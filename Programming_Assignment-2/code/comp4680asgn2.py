@@ -193,7 +193,7 @@ except:
 # Change the scenario variable to point to the desired data directory.
 
 # load map, laser measurements, and odometry
-scenario = "./data/easy/"
+scenario = "../data/easy/"
 map = Image.open(scenario + "map.png")
 with open(scenario + "measurements.txt") as f:
     measurements = [[float(x) for x in line.split()] for line in f]
