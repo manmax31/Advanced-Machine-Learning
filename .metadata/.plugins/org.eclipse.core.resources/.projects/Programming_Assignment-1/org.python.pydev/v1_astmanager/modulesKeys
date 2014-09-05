@@ -1,0 +1,10 @@
+MODULES_MANAGER_V2
+Codes.BinaryTree.BinaryTreeBeliefPropagation|/Users/manabchetia/Documents/Eclipse/Python/Advanced Machine Learning/Programming_Assignment-1/Codes/BinaryTree/BinaryTreeBeliefPropagation.py
+Codes.BinaryTree.BinaryTreeBruteForce|/Users/manabchetia/Documents/Eclipse/Python/Advanced Machine Learning/Programming_Assignment-1/Codes/BinaryTree/BinaryTreeBruteForce.py
+Codes.BinaryTree.BinaryTreeSampling|/Users/manabchetia/Documents/Eclipse/Python/Advanced Machine Learning/Programming_Assignment-1/Codes/BinaryTree/BinaryTreeSampling.py
+Codes.Chain.ChainBeliefPropagation|/Users/manabchetia/Documents/Eclipse/Python/Advanced Machine Learning/Programming_Assignment-1/Codes/Chain/ChainBeliefPropagation.py
+Codes.Chain.ChainBruteForce|/Users/manabchetia/Documents/Eclipse/Python/Advanced Machine Learning/Programming_Assignment-1/Codes/Chain/ChainBruteForce.py
+Codes.Chain.ChainSampling|/Users/manabchetia/Documents/Eclipse/Python/Advanced Machine Learning/Programming_Assignment-1/Codes/Chain/ChainSampling.py
+Codes.GridGraph.GridGraphBeliefPropagation|/Users/manabchetia/Documents/Eclipse/Python/Advanced Machine Learning/Programming_Assignment-1/Codes/GridGraph/GridGraphBeliefPropagation.py
+Codes.GridGraph.GridGraphBruteForce|/Users/manabchetia/Documents/Eclipse/Python/Advanced Machine Learning/Programming_Assignment-1/Codes/GridGraph/GridGraphBruteForce.py
+Codes.GridGraph.GridGraphSampling|/Users/manabchetia/Documents/Eclipse/Python/Advanced Machine Learning/Programming_Assignment-1/Codes/GridGraph/GridGraphSampling.py
