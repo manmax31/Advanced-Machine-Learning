@@ -80,9 +80,9 @@ def distance_to_wall(state, map, dtheta):
 
     # look for first position where map is not white
     dx = abs(x1 - x0)
-    sx = cmp(x0, x1)
+    sx = cmp(x1, x0)
     dy = abs(y1 - y0)
-    sy = cmp(y0, y1)
+    sy = cmp(y1, y0)
     err = dx - dy
     while (((x0 != x1) or (y0 != y1)) and (map.getpixel((x0, y0)) == 255)):
         e2 = 2 * err;
@@ -159,7 +159,7 @@ def motion_update(particles, odometry, map):
 
 def particle_likelihood(particles, measurements, map):
     max_range = 50.0
-    measurement_angles = [0.2 * math.pi / 4 * float(i) for i in range(-6,5)]
+    measurement_angles = [0.2 * math.pi / 4 * float(i) for i in range(-5,6)]
 
     # TODO
     # Write code that computes the weight of each particle based on
