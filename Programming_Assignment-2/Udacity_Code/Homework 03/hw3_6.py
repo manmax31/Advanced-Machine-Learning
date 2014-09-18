@@ -110,11 +110,9 @@ class robot:
 	#  
 
 	def measurement_prob(self, measurements):
-
 		# calculate the correct measurement
 		predicted_measurements = self.sense(0) # Our sense function took 0 as an argument to switch off noise.
-
-
+		
 		# compute errors
 		error = 1.0
 		for i in range(len(measurements)):

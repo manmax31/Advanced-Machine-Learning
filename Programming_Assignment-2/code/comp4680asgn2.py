@@ -181,37 +181,40 @@ def resample(particles, weights, map):
     return new_particles
 
 # --- main ----------------------------------------------------------------------
-
-# initialize gui
-try:
-    wnd = Tkinter.Tk()
-except:
-    wnd = None
-    print "WARNING: could not find module Tkinter"
-
-# --- TODO ---
-# Change the scenario variable to point to the desired data directory.
-
-# load map, laser measurements, and odometry
-scenario = "../data/easy/"
-map = Image.open(scenario + "map.png")
-with open(scenario + "measurements.txt") as f:
-    measurements = [[float(x) for x in line.split()] for line in f]
-with open(scenario + "odometry.txt") as f:
-    odometry = [float(line) for line in f]
-
-# initialize particles
-N = 1000
-particles = initialize_particles(N, map)
-visualize(wnd, particles, map)
-
-# iterate through measurements and odometry
-for m, o in zip(measurements, odometry):
-    # update particles with current control
-    particles = motion_update(particles, o, map)
-    # calculate weights for each particle
-    weights = particle_likelihood(particles, m, map)
-    # resample the particles
-    particles = resample(particles, weights, map)
-    # visualize
+def main():
+    # initialize gui
+    try:
+        wnd = Tkinter.Tk()
+    except:
+        wnd = None
+        print "WARNING: could not find module Tkinter"
+    
+    # --- TODO ---
+    # Change the scenario variable to point to the desired data directory.
+    
+    # load map, laser measurements, and odometry
+    scenario = "../data/easy/"
+    map = Image.open(scenario + "map.png")
+    with open(scenario + "measurements.txt") as f:
+        measurements = [[float(x) for x in line.split()] for line in f]
+    with open(scenario + "odometry.txt") as f:
+        odometry = [float(line) for line in f]
+    
+    # initialize particles
+    N = 1000
+    particles = initialize_particles(N, map)
     visualize(wnd, particles, map)
+    
+    # iterate through measurements and odometry
+    for m, o in zip(measurements, odometry):
+        # update particles with current control
+        particles = motion_update(particles, o, map)
+        # calculate weights for each particle
+        weights = particle_likelihood(particles, m, map)
+        # resample the particles
+        particles = resample(particles, weights, map)
+        # visualize
+        visualize(wnd, particles, map)
+
+
+if __name__ == "__main__":main()
