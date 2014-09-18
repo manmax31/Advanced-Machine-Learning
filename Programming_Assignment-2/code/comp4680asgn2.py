@@ -26,7 +26,7 @@ def is_valid_state(state, map):
     if (x < 0) or (x >= W) or (y < 0) or (y >= H):
         return False
 
-    return (map.getpixel((x, y)) == 255)
+    return ( map.getpixel((x, y)) == 255 )
 
 # --- distance_to_wall ----------------------------------------------------------
 # Computes the distance from the current robot position to the nearest wall in
