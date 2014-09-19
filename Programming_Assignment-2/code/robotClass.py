@@ -7,6 +7,7 @@ import copy
 import math
 import random
 import Tkinter
+from scipy.stats import norm
 from comp4680asgn2 import distance_to_wall
 
 from PIL import Image, ImageDraw, ImageTk
@@ -52,7 +53,7 @@ class robot:
     def sense(self): # Returns [11 distances] from the wall in the range -pi/4 to pi/4
         max_range = 50.0
         measurement_angles = [ 0.2 * math.pi / 4 * float(i) for i in xrange(-5,6) ]
-        Z = [distance_to_wall([self.x, self.y, self.orientation], map, angle) for angle in measurement_angles]
+        Z = [ distance_to_wall([self.x, self.y, self.orientation], map, angle) for angle in measurement_angles ]
         return Z
          
     def move(self, turn, forward):     
@@ -71,9 +72,11 @@ class robot:
         r.set_noise(self.forward_noise, self.turn_noise, self.sense_noise)
         return r
     
-    def measurement_prob(self, measurement):
+    def measurement_prob(self, Z, measurement):
         prob = 1.0
-        
+        for i in range( len(Z) ):
+            prob *= norm.pdf( Z[i], measurement[i], self.sense_noise)
+        return prob
         
     def __repr__(self):  
         return '[x=%.6s y=%.6s orient=%.6s]' % ( str(self.x), str(self.y), str(self.orientation) ) 
@@ -150,16 +153,28 @@ def motionUpdate(particles, odo):
     
     return particles2
 
-def particle_likelihood(particles, measurement):
-    max_range = 50.0
-    measurement_angles = [0.2 * math.pi / 4 * float(i) for i in range(-5,6)]
-    #===========================================================================
-    # weights = []
-    # for particle in particles:
-    #===========================================================================
-        
-        
+def particle_likelihood(particles, measurement, Z):    
+    weights = []
+    for particle in particles:
+        weights.append( particle.measurement_prob(Z, measurement) )
+    return weights
 
+def resample(particles, weights, N):
+    particles3 = []
+    index = int( random.random() * N )
+    beta = 0.0
+    mw = max(weights)
+    
+    for i in xrange(N):
+        beta += random.random() * 2.0 * mw
+        while beta > weights[index]:
+            beta -= weights[index]
+            index = (index + 1) % N
+        particles3.append( particles[index] )
+    
+    return particles3
+               
+        
 # ========================================= MAIN =====================================================
 
 def main():
@@ -178,14 +193,21 @@ def main():
     
     print(particles)
            
-    #===========================================================================
-    # for measurement, odo in zip(measurements, odometry):
-    #     # Motion Update
-    #     particles = motionUpdate(particles, odo)
-    #      
-    #     visualize(wnd, particles, map)
-    #          
-    #===========================================================================
+    for measurement, odo in zip(measurements, odometry):
+        myRobot = myRobot.move( turn=random.uniform(-math.pi/2, math.pi/2), forward = odo)
+        Z       = myRobot.sense()
+        
+        # Motion Update
+        particles = motionUpdate(particles, odo)
+        
+        # Measurement Update
+        weights = particle_likelihood(particles, measurement, Z)
+        
+        particles = resample(particles, weights, N)
+          
+        visualize(wnd, particles, map)
+        
+              
        
      
      
