@@ -144,11 +144,15 @@ def motionUpdate(particles, odo):
             particles2.append(r)
         except ValueError:
             #===================================================================
+            # I was trying to simulate that if a particle goes beyond the wall, we try to keep it closest to the wall. This ain't working.
+            # Even if i ask the particle to move 0.0 pixels, i.e particle remains where it was previously. In other words, particle.move(turnAngle, 0.0)
+            # shows invalid state. Dont know why!!
+            
             # state = [ particle.x, particle.y, particle.orientation ]
             # dist  = distance_to_wall(state, map, turnAngle)
-            # r     = particle.move(turnAngle, 0.0)
+            # r     = particle.move(turnAngle, dist)
             #===================================================================
-            r = robot()
+            r = robot() # THIS NEEEDS TO BE FIXED
             particles2.append(r)
     
     return particles2
@@ -161,9 +165,9 @@ def particle_likelihood(particles, measurement, Z):
 
 def resample(particles, weights, N):
     particles3 = []
-    index = int( random.random() * N )
-    beta = 0.0
-    mw = max(weights)
+    index      = int( random.random() * N )
+    beta       = 0.0
+    mw         = max(weights)
     
     for i in xrange(N):
         beta += random.random() * 2.0 * mw
@@ -173,12 +177,11 @@ def resample(particles, weights, N):
         particles3.append( particles[index] )
     
     return particles3
-               
-        
-# ========================================= MAIN =====================================================
+                
+# ============================================= MAIN =====================================================
 
 def main():
-    N = 1000
+    N = 1000 # Number of particles
 
     # initialize gui
     wnd = Tkinter.Tk()
@@ -188,11 +191,11 @@ def main():
     
     # Generate and Initialise 1000 particles
     particles = intialiseParticles(N)
+    visualize(wnd, particles, map)
     
+    # Intialising robot
     myRobot = robot()
-    
-    print(particles)
-           
+      
     for measurement, odo in zip(measurements, odometry):
         myRobot = myRobot.move( turn=random.uniform(-math.pi/2, math.pi/2), forward = odo)
         Z       = myRobot.sense()
@@ -203,16 +206,10 @@ def main():
         # Measurement Update
         weights = particle_likelihood(particles, measurement, Z)
         
+        # Resample
         particles = resample(particles, weights, N)
           
         visualize(wnd, particles, map)
         
-              
-       
-     
-     
-    
-    
         
-
 if __name__ == "__main__":main()
