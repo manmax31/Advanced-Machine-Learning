@@ -20,7 +20,7 @@ with open(scenario + "measurements.txt") as f:
     measurements = [ [float(x) for x in line.split()] for line in f ]
 # Odometry
 with open(scenario + "odometry.txt") as f:
-    odometry = [float(line) for line in f]
+    odometry = [ float(line) for line in f ]
 
 valid_pixels     = []
 num_valid_pixels =  0.0
@@ -51,10 +51,10 @@ class robot:
      
     def move(self, turn, forward):     
         orientation = self.orientation + float(turn) + random.gauss(0.0, self.turn_noise)
-        dist        = float(forward)  + random.gauss(0.0, self.forward_noise)
+        dist        = float(forward)   # + random.gauss(0.0, self.forward_noise)
             
         x = self.x +  ( math.cos(orientation) * dist )
-        y = self.y +  ( math.cos(orientation) * dist )
+        y = self.y +  ( math.sin(orientation) * dist )
         
         self.x           = float(x)
         self.y           = float(y)
@@ -90,7 +90,6 @@ def validPixels():
                 valid_pixels.append((x, y))
         
     num_valid_pixels = len(valid_pixels)
-    #return valid_pixels, num_valid_pixels
 
 def intialiseParticles(N):
     particles = []
@@ -123,6 +122,23 @@ def visualize(wnd, particles, map):
         label_image.place(x=0, y=0, width=canvas.size[0], height=canvas.size[1])
         wnd.update()
 
+def motionUpdate(particles, odo):
+    particles2 = []
+    for particle in particles:
+        turnAngle = 0.1
+        try:
+            r = particle.move(turnAngle, odo)
+            particles2.append(r)
+        except ValueError:
+            #===================================================================
+            # state = [particle.x, particle.y, particle.orientation]
+            # dist = distance_to_wall(state, map, turnAngle)
+            # r = particle.move(turnAngle, 0.0)
+            #===================================================================
+            r = robot()
+            particles2.append(r)
+    
+    return particles2
 
 # ========================================= MAIN =====================================================
 
@@ -147,19 +163,13 @@ def main():
     #    visualize(wnd, particles, map)
      
     myRobot = robot()
-     
-     # Motion Update
-    particles2 = []
-    for particle in particles:
-        turnAngle = 0.1
-        try:
-            mov = particle.move(turnAngle, odometry[1])
-        except ValueError:
-            state = [ particle.x, particle.y, particle.orientation ]
-            dist  = distance_to_wall(state, map, turnAngle)
-            print(str(dist) + "\n")
-        else:
-            particles2.append(mov)
+            
+    for measurement, odo in zip(measurements, odometry):
+        # Motion Update
+        particles = motionUpdate(particles, odo)
+        
+        visualize(wnd, particles, map)
+             
        
      
      
