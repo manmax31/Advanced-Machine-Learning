@@ -284,11 +284,7 @@ def particle_filter(motions, measurements, N=500): # I know it's tempting, but d
 		r.set_noise(bearing_noise, steering_noise, distance_noise)
 		p.append(r)
 	
-
-	# --------
-	#
 	# Update particles
-	#     
 
 	for t in range(len(motions)):
 
@@ -329,9 +325,6 @@ def particle_filter(motions, measurements, N=500): # I know it's tempting, but d
 ## filter is a randomized algorithm. We will be testing your code
 ## multiple times. Make sure check_output returns True at least 80%
 ## of the time.
-
-
-
 ## --------
 ## TEST CASES:
 ## 

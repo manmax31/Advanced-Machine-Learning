@@ -23,7 +23,7 @@ with open(scenario + "odometry.txt") as f:
     odometry = [ float(line) for line in f ]
 
 valid_pixels     = []
-num_valid_pixels =  0.0
+num_valid_pixels = 0.0
 
 # ========================================== CLASS ==================================================
 class robot:
@@ -48,10 +48,16 @@ class robot:
         self.forward_noise = float(new_f_noise)
         self.turn_noise    = float(new_t_noise)
         self.sense_noise   = float(new_s_noise) 
-     
+    
+    def sense(self): # Returns [11 distances] from the wall in the range -pi/4 to pi/4
+        max_range = 50.0
+        measurement_angles = [ 0.2 * math.pi / 4 * float(i) for i in xrange(-5,6) ]
+        Z = [distance_to_wall([self.x, self.y, self.orientation], map, angle) for angle in measurement_angles]
+        return Z
+         
     def move(self, turn, forward):     
         orientation = self.orientation + float(turn) + random.gauss(0.0, self.turn_noise)
-        dist        = float(forward)   # + random.gauss(0.0, self.forward_noise)
+        dist        = float(forward)  # + random.gauss(0.0, self.forward_noise)
             
         x = self.x +  ( math.cos(orientation) * dist )
         y = self.y +  ( math.sin(orientation) * dist )
@@ -64,6 +70,10 @@ class robot:
         r.set(x, y, orientation)
         r.set_noise(self.forward_noise, self.turn_noise, self.sense_noise)
         return r
+    
+    def measurement_prob(self, measurement):
+        prob = 1.0
+        
         
     def __repr__(self):  
         return '[x=%.6s y=%.6s orient=%.6s]' % ( str(self.x), str(self.y), str(self.orientation) ) 
@@ -125,62 +135,62 @@ def visualize(wnd, particles, map):
 def motionUpdate(particles, odo):
     particles2 = []
     for particle in particles:
-        turnAngle = 0.1
+        turnAngle = random.uniform( -math.pi/2, math.pi/2 ) # Robot may turn between -pi/2 and pi/2 radians
         try:
             r = particle.move(turnAngle, odo)
             particles2.append(r)
         except ValueError:
             #===================================================================
-            # state = [particle.x, particle.y, particle.orientation]
-            # dist = distance_to_wall(state, map, turnAngle)
-            # r = particle.move(turnAngle, 0.0)
+            # state = [ particle.x, particle.y, particle.orientation ]
+            # dist  = distance_to_wall(state, map, turnAngle)
+            # r     = particle.move(turnAngle, 0.0)
             #===================================================================
             r = robot()
             particles2.append(r)
     
     return particles2
 
+def particle_likelihood(particles, measurement):
+    max_range = 50.0
+    measurement_angles = [0.2 * math.pi / 4 * float(i) for i in range(-5,6)]
+    #===========================================================================
+    # weights = []
+    # for particle in particles:
+    #===========================================================================
+        
+        
+
 # ========================================= MAIN =====================================================
 
 def main():
     N = 1000
-    T = len(odometry)
 
-    
     # initialize gui
-    try:
-        wnd = Tkinter.Tk()
-    except:
-        wnd = None
-        print "WARNING: could not find module Tkinter"
+    wnd = Tkinter.Tk()
     
-    validPixels() # Setting Global variables valid_pixels, num_valid_pixels
+    # Setting Global variables valid_pixels, num_valid_pixels
+    validPixels() 
     
     # Generate and Initialise 1000 particles
     particles = intialiseParticles(N)
-    #print(particles)
-    #for i in range(10):
-    #    visualize(wnd, particles, map)
-     
+    
     myRobot = robot()
-            
-    for measurement, odo in zip(measurements, odometry):
-        # Motion Update
-        particles = motionUpdate(particles, odo)
-        
-        visualize(wnd, particles, map)
-             
+    
+    print(particles)
+           
+    #===========================================================================
+    # for measurement, odo in zip(measurements, odometry):
+    #     # Motion Update
+    #     particles = motionUpdate(particles, odo)
+    #      
+    #     visualize(wnd, particles, map)
+    #          
+    #===========================================================================
        
      
      
-    #for i in range(10):        
-    #    visualize(wnd, particles2, map)
-            
-        
-        
     
     
-        
         
 
 if __name__ == "__main__":main()
