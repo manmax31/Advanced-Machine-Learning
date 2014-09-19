@@ -283,6 +283,7 @@ def particle_filter(motions, measurements, N=500): # I know it's tempting, but d
 		r = robot()
 		r.set_noise(bearing_noise, steering_noise, distance_noise)
 		p.append(r)
+	
 
 	# --------
 	#
@@ -339,7 +340,7 @@ def particle_filter(motions, measurements, N=500): # I know it's tempting, but d
 ##    vector near [x=93.476 y=75.186 orient=5.2664], that is, the
 ##    robot's true location.
 ##
-motions = [[2. * pi / 10, 20.] for row in range(8)]
+motions = [ [2. * pi / 10, 20.] for row in range(8) ]
 measurements = [[4.746936, 3.859782, 3.045217, 2.045506],
                 [3.510067, 2.916300, 2.146394, 1.598332],
                 [2.972469, 2.407489, 1.588474, 1.611094],

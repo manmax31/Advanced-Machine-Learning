@@ -158,7 +158,9 @@ def motion_update(particles, odometry, map):
     #     p2.append(p[i].move(motions[t]))
     # p = p2
     #===========================================================================
-
+    for particle in particles:
+        
+    
     return particles
 
 # --- particle_likelihood -------------------------------------------------------
