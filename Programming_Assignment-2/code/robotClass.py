@@ -9,7 +9,6 @@ import random
 import Tkinter
 from scipy.stats import norm
 from comp4680asgn2 import distance_to_wall
-
 from PIL import Image, ImageDraw, ImageTk
 
 # ======================================= GLOBAL DATA ==============================================
@@ -44,6 +43,7 @@ class robot:
             self.orientation = float(new_orientation)
         else:
             raise ValueError, "Invalid State"
+            #return False
     
     def set_noise(self, new_f_noise, new_t_noise, new_s_noise):
         self.forward_noise = float(new_f_noise)
@@ -52,30 +52,41 @@ class robot:
     
     def sense(self): # Returns [11 distances] from the wall in the range -pi/4 to pi/4
         max_range = 50.0
-        measurement_angles = [ 0.2 * math.pi / 4 * float(i) for i in xrange(-5,6) ]
-        Z = [ distance_to_wall([self.x, self.y, self.orientation], map, angle) for angle in measurement_angles ]
+        failChance = random.random() # Sensor Failure Probability
+        if failChance <= 0.99:
+            measurement_angles = [ 0.2 * math.pi / 4 * float(i) for i in xrange(-5,6) ]
+            Z = [ distance_to_wall([self.x, self.y, self.orientation], map, angle) for angle in measurement_angles ]
+        else:
+            Z = [max_range for i in xrange(11)]
         return Z
          
-    def move(self, turn, forward):     
-        orientation = self.orientation + float(turn) + random.gauss(0.0, self.turn_noise)
-        dist        = float(forward)  # + random.gauss(0.0, self.forward_noise)
+    def move(self, turnAngle, forward):     
+        orientation = self.orientation + float(turnAngle) + random.gauss(0.0, self.turn_noise)
+        dist        = float(forward)   + random.gauss(0.0, self.forward_noise)
             
         x = self.x +  ( math.cos(orientation) * dist )
         y = self.y +  ( math.sin(orientation) * dist )
         
-        self.x           = float(x)
-        self.y           = float(y)
-        self.orientation = float(orientation)
-            
-        r = robot()
-        r.set(x, y, orientation)
-        r.set_noise(self.forward_noise, self.turn_noise, self.sense_noise)
+        if is_valid_state(x, y, orientation):
+            r = robot()
+            r.set(x, y, orientation)
+            r.set_noise(self.forward_noise, self.turn_noise, self.sense_noise)
+        else:
+            state       = [ self.x, self.y, self.orientation ]
+            dist        = distance_to_wall(state, map, turnAngle)
+            orientation = self.orientation + float(turnAngle) + random.gauss(0.0, self.turn_noise)
+            x           = self.x +  ( math.cos(orientation) * dist )
+            y           = self.y +  ( math.sin(orientation) * dist )
+            r  = robot()
+            #r.set(x, y, orientation)
+            #r.set_noise(self.forward_noise, self.turn_noise, self.sense_noise)  
         return r
+
     
     def measurement_prob(self, Z, measurement):
         prob = 1.0
-        for i in range( len(Z) ):
-            prob *= norm.pdf( Z[i], measurement[i], self.sense_noise)
+        for m, z in zip(measurement, Z):
+            prob *= norm.pdf(m, z, self.sense_noise)
         return prob
         
     def __repr__(self):  
@@ -139,27 +150,14 @@ def motionUpdate(particles, odo):
     particles2 = []
     for particle in particles:
         turnAngle = random.uniform( -math.pi/2, math.pi/2 ) # Robot may turn between -pi/2 and pi/2 radians
-        try:
-            r = particle.move(turnAngle, odo)
-            particles2.append(r)
-        except ValueError:
-            #===================================================================
-            # I was trying to simulate that if a particle goes beyond the wall, we try to keep it closest to the wall. This ain't working.
-            # Even if i ask the particle to move 0.0 pixels, i.e particle remains where it was previously. In other words, particle.move(turnAngle, 0.0)
-            # shows invalid state. Dont know why!!
-            
-            # state = [ particle.x, particle.y, particle.orientation ]
-            # dist  = distance_to_wall(state, map, turnAngle)
-            # r     = particle.move(turnAngle, dist)
-            #===================================================================
-            r = robot() # THIS NEEEDS TO BE FIXED
-            particles2.append(r)
-    
+        r = particle.move(turnAngle, odo)
+        particles2.append(r)
     return particles2
 
-def particle_likelihood(particles, measurement, Z):    
+def particle_likelihood(particles, measurement):    
     weights = []
     for particle in particles:
+        Z = particle.sense()
         weights.append( particle.measurement_prob(Z, measurement) )
     return weights
 
@@ -192,19 +190,15 @@ def main():
     # Generate and Initialise 1000 particles
     particles = intialiseParticles(N)
     visualize(wnd, particles, map)
-    
-    # Intialising robot
-    myRobot = robot()
+
       
     for measurement, odo in zip(measurements, odometry):
-        myRobot = myRobot.move( turn=random.uniform(-math.pi/2, math.pi/2), forward = odo)
-        Z       = myRobot.sense()
         
         # Motion Update
         particles = motionUpdate(particles, odo)
         
         # Measurement Update
-        weights = particle_likelihood(particles, measurement, Z)
+        weights = particle_likelihood(particles, measurement)
         
         # Resample
         particles = resample(particles, weights, N)
