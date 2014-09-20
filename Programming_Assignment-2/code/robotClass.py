@@ -86,7 +86,7 @@ class robot:
     def measurement_prob(self, Z, measurement):
         prob = 1.0
         for m, z in zip(measurement, Z):
-            prob *= norm.pdf(m, z, self.sense_noise)
+            prob *= norm.pdf(m, z, 10)#self.sense_noise)
         return prob
         
     def __repr__(self):  
@@ -159,6 +159,12 @@ def particle_likelihood(particles, measurement):
     for particle in particles:
         Z = particle.sense()
         weights.append( particle.measurement_prob(Z, measurement) )
+        #=======================================================================
+        # print( "Z           : " + str(Z) )
+        # print( "Measurement : " + str(measurement) )
+        # print( "Prob     m|Z: " + str(particle.measurement_prob(Z, measurement)) )
+        # print
+        #=======================================================================
     return weights
 
 def resample(particles, weights, N):
@@ -191,7 +197,6 @@ def main():
     particles = intialiseParticles(N)
     visualize(wnd, particles, map)
 
-      
     for measurement, odo in zip(measurements, odometry):
         
         # Motion Update
@@ -202,7 +207,7 @@ def main():
         
         # Resample
         particles = resample(particles, weights, N)
-          
+        
         visualize(wnd, particles, map)
         
         
