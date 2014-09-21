@@ -37,7 +37,7 @@ class robot:
         self.sense_noise   = 0.0
     
     def set(self, new_x, new_y, new_orientation):
-        if is_valid_state ( new_x, new_y, new_orientation ):
+        if is_valid_state ( new_x, new_y):#, new_orientation ):
             self.x           = float(new_x)
             self.y           = float(new_y)
             self.orientation = float(new_orientation)
@@ -67,7 +67,7 @@ class robot:
         x = self.x +  ( math.cos(orientation) * dist )
         y = self.y +  ( math.sin(orientation) * dist )
         
-        if is_valid_state(x, y, orientation):
+        if is_valid_state(x, y):#, orientation):
             r = robot()
             r.set(x, y, orientation)
             r.set_noise(self.forward_noise, self.turn_noise, self.sense_noise)
@@ -83,10 +83,10 @@ class robot:
         return r
 
     
-    def measurement_prob(self, Z, measurement):
+    def measurement_prob(self, Y, measurement):
         prob = 1.0
-        for m, z in zip(measurement, Z):
-            prob *= norm.pdf(m, z, 10)#self.sense_noise)
+        for m, y in zip(measurement, Y):
+            prob *= norm.pdf(m, y, 10)#self.sense_noise)
         return prob
         
     def __repr__(self):  
@@ -95,13 +95,15 @@ class robot:
 
 # ==================================== HELPER METHODS ====================================================
 
-def is_valid_state(x, y, orientation):
-    W, H = map.size
-    x = math.floor( x + math.cos(orientation) )
-    y = math.floor( y + math.sin(orientation) )
-
-    if (x < 0) or (x >= W) or (y < 0) or (y >= H):
-        return False
+def is_valid_state(x, y):#, orientation):
+#===============================================================================
+#     W, H = map.size
+#     x = math.floor( x + math.cos(orientation) )
+#     y = math.floor( y + math.sin(orientation) )
+# 
+#     if (x < 0) or (x >= W) or (y < 0) or (y >= H):
+#         return False
+#===============================================================================
     return ( map.getpixel((x, y)) == 255 )
 
 def validPixels():
@@ -157,14 +159,8 @@ def motionUpdate(particles, odo):
 def particle_likelihood(particles, measurement):    
     weights = []
     for particle in particles:
-        Z = particle.sense()
-        weights.append( particle.measurement_prob(Z, measurement) )
-        #=======================================================================
-        # print( "Z           : " + str(Z) )
-        # print( "Measurement : " + str(measurement) )
-        # print( "Prob     m|Z: " + str(particle.measurement_prob(Z, measurement)) )
-        # print
-        #=======================================================================
+        Y = particle.sense()
+        weights.append( particle.measurement_prob(Y, measurement) )
     return weights
 
 def resample(particles, weights, N):
@@ -172,14 +168,12 @@ def resample(particles, weights, N):
     index      = int( random.random() * N )
     beta       = 0.0
     mw         = max(weights)
-    
     for i in xrange(N):
         beta += random.random() * 2.0 * mw
         while beta > weights[index]:
             beta -= weights[index]
             index = (index + 1) % N
         particles3.append( particles[index] )
-    
     return particles3
                 
 # ============================================= MAIN =====================================================
