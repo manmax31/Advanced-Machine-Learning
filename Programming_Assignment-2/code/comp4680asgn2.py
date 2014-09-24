@@ -11,33 +11,37 @@ try:
 except:
     pass
 
+from scipy.stats import norm
 from PIL import Image, ImageDraw, ImageTk
 
 # --- is_valid_state ------------------------------------------------------------
 # Returns true if the current state (x, y, \theta) is within the open area of
-# the map.
+# the _map.
 
-def is_valid_state(state, map):
-    W, H = map.size
-    x = math.floor(state[0] + math.cos(state[2]))
-    y = math.floor(state[1] + math.sin(state[2]))
+def is_valid_state(state, _map):
 
+    W, H = _map.size
+    #x = math.floor(state[0] + math.cos(state[2]))
+    #y = math.floor(state[1] + math.sin(state[2]))
+    x = state[0]
+    y = state[1]
+    
     if (x < 0) or (x >= W) or (y < 0) or (y >= H):
         return False
 
-    return ( map.getpixel((x, y)) == 255 )
+    return (_map.getpixel((x, y)) == 255)
 
 # --- distance_to_wall ----------------------------------------------------------
 # Computes the distance from the current robot position to the nearest wall in
 # direction dtheta with respect to the robot's heading.
 
-def distance_to_wall(state, map, dtheta):
-    W, H = map.size
+def distance_to_wall(state, _map, dtheta):
+    W, H = _map.size
 
     # determine start and end points for direction search
     x0 = state[0]
     y0 = state[1]
-    theta = state[2] + dtheta;
+    theta = state[2] + dtheta + math.pi;
 
     x1 = x0 + 2 * W * math.cos(theta)
     y1 = y0 + 2 * H * math.sin(theta)
@@ -77,13 +81,13 @@ def distance_to_wall(state, map, dtheta):
     x1 = max(math.floor(x1 + math.cos(theta)), 0)
     y1 = max(math.floor(y1 + math.sin(theta)), 0)
 
-    # look for first position where map is not white
+    # look for first position where _map is not white
     dx = abs(x1 - x0)
-    sx = cmp(x1, x0)
+    sx = cmp(x0, x1)
     dy = abs(y1 - y0)
-    sy = cmp(y1, y0)
+    sy = cmp(y0, y1)
     err = dx - dy
-    while (((x0 != x1) or (y0 != y1)) and (map.getpixel((x0, y0)) == 255)):
+    while (((x0 != x1) or (y0 != y1)) and (_map.getpixel((x0, y0)) == 255)):
         e2 = 2 * err;
         if (e2 > -dy):
             err = err - dy
@@ -97,21 +101,24 @@ def distance_to_wall(state, map, dtheta):
     return dist
 
 # --- visualize -----------------------------------------------------------------
-# Visualize the particles on the map.
+# Visualize the particles on the _map.
 
-def visualize(wnd, particles, map):
+def visualize(wnd, particles, _map, truth=[0,0]):
     scale = 2
-    canvas = Image.new("RGBA", map.size)
-    canvas.paste(map)
+    truth[0] = truth[0]*scale
+    truth[1] = truth[1]*scale
+    canvas = Image.new("RGBA", _map.size)
+    canvas.paste(_map)
     if (scale != 1):
-        canvas = canvas.resize((scale * map.size[0], scale * map.size[1]), Image.BILINEAR)
+        canvas = canvas.resize((scale * _map.size[0], scale * _map.size[1]), Image.BILINEAR)
     draw = ImageDraw.Draw(canvas)
-
+    
+    draw.ellipse((truth[0] - 4, truth[1] - 4, truth[0] + 4, truth[1] + 4), fill="red")
     for p in particles:
         x, y, theta = int(scale * p[0]), int(scale * p[1]), p[2]
         draw.line((x, y, x + 5 * math.cos(theta), y + 5 * math.sin(theta)), fill=(0,0,255))
         draw.ellipse((x - 2, y - 2, x + 2, y + 2), fill=(0,0,255))
-
+    
     if (wnd is None):
         canvas.show()
     else:
@@ -124,12 +131,12 @@ def visualize(wnd, particles, map):
 # --- initialize_particles -------------------------------------------------------
 # Randomly initialize set of particles to valid states.
 
-def initialize_particles(n, map):
-    W, H = map.size # Getting dimensions of map or image
+def initialize_particles(n, _map):
+    W, H = _map.size
     valid_pixels = []
     for y in range(H):
         for x in range(W):
-            if (map.getpixel((x, y)) == 255):
+            if (_map.getpixel((x, y)) == 255):
                 valid_pixels.append((x, y))
 
     num_valid_pixels = len(valid_pixels)
@@ -140,105 +147,110 @@ def initialize_particles(n, map):
 
     return particles
 
-# --- motion_update -------------------------------------------------------------
-# Sample x_t from p(x_t \mid x_{t-1}, u_t)
-
-def motion_update(particles, odometry, map):
-
-    # TODO
-    # Write code to perform a motion update for each particle. That is
-    # for each particle sample a new particle from your state transition
-    # model. Make sure your sampled particle stays within the free space
-    # on the map. Hint: use the is_valid_state function.
-    # motion update (prediction)
+def motion_update(particles, odometry, arg_map):
+    odometryNoise = 1
+    newPs=[]
     
-    #===========================================================================
-    # p2 = []
-    # for i in range(N):
-    #     p2.append(p[i].move(motions[t]))
-    # p = p2
-    #===========================================================================
+    for particle in particles:
+        newP=[]
+        trueTurn = particle[2] + random.uniform(-math.pi/2, math.pi/2)
+        trueTurn %= 2*math.pi
+        trueOdometry = min( max(0, odometry + random.gauss(0.0, odometryNoise)), distance_to_wall(particle, arg_map, 0) )
+        newP.append(particle[0] + math.cos(trueTurn) * trueOdometry)
+        newP.append(particle[1] + math.sin(trueTurn) * trueOdometry)
+        newP.append(trueTurn)
+        
+        while not is_valid_state(newP, arg_map):
+            #print(newP)
+            trueOdometry = max(0,trueOdometry-2)
+            newP=[]
+            newP.append(particle[0] + math.cos(trueTurn) * trueOdometry)
+            newP.append(particle[1] + math.sin(trueTurn) * trueOdometry)
+            newP.append(trueTurn)
+        
+#         if not is_valid_state(newP, arg_map):
+#             newP = [truth[0],truth[1],random.uniform(0, 2 * math.pi)]
+# #             newP = gen_particle(valid_pixels)
 
-    return particles
+        newPs.append(newP)
+
+    return newPs
 
 # --- particle_likelihood -------------------------------------------------------
 # Compute w_t = p(z_t \mid x_t)
-# Get Importance Weights
 
-def particle_likelihood(particles, measurements, map):
+def sense(particle, max_range, measurement_angles, _map):
+    measurements = []
+    for angle in measurement_angles:
+        measurements.append( min(max_range,distance_to_wall(particle, _map, angle)))
+    return measurements
+
+def particle_likelihood(particles, measurements, arg_map):
     max_range = 50.0
     measurement_angles = [0.2 * math.pi / 4 * float(i) for i in range(-5,6)]
-
-    # TODO
-    # Write code that computes the weight of each particle based on
-    # your measurement model.
-
-    weights = [0.0 for i in range(len(particles))]
+    sigma = 10.0
+    
+    weights = []
+    for particle in particles:
+        Y = sense(particle, max_range, measurement_angles, arg_map)
+        prob = 1.0
+        for i in range(len(measurements)):
+            prob *= norm.pdf(measurements[i], Y[i], sigma)
+        weights.append(prob)
+            
     return weights
 
 # --- resample ------------------------------------------------------------------
 # Resample particles with replacement from distribution defined by weights.
 
-def resample(particles, weights, map):
+def resample(particles, weights, N):
+    particles3 = []
+    index      = int( random.random() * N )
+    beta       = 0.0
+    mw         = max(weights)
+    for i in xrange(N):
+        beta += random.random() * 2.0 * mw
+        while beta > weights[index]:
+            beta -= weights[index]
+            index = (index + 1) % N
+        particles3.append( particles[index] )
+    return particles3
 
-    # TODO
-    # Write code to resample particles. You may want to introduce some new
-    # randomly sampled particles to combat particle deprivation.
-    
-    # resampling
-    #===========================================================================
-    # p3 = []
-    # index = int(random.random() * N)
-    # beta = 0.0
-    # mw = max(w)
-    # for i in range(N):
-    #     beta += random.random() * 2.0 * mw
-    #     while beta > w[index]:
-    #         beta -= w[index]
-    #         index = (index + 1) % N
-    #     p3.append(p[index])
-    # p = p3
-    #===========================================================================
-
-    new_particles = copy.deepcopy(particles)
-    return new_particles
 
 # --- main ----------------------------------------------------------------------
-def main():
-    # initialize gui
-    try:
-        wnd = Tkinter.Tk()
-    except:
-        wnd = None
-        print "WARNING: could not find module Tkinter"
-    
-    # --- TODO ---
-    # Change the scenario variable to point to the desired data directory.
-    
-    # load map, laser measurements, and odometry
-    scenario = "../data/easy/"
-    map = Image.open(scenario + "map.png")
-    with open(scenario + "measurements.txt") as f:
-        measurements = [[float(x) for x in line.split()] for line in f]
-    with open(scenario + "odometry.txt") as f:
-        odometry = [float(line) for line in f]
-    
-    # initialize particles
-    N = 1000
-    particles = initialize_particles(N, map)
-    visualize(wnd, particles, map)
-    
-    print(particles)
-    #iterate through measurements and odometry
-    for m, o in zip(measurements, odometry):
-        # update particles with current control
-        particles = motion_update(particles, o, map)
-        # calculate weights for each particle
-        weights = particle_likelihood(particles, m, map)
-        # resample the particles
-        particles = resample(particles, weights, map)
-        # visualize
-        visualize(wnd, particles, map)
 
+# initialize gui
+try:
+    wnd = Tkinter.Tk()
+except:
+    wnd = None
+    print "WARNING: could not find module Tkinter"
 
-if __name__ == "__main__":main()
+# --- TODO ---
+# Change the scenario variable to point to the desired data directory.
+
+# load map, laser measurements, and odometry
+scenario = "../data/easy/"
+_map = Image.open(scenario + "map.png")
+with open(scenario + "measurements.txt") as f:
+    measurements = [[float(x) for x in line.split()] for line in f]
+with open(scenario + "odometry.txt") as f:
+    odometry = [float(line) for line in f]
+with open(scenario + "truth.txt") as f:
+    truth = [[float(x) for x in line.split()] for line in f]
+
+# initialize particles
+N = 2000
+particles = initialize_particles(N, _map)
+visualize(wnd, particles, _map)
+
+# iterate through measurements and odometry
+for m, o, t in zip(measurements, odometry, truth):
+    # update particles with current control
+    particles = motion_update(particles, o, _map)
+    # calculate weights for each particle
+    weights = particle_likelihood(particles, m, _map)
+    # resample the particles
+    particles = resample(particles, weights, N)
+    # visualize
+    visualize(wnd, particles, _map, t)

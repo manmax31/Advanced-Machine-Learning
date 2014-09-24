@@ -3,6 +3,7 @@ Created on 19-Sep-2014
 
 @author: manabchetia
 '''
+import copy
 import math
 import random
 import Tkinter
@@ -30,8 +31,8 @@ num_valid_pixels = 0.0
 class robot:
     def __init__(self):
         p                  = valid_pixels[ random.randrange(0, num_valid_pixels) ]
-        self.x             = p[0] + random.random();
-        self.y             = p[1] + random.random();
+        self.x             = p[0] + random.random()
+        self.y             = p[1] + random.random()
         self.orientation   = random.uniform(0, 2 * math.pi)
         self.forward_noise = 0.0
         self.turn_noise    = 0.0
@@ -52,7 +53,7 @@ class robot:
         failChance = random.random() # Sensor Failure Probability
         if failChance <= 0.99:
             measurement_angles = [ 0.2 * math.pi / 4 * float(i) for i in xrange(-5,6) ]
-            Y = [ min( max_range, distance_to_wall([self.x, self.y, self.orientation], angle) ) for angle in measurement_angles ]
+            Y = [ min( max_range, distance_to_wall( [self.x, self.y, self.orientation], angle ) ) for angle in measurement_angles ]
         else:
             Y = [ max_range for i in xrange(11) ]
         return Y
@@ -69,7 +70,7 @@ class robot:
         #if is_valid_state(x, y, orientation):
         r = robot()
         r.set(x, y, orientation)
-        r.set_noise(self.forward_noise, self.turn_noise, self.sense_noise)
+        #r.set_noise(self.forward_noise, self.turn_noise, self.sense_noise)
         
         state = [r.x, r.y, r.orientation]
         while not is_valid_state( state ):
@@ -83,12 +84,17 @@ class robot:
         #return r, dist
 
     
-    def measurement_prob(self, Y, measurement):
+    def measurementProb(self, Y, measurement):
         prob = 1.0
         for m, y in zip(measurement, Y):
             prob *= norm.pdf(m, y, 10)#self.sense_noise)
-        #prob = norm.pdf(measurement, Y, 10)
-        
+            #===================================================================
+            # weight = norm.pdf(m, y, 10)
+            # if weight == 0:
+            #     prob = float('-inf')
+            # else:
+            #     prob += math.log(weight)
+            #===================================================================
         return prob
         
     def __repr__(self):  
@@ -148,7 +154,7 @@ def distance_to_wall(state, dtheta):
     # determine start and end points for direction search
     x0 = state[0]
     y0 = state[1]
-    theta = state[2] + dtheta + math.pi;
+    theta = state[2] + dtheta + math.pi
 
     x1 = x0 + 2 * W * math.cos(theta)
     y1 = y0 + 2 * H * math.sin(theta)
@@ -190,9 +196,9 @@ def distance_to_wall(state, dtheta):
 
     # look for first position where map is not white
     dx = abs(x1 - x0)
-    sx = cmp(x1, x0)
+    sx = cmp(x0, x1)
     dy = abs(y1 - y0)
-    sy = cmp(y1, y0)
+    sy = cmp(y0, y1)
     err = dx - dy
     while (((x0 != x1) or (y0 != y1)) and (map.getpixel((x0, y0)) == 255)):
         e2 = 2 * err;
@@ -259,9 +265,20 @@ def motionUpdate(particles, odo):
 
 def particle_likelihood(particles, measurement):    
     weights = []
+    #log_weight_list = []
     for particle in particles:
         Y = particle.sense()
-        weights.append( particle.measurement_prob(Y, measurement) )
+        weights.append( particle.measurementProb(Y, measurement) )
+ #==============================================================================
+ #        log_weight = particle.measurementProb(Y, measurement)
+ #        log_weight_list.append(log_weight)
+ #    max_weight = max(log_weight_list)
+ #    log_weight_list = [x - max_weight for x in log_weight_list]
+ #    weight_list = [math.e**x for x in log_weight_list]
+ # 
+ #    sum_weight = sum(weight_list)
+ #    weights = [weight_list[i]/sum_weight for i in xrange(len(particles))]
+ #==============================================================================
     return weights
 
 
@@ -278,11 +295,11 @@ def resample(particles, weights, N):
         particles3.append( particles[index] )
     return particles3
 
-                
+              
 # ============================================= MAIN =====================================================
 
 def main():
-    N = 1000 # Number of particles
+    N = 2000 # Number of particles
 
     # initialize gui
     wnd = Tkinter.Tk()
