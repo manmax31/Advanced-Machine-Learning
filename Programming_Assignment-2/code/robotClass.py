@@ -3,7 +3,7 @@ Created on 19-Sep-2014
 
 @author: manabchetia
 '''
-import copy
+import numpy as np
 import math
 import random
 import Tkinter
@@ -16,13 +16,13 @@ scenario = "../data/easy/"
 map = Image.open( scenario + "map.png" )
 # Measurements
 with open(scenario + "measurements.txt") as f:
-    measurements = [ [float(x) for x in line.split()] for line in f ]
+    measurements = np.array( [ [float(x) for x in line.split()] for line in f ] )
 # Odometry
 with open(scenario + "odometry.txt") as f:
-    odometry = [ float(line) for line in f ]
+    odometry = np.array( [ float(line) for line in f ] )
 # Truth
 with open(scenario + "truth.txt") as f:
-    truth = [[float(x) for x in line.split()] for line in f]
+    truth = np.array( [[float(x) for x in line.split()] for line in f] )
 
 valid_pixels     = []
 num_valid_pixels = 0.0
@@ -67,34 +67,24 @@ class robot:
         x = self.x +  ( math.cos(orientation) * dist )
         y = self.y +  ( math.sin(orientation) * dist )
         
-        #if is_valid_state(x, y, orientation):
         r = robot()
         r.set(x, y, orientation)
-        #r.set_noise(self.forward_noise, self.turn_noise, self.sense_noise)
+        r.set_noise(self.forward_noise, self.turn_noise, self.sense_noise)
         
         state = [r.x, r.y, r.orientation]
         while not is_valid_state( state ):
-            #print(state[0], state[1])
             dist  = max(0, dist-2)
             x = self.x + math.cos(orientation)*dist
             y = self.y + math.sin(orientation)*dist
             state = [x, y, orientation]
         r.set(state[0], state[1], state[2])
         return r
-        #return r, dist
 
     
     def measurementProb(self, Y, measurement):
         prob = 1.0
         for m, y in zip(measurement, Y):
             prob *= norm.pdf(m, y, 10)#self.sense_noise)
-            #===================================================================
-            # weight = norm.pdf(m, y, 10)
-            # if weight == 0:
-            #     prob = float('-inf')
-            # else:
-            #     prob += math.log(weight)
-            #===================================================================
         return prob
         
     def __repr__(self):  
@@ -103,22 +93,11 @@ class robot:
 
 # ==================================== HELPER METHODS ====================================================
 
-#===============================================================================
-# def is_valid_state(x, y, orientation):
-#     W, H = map.size
-#     #x = math.floor( x + math.cos(orientation) )
-#     #y = math.floor( y + math.sin(orientation) )
-#  
-#     if (x < 0) or (x >= W) or (y < 0) or (y >= H):
-#         return False
-#     return ( map.getpixel((x, y)) == 255 )
-#===============================================================================
-
 def is_valid_state(state):
 
     W, H = map.size
-#     x = math.floor(state[0] + math.cos(state[2]))
-#     y = math.floor(state[1] + math.sin(state[2]))
+    #x = math.floor(state[0] + math.cos(state[2]))
+    #y = math.floor(state[1] + math.sin(state[2]))
     x = state[0]
     y = state[1]
     
@@ -239,46 +218,44 @@ def visualize(wnd, particles, map, truth=[0,0]):
         wnd.update()
 
 
+#===============================================================================
+# def visualize(wnd, particles, map):
+#     scale = 2
+#     canvas = Image.new("RGBA", map.size)
+#     canvas.paste(map)
+#     if (scale != 1):
+#         canvas = canvas.resize((scale * map.size[0], scale * map.size[1]), Image.BILINEAR)
+#     draw = ImageDraw.Draw(canvas)
+# 
+#     for p in particles:
+#         x, y, theta = int(scale * p[0]), int(scale * p[1]), p[2]
+#         draw.line((x, y, x + 5 * math.cos(theta), y + 5 * math.sin(theta)), fill=(0,0,255))
+#         draw.ellipse((x - 2, y - 2, x + 2, y + 2), fill=(0,0,255))
+# 
+#     if (wnd is None):
+#         canvas.show()
+#     else:
+#         wnd.geometry("%dx%d+0+0" % (canvas.size[0], canvas.size[1]))
+#         tkpi = ImageTk.PhotoImage(canvas)
+#         label_image = Tkinter.Label(wnd, image=tkpi)
+#         label_image.place(x=0, y=0, width=canvas.size[0], height=canvas.size[1])
+#         wnd.update()
+#===============================================================================
+
 def motionUpdate(particles, odo):
     particles2 = []
     for particle in particles:
         turnAngle = random.uniform( -math.pi/2, math.pi/2 ) # Robot may turn between -pi/2 and pi/2 radians
         robo = particle.move(turnAngle, odo)
-     #==========================================================================
-     #    robo, dist = particle.move( turnAngle, odo )
-     # 
-     #    state = [robo.x, robo.y, robo.orientation]
-     #    while not is_valid_state(state):
-     #        #print(state[0], state[1], dist)
-     #        dist  = max(0, dist-1)
-     #        state = []
-     #        state.append( particle.x + math.cos(robo.orientation)*dist )
-     #        state.append( particle.y + math.sin(robo.orientation)*dist )
-     #        state.append( robo.orientation )
-     #         #state = [ robo.x + math.cos(robo.orientation)*dist, robo.y + math.sin(robo.orientation)*dist, robo.orientation ]
-     #     
-     #    robo.set(state[0], state[1], state[2])
-     #==========================================================================
         particles2.append(robo)
     return particles2
 
 
 def particle_likelihood(particles, measurement):    
     weights = []
-    #log_weight_list = []
     for particle in particles:
         Y = particle.sense()
         weights.append( particle.measurementProb(Y, measurement) )
- #==============================================================================
- #        log_weight = particle.measurementProb(Y, measurement)
- #        log_weight_list.append(log_weight)
- #    max_weight = max(log_weight_list)
- #    log_weight_list = [x - max_weight for x in log_weight_list]
- #    weight_list = [math.e**x for x in log_weight_list]
- # 
- #    sum_weight = sum(weight_list)
- #    weights = [weight_list[i]/sum_weight for i in xrange(len(particles))]
- #==============================================================================
     return weights
 
 
@@ -323,6 +300,19 @@ def main():
         particles = resample(particles, weights, N)
         
         visualize(wnd, particles, map, tru)
+        
+    for measurement, odo in zip(measurements, odometry):
+        
+        # Motion Update
+        particles = motionUpdate(particles, odo)
+        
+        # Measurement Update
+        weights = particle_likelihood(particles, measurement)
+        
+        # Resample
+        particles = resample(particles, weights, N)
+        
+        visualize(wnd, particles, map)
         
         
 if __name__ == "__main__":main()
