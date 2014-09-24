@@ -1,5 +1,5 @@
-INSTUPcode.robotClass
-/Users/manabchetia/Documents/Eclipse/Python/Advanced-Machine-Learning/Programming_Assignment-2/code/robotClass.py
+INSTUPcode.robotClassHard
+/Users/manabchetia/Documents/Eclipse/Python/Advanced-Machine-Learning/Programming_Assignment-2/code/robotClassHard.py
 INFOS:&&3|1|2|0&&3|3|2|0&&3|4|2|0&&3|5|2|0&&3|6|2|0&&3|7|2|0&&3|8|2|0&&1|9|2|0&&2|10|2|9&&3|11|2|12&&3|13|2|12&&3|14|2|12&&3|15|2|12&&3|16|2|12&&3|17|2|12&&2|18|2|9&&3|11|2|19&&3|13|2|19&&3|14|2|19&&2|20|2|9&&3|15|2|21&&3|16|2|21&&3|17|2|21&&2|22|2|9&&2|23|2|9&&3|14|2|0&&3|24|2|0&&3|25|2|0&&3|26|2|0&&3|11|2|0&&3|13|2|0&&3|27|2|0&&3|28|2|0&&3|26|2|0&&3|11|2|0&&3|13|2|0&&3|28|2|0&&2|29|2|0&&2|30|2|0&&2|31|2|0&&2|32|2|0&&2|33|2|0&&2|34|2|0&&2|35|2|0&&2|36|2|0&&2|37|2|0&&3|38|2|0&&3|39|2|0&&2|40|2|0&&2|41|2|0
 odometry=5
 motionUpdate=36
@@ -8,9 +8,9 @@ intialiseParticles=33
 dist=26
 main=41
 valid_pixels=7
+code.robotClassHard=2
 robot=9
 robot.set_noise=21
-code.robotClass=2
 scenario=1
 visualize=35
 forward_noise=15
