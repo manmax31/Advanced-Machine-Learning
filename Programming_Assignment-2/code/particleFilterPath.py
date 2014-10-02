@@ -5,6 +5,8 @@ Created on 19-Sep-2014
 
 References: Notes, Video lectures from Prof. Sebastian Thrun's Artificial Intelligence for Robotics
 
+This script implements particle filter to localise a robot
+
 '''
 import numpy as np
 import math
@@ -326,6 +328,9 @@ def intialisePaths(N):
         paths.append([  ])
 
 
+'''
+This function returns the path of the particle which has the highest joint distribution
+'''
 def getMostLikelyPath():
     odoSliced = odometry[1:]
     index  = 0
@@ -354,7 +359,7 @@ Execution starts from here
 '''
 def main():
     # Number of particles
-    N = 200
+    N = 5
 
 
     # initialize gui
@@ -387,7 +392,7 @@ def main():
 
     mostLikelyPath = getMostLikelyPath()
     canvasImg = visualizePath(wnd, mostLikelyPath, map)
-    canvasImg.save("Final Test Hard1 image.jpg")
+    canvasImg.save("Final Test Hard image.jpg")
 
 
 

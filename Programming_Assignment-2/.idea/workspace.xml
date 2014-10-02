@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="68996fa5-4315-492d-9b39-f6e9575a90c6" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/code/Final Test image.jpg" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/kidnapped.py" afterPath="$PROJECT_DIR$/code/kidnapped.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/particleFilterPath.py" afterPath="$PROJECT_DIR$/code/particleFilterPath.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/slam.py" afterPath="$PROJECT_DIR$/code/slam.py" />
     </list>
     <ignored path="Programming_Assignment-2.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -17,9 +15,9 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/Programming_Assignment-2$kidnapped.coverage" NAME="kidnapped Coverage Results" MODIFIED="1412266263347" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code" />
+    <SUITE FILE_PATH="coverage/Programming_Assignment-2$kidnapped.coverage" NAME="kidnapped Coverage Results" MODIFIED="1412266732536" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code" />
     <SUITE FILE_PATH="coverage/Programming_Assignment-2$robotClassHard.coverage" NAME="robotClassHard Coverage Results" MODIFIED="1412222501424" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code" />
-    <SUITE FILE_PATH="coverage/Programming_Assignment-2$particleFilterPath.coverage" NAME="particleFilterPath Coverage Results" MODIFIED="1412266322747" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code" />
+    <SUITE FILE_PATH="coverage/Programming_Assignment-2$particleFilterPath.coverage" NAME="particleFilterPath Coverage Results" MODIFIED="1412267264934" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code" />
     <SUITE FILE_PATH="coverage/Programming_Assignment-2$particleFilter.coverage" NAME="particleFilter Coverage Results" MODIFIED="1412244553008" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code" />
   </component>
   <component name="CreatePatchCommitExecutor">
@@ -34,23 +32,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="particleFilterPath.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="particleFilterPath.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/code/particleFilterPath.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="5058" max-vertical-offset="6000">
-              <caret line="376" column="28" selection-start-line="376" selection-start-column="28" selection-end-line="376" selection-end-column="28" />
+            <state vertical-scroll-proportion="-6.857143" vertical-offset="5361" max-vertical-offset="6075">
+              <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
               <folding>
-                <element signature="e#155#173#0" expanded="true" />
+                <element signature="e#215#233#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="kidnapped.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="kidnapped.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code/kidnapped.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.2733564" vertical-offset="5178" max-vertical-offset="6045">
-              <caret line="367" column="0" selection-start-line="367" selection-start-column="0" selection-end-line="367" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="5286" max-vertical-offset="6045">
+              <caret line="398" column="37" selection-start-line="398" selection-start-column="37" selection-end-line="398" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -476,7 +474,7 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39903846" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.11561265" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2667984" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -512,7 +510,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="3244" max-vertical-offset="4680">
           <caret line="317" column="17" selection-start-line="317" selection-start-column="17" selection-end-line="317" selection-end-column="17" />
           <folding>
-            <element signature="e#155#173#0" expanded="true" />
+            <element signature="e#215#233#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -548,7 +546,7 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="1230" max-vertical-offset="4710">
           <caret line="82" column="38" selection-start-line="82" selection-start-column="38" selection-end-line="82" selection-end-column="38" />
           <folding>
-            <element signature="e#155#173#0" expanded="true" />
+            <element signature="e#215#233#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -683,16 +681,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/particleFilterPath.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="5058" max-vertical-offset="6000">
-          <caret line="376" column="28" selection-start-line="376" selection-start-column="28" selection-end-line="376" selection-end-column="28" />
-          <folding>
-            <element signature="e#155#173#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/data/easy/measurements.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3705">
@@ -719,9 +707,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/code/kidnapped.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2733564" vertical-offset="5178" max-vertical-offset="6045">
-          <caret line="367" column="0" selection-start-line="367" selection-start-column="0" selection-end-line="367" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="5286" max-vertical-offset="6045">
+          <caret line="398" column="37" selection-start-line="398" selection-start-column="37" selection-end-line="398" selection-end-column="37" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/particleFilterPath.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.857143" vertical-offset="5361" max-vertical-offset="6075">
+          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+          <folding>
+            <element signature="e#215#233#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

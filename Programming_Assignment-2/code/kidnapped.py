@@ -321,9 +321,9 @@ def resample(particles, weights, N):
         particles3.append( particles[index] )
 
     for i in xrange(  int(kidnapProb * N) ):
-        r = robot()
-        r.set_noise(0.1, 0.1, 1.0)
-        particles3.append( r )
+        rParticle = robot()
+        rParticle.set_noise(0.1, 0.1, 1.0)
+        particles3.append( rParticle )
     return particles3
 
 def intialisePaths(particles):
@@ -350,7 +350,7 @@ def getMostLikelyPath():
             # score_x = dec( str(norm.pdf(state_n[0], state_p[0], odo)) )
             # score_y = dec( str(norm.pdf(state_n[1], state_p[1], odo)) )
             # score *= score_x * score_y
-        #print score
+        print score
         scores.append(score)
     index = scores.index( max(scores)  )
     return paths[index]
@@ -363,7 +363,7 @@ Execution starts from here
 '''
 def main():
     # Number of particles
-    N = 500
+    N = 100
 
 
     # initialize gui
@@ -396,7 +396,7 @@ def main():
 
     mostLikelyPath = getMostLikelyPath()
     canvasImg = visualizePath(wnd, mostLikelyPath, map)
-    canvasImg.save("Final Test Hard image.jpg")
+    canvasImg.save("Final Test Kidnap image.jpg")
 
 
 
