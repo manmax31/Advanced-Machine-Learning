@@ -15,7 +15,7 @@ from scipy.stats import norm
 from PIL import Image, ImageDraw, ImageTk
 
 # ======================================= GLOBAL DATA ==============================================
-scenario = "../data/easy/"
+scenario = "../data/hard/"
 # Map
 map = Image.open( scenario + "map.png" )
 # Measurements
@@ -318,13 +318,12 @@ def resample(particles, weights, N):
         particles3.append( particles[index] )
     return particles3
 
-def intialisePaths(particles):
+'''This function initalises the path'''
+def intialisePaths(N):
     global paths
-    #index = 0
-    for particle in particles:
-        #paths.append([ [ particle.x, particle.y  ] ])
+    #for particle in particles:
+    for i in xrange(N):
         paths.append([  ])
-        # index += 1
 
 
 def getMostLikelyPath():
@@ -355,10 +354,8 @@ Execution starts from here
 '''
 def main():
     # Number of particles
-    N = 1000
+    N = 200
 
-
-    #mostLikelyParticles = []
 
     # initialize gui
     wnd = Tkinter.Tk()
@@ -368,9 +365,9 @@ def main():
     
     # Generate and Initialise 1000 particles
     particles = intialiseParticles(N)
-    #visualize(wnd, particles, map)
+    visualize(wnd, particles, map)
 
-    intialisePaths(particles)
+    intialisePaths(N)
 
     for measurement, odo in zip(measurements, odometry):
         
@@ -384,13 +381,13 @@ def main():
         # Resample
         particles = resample(particles, weights, N)
         
-        #visualize(wnd, particles, map)
+        visualize(wnd, particles, map)
 
 
 
     mostLikelyPath = getMostLikelyPath()
     canvasImg = visualizePath(wnd, mostLikelyPath, map)
-    canvasImg.save("Final Test image.jpg")
+    canvasImg.save("Final Test Hard1 image.jpg")
 
 
 

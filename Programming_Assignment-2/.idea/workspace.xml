@@ -2,63 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="68996fa5-4315-492d-9b39-f6e9575a90c6" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/particleFilter.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/code/particleFilterPath.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.history/11/0036ccbf6344001417e9d0a8b9256927" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.history/17/d04145656944001417e9d0a8b9256927" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.history/1c/a041286b6a44001417e9d0a8b9256927" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.history/20/10f9efa06344001417e9d0a8b9256927" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.history/25/2088b1c7a94400141072fd85c0b89071" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.history/2a/20de24766944001417e9d0a8b9256927" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.history/66/c0d4e1496544001417e9d0a8b9256927" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.history/76/b0c1c55b6544001417e9d0a8b9256927" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.history/8/5066c56c1c4700141cd0ca3b0521c302" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.history/81/102f22ac6344001417e9d0a8b9256927" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.history/87/a0668e946a44001417e9d0a8b9256927" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.history/8e/60ca1ba16b44001417e9d0a8b9256927" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.history/99/80e55ca86a44001417e9d0a8b9256927" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.history/ac/80b54a836344001417e9d0a8b9256927" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.history/c2/0040853bb9460014110e807e2f507b53" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.history/e1/c072c92d6544001417e9d0a8b9256927" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.history/e2/309b24966344001417e9d0a8b9256927" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.history/e4/2039729c6344001417e9d0a8b9256927" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.history/e5/304fcdf26344001417e9d0a8b9256927" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.history/e9/70270c6a6344001417e9d0a8b9256927" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.history/f4/f0da0f476344001417e9d0a8b9256927" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.history/ff/60c642611c4700141cd0ca3b0521c302" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.root/19.tree" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/code/Final image.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/code/finalimage.jpg" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.projects/Programming_Assignment-2/com.python.pydev.analysis/0.v1_projectinfodelta" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.projects/Programming_Assignment-2/com.python.pydev.analysis/0.v1_projectinfodelta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.python.pydev/v1_cinwjs98s1gbk9puv2b6cop18/0.v1_sys_astdelta" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.python.pydev/v1_cinwjs98s1gbk9puv2b6cop18/0.v1_sys_astdelta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.projects/Programming_Assignment-2/com.python.pydev.analysis/1.v1_projectinfodelta" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.projects/Programming_Assignment-2/com.python.pydev.analysis/1.v1_projectinfodelta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.python.pydev/v1_cinwjs98s1gbk9puv2b6cop18/1.v1_sys_astdelta" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.python.pydev/v1_cinwjs98s1gbk9puv2b6cop18/1.v1_sys_astdelta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.python.pydev/v1_cinwjs98s1gbk9puv2b6cop18/10.v1_sys_astdelta" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.python.pydev/v1_cinwjs98s1gbk9puv2b6cop18/10.v1_sys_astdelta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.python.pydev/v1_cinwjs98s1gbk9puv2b6cop18/11.v1_sys_astdelta" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.python.pydev/v1_cinwjs98s1gbk9puv2b6cop18/11.v1_sys_astdelta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.python.pydev/v1_cinwjs98s1gbk9puv2b6cop18/12.v1_sys_astdelta" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.python.pydev/v1_cinwjs98s1gbk9puv2b6cop18/12.v1_sys_astdelta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.projects/Programming_Assignment-2/com.python.pydev.analysis/2.v1_projectinfodelta" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.projects/Programming_Assignment-2/com.python.pydev.analysis/2.v1_projectinfodelta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.python.pydev/v1_cinwjs98s1gbk9puv2b6cop18/2.v1_sys_astdelta" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.python.pydev/v1_cinwjs98s1gbk9puv2b6cop18/2.v1_sys_astdelta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.python.pydev/v1_cinwjs98s1gbk9puv2b6cop18/3.v1_sys_astdelta" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.python.pydev/v1_cinwjs98s1gbk9puv2b6cop18/3.v1_sys_astdelta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.python.pydev/v1_cinwjs98s1gbk9puv2b6cop18/4.v1_sys_astdelta" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.python.pydev/v1_cinwjs98s1gbk9puv2b6cop18/4.v1_sys_astdelta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.python.pydev/v1_cinwjs98s1gbk9puv2b6cop18/5.v1_sys_astdelta" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.python.pydev/v1_cinwjs98s1gbk9puv2b6cop18/5.v1_sys_astdelta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.python.pydev/v1_cinwjs98s1gbk9puv2b6cop18/6.v1_sys_astdelta" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.python.pydev/v1_cinwjs98s1gbk9puv2b6cop18/6.v1_sys_astdelta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.python.pydev/v1_cinwjs98s1gbk9puv2b6cop18/7.v1_sys_astdelta" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.python.pydev/v1_cinwjs98s1gbk9puv2b6cop18/7.v1_sys_astdelta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.python.pydev/v1_cinwjs98s1gbk9puv2b6cop18/8.v1_sys_astdelta" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.python.pydev/v1_cinwjs98s1gbk9puv2b6cop18/8.v1_sys_astdelta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.python.pydev/v1_cinwjs98s1gbk9puv2b6cop18/9.v1_sys_astdelta" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.python.pydev/v1_cinwjs98s1gbk9puv2b6cop18/9.v1_sys_astdelta" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.projects/Programming_Assignment-2/com.python.pydev.analysis/AdditionalProjectInterpreterInfo.pydevinfo" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.projects/Programming_Assignment-2/com.python.pydev.analysis/AdditionalProjectInterpreterInfo.pydevinfo" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.pde.core/.cache/clean-cache.properties" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.pde.core/.cache/clean-cache.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.projects/Programming_Assignment-2/.indexes/ed/history.index" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.projects/Programming_Assignment-2/.indexes/ed/history.index" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.projects/Programming_Assignment-2/org.python.pydev/v1_astmanager/modulesKeys" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.projects/Programming_Assignment-2/org.python.pydev/v1_astmanager/modulesKeys" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.python.pydev/v1_cinwjs98s1gbk9puv2b6cop18/modulesKeys" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.python.pydev/v1_cinwjs98s1gbk9puv2b6cop18/modulesKeys" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.core.resources/.safetable/org.eclipse.core.resources" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.metadata/.plugins/com.python.pydev.analysis/python_v1_cinwjs98s1gbk9puv2b6cop18/python.pydevsysteminfo" afterPath="$PROJECT_DIR$/../.metadata/.plugins/com.python.pydev.analysis/python_v1_cinwjs98s1gbk9puv2b6cop18/python.pydevsysteminfo" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.metadata/.log" afterPath="$PROJECT_DIR$/../.metadata/.log" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/code/Final Test image.jpg" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/kidnapped.py" afterPath="$PROJECT_DIR$/code/kidnapped.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.debug.ui/launchConfigurationHistory.xml" afterPath="$PROJECT_DIR$/../.metadata/.plugins/org.eclipse.debug.ui/launchConfigurationHistory.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/robotClassHard.py" afterPath="$PROJECT_DIR$/code/robotClassHard.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.metadata/version.ini" afterPath="$PROJECT_DIR$/../.metadata/version.ini" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/particleFilterPath.py" afterPath="$PROJECT_DIR$/code/particleFilterPath.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/code/slam.py" afterPath="$PROJECT_DIR$/code/slam.py" />
     </list>
     <ignored path="Programming_Assignment-2.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -70,9 +17,9 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/Programming_Assignment-2$kidnapped.coverage" NAME="kidnapped Coverage Results" MODIFIED="1412225975229" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code" />
+    <SUITE FILE_PATH="coverage/Programming_Assignment-2$kidnapped.coverage" NAME="kidnapped Coverage Results" MODIFIED="1412266263347" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code" />
     <SUITE FILE_PATH="coverage/Programming_Assignment-2$robotClassHard.coverage" NAME="robotClassHard Coverage Results" MODIFIED="1412222501424" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code" />
-    <SUITE FILE_PATH="coverage/Programming_Assignment-2$particleFilterPath.coverage" NAME="particleFilterPath Coverage Results" MODIFIED="1412258795784" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code" />
+    <SUITE FILE_PATH="coverage/Programming_Assignment-2$particleFilterPath.coverage" NAME="particleFilterPath Coverage Results" MODIFIED="1412266322747" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code" />
     <SUITE FILE_PATH="coverage/Programming_Assignment-2$particleFilter.coverage" NAME="particleFilter Coverage Results" MODIFIED="1412244553008" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/code" />
   </component>
   <component name="CreatePatchCommitExecutor">
@@ -86,50 +33,30 @@
     <favorites_list name="Programming_Assignment-2" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5">
-      <split-first>
-        <leaf>
-          <file leaf-file-name="particleFilterPath.py" pinned="false" current="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/code/particleFilterPath.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.12885663" vertical-offset="4249" max-vertical-offset="5010">
-                  <caret line="357" column="10" selection-start-line="357" selection-start-column="10" selection-end-line="357" selection-end-column="10" />
-                  <folding>
-                    <element signature="e#5385#7179#0" expanded="false" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="odometry.txt" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/data/easy/odometry.txt">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3705">
-                  <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file leaf-file-name="particleFilterPath.py" pinned="false" current="true" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/code/particleFilterPath.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.21052632" vertical-offset="5434" max-vertical-offset="6045">
-                  <caret line="370" column="5" selection-start-line="370" selection-start-column="5" selection-end-line="370" selection-end-column="5" />
-                  <folding>
-                    <element signature="e#155#173#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf>
+      <file leaf-file-name="particleFilterPath.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code/particleFilterPath.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="5058" max-vertical-offset="6000">
+              <caret line="376" column="28" selection-start-line="376" selection-start-column="28" selection-end-line="376" selection-end-column="28" />
+              <folding>
+                <element signature="e#155#173#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="kidnapped.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/code/kidnapped.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.2733564" vertical-offset="5178" max-vertical-offset="6045">
+              <caret line="367" column="0" selection-start-line="367" selection-start-column="0" selection-end-line="367" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -142,17 +69,18 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/code/slam.py" />
         <option value="$PROJECT_DIR$/code/robotClassHard.py" />
-        <option value="$PROJECT_DIR$/code/kidnapped.py" />
         <option value="$PROJECT_DIR$/code/particleFilter.py" />
+        <option value="$PROJECT_DIR$/code/slam.py" />
+        <option value="$PROJECT_DIR$/code/kidnapped.py" />
         <option value="$PROJECT_DIR$/code/particleFilterPath.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="width" value="1440" />
-    <option name="height" value="900" />
+    <option name="x" value="1440" />
+    <option name="width" value="1920" />
+    <option name="height" value="1080" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -227,6 +155,10 @@
               <option name="myItemId" value="data" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="kidnapped" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -239,10 +171,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="data" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="easy" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -536,7 +464,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <frame x="1440" y="0" width="1920" height="1080" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -544,11 +472,11 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24964234" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22317597" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16613418" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39903846" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28846154" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.11561265" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -711,21 +639,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code/slam.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.3307985" vertical-offset="0" max-vertical-offset="10260">
-          <caret line="71" column="4" selection-start-line="71" selection-start-column="4" selection-end-line="76" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code/kidnapped.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2979" max-vertical-offset="4785">
-          <caret line="221" column="0" selection-start-line="221" selection-start-column="0" selection-end-line="221" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/code/robotClassEasy.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4455">
@@ -742,19 +655,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/easy/measurements.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.8346457" vertical-offset="3070" max-vertical-offset="3705">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/code/particleFilter.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.79646015" vertical-offset="0" max-vertical-offset="4635">
           <caret line="42" column="39" selection-start-line="42" selection-start-column="39" selection-end-line="42" selection-end-column="39" />
           <folding>
             <element signature="e#53#71#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/slam.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.421365" vertical-offset="5461" max-vertical-offset="6135">
+          <caret line="383" column="37" selection-start-line="0" selection-start-column="0" selection-end-line="403" selection-end-column="32" />
+          <folding>
+            <element signature="e#155#173#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -769,11 +685,43 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/code/particleFilterPath.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21052632" vertical-offset="5434" max-vertical-offset="6045">
-          <caret line="370" column="5" selection-start-line="370" selection-start-column="5" selection-end-line="370" selection-end-column="5" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="5058" max-vertical-offset="6000">
+          <caret line="376" column="28" selection-start-line="376" selection-start-column="28" selection-end-line="376" selection-end-column="28" />
           <folding>
             <element signature="e#155#173#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/easy/measurements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3705">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/kidnapped/measurements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.4394463" vertical-offset="1248" max-vertical-offset="8220">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/kidnapped/odometry.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="8220">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code/kidnapped.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2733564" vertical-offset="5178" max-vertical-offset="6045">
+          <caret line="367" column="0" selection-start-line="367" selection-start-column="0" selection-end-line="367" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

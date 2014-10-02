@@ -2,18 +2,20 @@
 Created on 19-Sep-2014
 
 @author: manabchetia
+
+References: Notes, Video lectures from Prof. Sebastian Thrun's Artificial Intelligence for Robotics
+
 '''
 import numpy as np
 import math
 import random
 import Tkinter
+from decimal import Decimal as dec
 from scipy.stats import norm
 from PIL import Image, ImageDraw, ImageTk
-import heapq
-import operator
 
 # ======================================= GLOBAL DATA ==============================================
-scenario = "../data/kidnapped/"
+scenario = "../data/hard/"
 # Map
 map = Image.open( scenario + "map.png" )
 # Measurements
@@ -23,12 +25,15 @@ with open(scenario + "measurements.txt") as f:
 with open(scenario + "odometry.txt") as f:
     odometry = np.array( [ float(line) for line in f ] )
 
-
 valid_pixels     = []
 num_valid_pixels = 0.0
 
+paths = []
 # ========================================== CLASS ==================================================
 class robot:
+    '''
+    This function initialises the robot/particle.
+    '''
     def __init__(self):
         p                  = valid_pixels[ random.randrange(0, num_valid_pixels) ]
         self.x             = p[0] + random.random()
@@ -37,35 +42,47 @@ class robot:
         self.forward_noise = 0.0
         self.turn_noise    = 0.0
         self.sense_noise   = 0.0
-    
+
+    '''
+    This function sets the x,y and angle values for the robot/particle.
+    '''
     def set(self, new_x, new_y, new_orientation):
         self.x           = float(new_x)
         self.y           = float(new_y)
         self.orientation = float(new_orientation)
-    
+
+    '''
+    This function sets the noise values for forward movement, turn angle and measurement.
+    '''
     def set_noise(self, new_f_noise, new_t_noise, new_s_noise):
         self.forward_noise = float(new_f_noise)
         self.turn_noise    = float(new_t_noise)
         self.sense_noise   = float(new_s_noise) 
-    
+
+    '''
+    This function calculates the 11 measurements from the wall of the robot/particle.
+    '''
     def sense(self): # Returns [11 distances] from the wall in the range -pi/4 to pi/4
         max_range = 50.0
-        failChance = random.random() # Sensor Failure Probability
-        if failChance <= 0.99:
+        fail_chance = random.random() # Sensor Failure Probability
+        if fail_chance <= 0.99:
             measurement_angles = [ 0.2 * math.pi / 4 * float(i) for i in xrange(-5,6) ]
             Y = [ min( max_range, distance_to_wall( [self.x, self.y, self.orientation], angle ) ) for angle in measurement_angles ]
         else:
             Y = [ max_range for i in xrange(11) ]
         return Y
          
-    def move(self, turnAngle, forward):     
+    '''
+    This function moves a robot/particle based on the odometry reading and turnAngle provided to it.
+    '''
+    def move(self, turnAngle, forward):
         orientation  = self.orientation + float(turnAngle) + random.gauss(0.0, self.turn_noise)
         orientation %= 2*math.pi
-        distForw     = float(forward) + random.gauss(0.0, self.forward_noise)
-        dist2Wall    = distance_to_wall( [self.x, self.y, self.orientation], 0 )   
-        dist         = min( max(0, distForw), dist2Wall ) 
-        x = self.x +  ( math.cos(orientation) * dist )
-        y = self.y +  ( math.sin(orientation) * dist )
+        dist_forw    = float(forward) + random.gauss(0.0, self.forward_noise)
+        dist_2_Wall  = distance_to_wall( [self.x, self.y, self.orientation], 0 )
+        dist         = min( max(0, dist_forw), dist_2_Wall ) 
+        x = self.x   +  ( math.cos(orientation) * dist )
+        y = self.y   +  ( math.sin(orientation) * dist )
         
         r = robot()
         r.set(x, y, orientation)
@@ -80,19 +97,28 @@ class robot:
         r.set(state[0], state[1], state[2])
         return r
 
-    
+
+    '''
+    This function calculates the probability of seeing a provided measurement based on the calculated measurement by function SENSE.
+    '''
     def measurementProb(self, Y, measurement):
         prob = 1.0
         for m, y in zip(measurement, Y):
             prob *= norm.pdf(m, y, 10)#self.sense_noise)
         return prob
         
-    def __repr__(self):  
+    '''
+    This function prints out the x,y and orientation of the particle.
+    '''
+    def __repr__(self):
         return '[x=%.6s y=%.6s orient=%.6s]' % ( str(self.x), str(self.y), str(self.orientation) ) 
     
 
 # ==================================== HELPER METHODS ====================================================
 
+'''
+This function checks if the particle/robot is in the valid state of the map
+'''
 def is_valid_state(state):
 
     W, H = map.size
@@ -118,6 +144,9 @@ def validPixels():
         
     num_valid_pixels = len(valid_pixels)
 
+'''
+This function initialises N particles.
+'''
 def intialiseParticles(N):
     particles = []
     for i in xrange(N):
@@ -126,7 +155,9 @@ def intialiseParticles(N):
         particles.append(r)
     return particles 
 
-
+'''
+This function calculates the distance of the particle from the wall
+'''
 def distance_to_wall(state, dtheta):
     W, H = map.size
 
@@ -148,10 +179,10 @@ def distance_to_wall(state, dtheta):
             y1 = 0
             x1 = (y1 - y0) * math.tan(0.5 * math.pi - theta) + x0
         elif (y1dash >= H):
-            y1 = H - 1
+            y1 = H - 1;
             x1 = (y1 - y0) * math.tan(0.5 * math.pi - theta) + x0
         else:
-            y1 = y1dash
+            y1 = y1dash;
 
     elif ((y1 < 0) or (y1 >= H)):
         if (y1 < 0):
@@ -166,7 +197,7 @@ def distance_to_wall(state, dtheta):
             x1 = W - 1
             y1 = (x1 - x0) * math.tan(theta) + y0;
         else:
-            x1 = x1dash
+            x1 = x1dash;
 
     x0 = max(math.floor(x0 + math.cos(theta)), 0)
     y0 = max(math.floor(y0 + math.sin(theta)), 0)
@@ -192,10 +223,9 @@ def distance_to_wall(state, dtheta):
     dist = math.sqrt((state[0] - x0) ** 2 + (state[1] - y0) ** 2)
     return dist
 
-def visualize( wnd, particles, map):#, mostLikelyParticle=[0,0] ):
+
+def visualize( wnd, particles, map):
     scale = 2
-    # mostLikelyParticle[0] = mostLikelyParticle[0] * scale
-    # mostLikelyParticle[1] = mostLikelyParticle[1] * scale
     
     canvas = Image.new("RGBA", map.size)
     canvas.paste(map)
@@ -217,32 +247,54 @@ def visualize( wnd, particles, map):#, mostLikelyParticle=[0,0] ):
         label_image = Tkinter.Label(wnd, image=tkpi)
         label_image.place(x=0, y=0, width=canvas.size[0], height=canvas.size[1])
         wnd.update()
+    
+    #return canvas
 
+def visualizePath( wnd, coordinates, map):
+    scale = 2
 
-def getMostLikelyParticle(particles, weights, n):
-    indices = zip( *heapq.nlargest(n, enumerate(weights), key=operator.itemgetter(1)) ) [0]
-    x = y = 0.0
+    canvas = Image.new("RGBA", map.size)
+    canvas.paste(map)
+    if (scale != 1):
+        canvas = canvas.resize((scale * map.size[0], scale * map.size[1]), Image.BILINEAR)
+    draw = ImageDraw.Draw(canvas)
 
-    for index in indices:
-        particle = particles[index]
-        x += particle.x
-        y += particle.y
+    #draw.ellipse((mostLikelyParticle[0] - 10, mostLikelyParticle[1] - 10, mostLikelyParticle[0] + 10, mostLikelyParticle[1] + 10), fill="red")
+    for coordinate in coordinates:
+        x, y = int(scale * coordinate[0]), int(scale * coordinate[1])
+        #draw.line((x, y, x + 5 * math.cos(theta), y + 5 * math.sin(theta)), fill=(0,0,255))
+        draw.ellipse((x - 2, y - 2, x + 2, y + 2), fill=(0,0,255))
 
-    x /= n
-    y /= n
-    r = robot()
-    r.set(x, y, 0.0)
-    return r
-
+    if (wnd is None):
+        canvas.show()
+    else:
+        wnd.geometry("%dx%d+0+0" % (canvas.size[0], canvas.size[1]))
+        tkpi = ImageTk.PhotoImage(canvas)
+        label_image = Tkinter.Label(wnd, image=tkpi)
+        label_image.place(x=0, y=0, width=canvas.size[0], height=canvas.size[1])
+        wnd.update()
+    return canvas
+'''
+This function does motion update for all particles.
+'''
 def motionUpdate(particles, odo):
     particles2 = []
+    global paths
+    index = 0
+
     for particle in particles:
         turnAngle = random.uniform( -math.pi/2, math.pi/2 ) # Robot may turn between -pi/2 and pi/2 radians
-        robo = particle.move(turnAngle, odo)
+        robo      = particle.move(turnAngle, odo)
+        paths[index].append (  [  robo.x, robo.y  ] )
+
         particles2.append(robo)
+        index += 1
+
     return particles2
 
-
+'''
+This function calculates the weight of each particle based on the measurement model.
+'''
 def particle_likelihood(particles, measurement):    
     weights = []
     for particle in particles:
@@ -250,14 +302,16 @@ def particle_likelihood(particles, measurement):
         weights.append( particle.measurementProb(Y, measurement) )
     return weights
 
-
+'''
+This function generates a new set of particle based on the weights by sampling with replacement.
+'''
 def resample(particles, weights, N):
     particles3  = []
     index       = int( random.random() * N )
     beta        = 0.0
     mw          = max(weights)
     kidnapProb  = 0.01
-    correctProb = 1-kidnapProb 
+    correctProb = 1-kidnapProb
 
     for i in xrange( int(correctProb * N) ):
         beta += random.random() * 2.0 * mw
@@ -265,31 +319,52 @@ def resample(particles, weights, N):
             beta -= weights[index]
             index = (index + 1) % N
         particles3.append( particles[index] )
-    
+
     for i in xrange(  int(kidnapProb * N) ):
         r = robot()
         r.set_noise(0.1, 0.1, 1.0)
         particles3.append( r )
     return particles3
 
- 
-def getMostLikelyParticle(particles, weights, n):
-    indices = zip( *heapq.nlargest(n, enumerate(weights), key=operator.itemgetter(1)) ) [0]
-    x = y = 0.0
-    
-    for index in indices:
-        particle = particles[index]
-        x += particle.x
-        y += particle.y
-    
-    x /= n
-    y /= n
-    particle = [x, y]
-    return particle             
+def intialisePaths(particles):
+    global paths
+    #index = 0
+    for particle in particles:
+        #paths.append([ [ particle.x, particle.y  ] ])
+        paths.append([  ])
+        # index += 1
+
+
+def getMostLikelyPath():
+    odoSliced = odometry[1:]
+    index  = 0
+    scores = []
+    iniProb = 1/len(paths)
+    for path in paths:
+        score = dec(iniProb)
+        for index  in xrange( len(path) - 1 ):
+            odo      =  odoSliced[index]
+            state_p  =  path[index]
+            state_n  =  path[index+1]
+            score   *=  dec(norm.pdf(state_n[0], state_p[0], odo)) * dec(norm.pdf(state_n[1], state_p[1], odo))
+            # score_x = dec( str(norm.pdf(state_n[0], state_p[0], odo)) )
+            # score_y = dec( str(norm.pdf(state_n[1], state_p[1], odo)) )
+            # score *= score_x * score_y
+        #print score
+        scores.append(score)
+    index = scores.index( max(scores)  )
+    return paths[index]
+
+          
 # ============================================= MAIN =====================================================
 
+'''
+Execution starts from here
+'''
 def main():
-    N = 500 # Number of particles
+    # Number of particles
+    N = 500
+
 
     # initialize gui
     wnd = Tkinter.Tk()
@@ -301,6 +376,8 @@ def main():
     particles = intialiseParticles(N)
     visualize(wnd, particles, map)
 
+    intialisePaths(particles)
+
     for measurement, odo in zip(measurements, odometry):
         
         # Motion Update
@@ -308,14 +385,20 @@ def main():
         
         # Measurement Update
         weights = particle_likelihood(particles, measurement)
-         
-        mostLikelyParticle = getMostLikelyParticle(particles, weights, 10)
         
+  
         # Resample
         particles = resample(particles, weights, N)
         
-        visualize(wnd, particles, map, mostLikelyParticle)
-        
-        
-        
+        visualize(wnd, particles, map)
+
+
+
+    mostLikelyPath = getMostLikelyPath()
+    canvasImg = visualizePath(wnd, mostLikelyPath, map)
+    canvasImg.save("Final Test Hard image.jpg")
+
+
+
+
 if __name__ == "__main__":main()
