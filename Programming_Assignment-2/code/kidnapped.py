@@ -148,10 +148,10 @@ def distance_to_wall(state, dtheta):
             y1 = 0
             x1 = (y1 - y0) * math.tan(0.5 * math.pi - theta) + x0
         elif (y1dash >= H):
-            y1 = H - 1;
+            y1 = H - 1
             x1 = (y1 - y0) * math.tan(0.5 * math.pi - theta) + x0
         else:
-            y1 = y1dash;
+            y1 = y1dash
 
     elif ((y1 < 0) or (y1 >= H)):
         if (y1 < 0):
@@ -166,7 +166,7 @@ def distance_to_wall(state, dtheta):
             x1 = W - 1
             y1 = (x1 - x0) * math.tan(theta) + y0;
         else:
-            x1 = x1dash;
+            x1 = x1dash
 
     x0 = max(math.floor(x0 + math.cos(theta)), 0)
     y0 = max(math.floor(y0 + math.sin(theta)), 0)
@@ -192,10 +192,10 @@ def distance_to_wall(state, dtheta):
     dist = math.sqrt((state[0] - x0) ** 2 + (state[1] - y0) ** 2)
     return dist
 
-def visualize( wnd, particles, map, mostLikelyParticle=[0,0] ):
+def visualize( wnd, particles, map):#, mostLikelyParticle=[0,0] ):
     scale = 2
-    mostLikelyParticle[0] = mostLikelyParticle[0] * scale
-    mostLikelyParticle[1] = mostLikelyParticle[1] * scale
+    # mostLikelyParticle[0] = mostLikelyParticle[0] * scale
+    # mostLikelyParticle[1] = mostLikelyParticle[1] * scale
     
     canvas = Image.new("RGBA", map.size)
     canvas.paste(map)
@@ -203,7 +203,7 @@ def visualize( wnd, particles, map, mostLikelyParticle=[0,0] ):
         canvas = canvas.resize((scale * map.size[0], scale * map.size[1]), Image.BILINEAR)
     draw = ImageDraw.Draw(canvas)
     
-    draw.ellipse((mostLikelyParticle[0] - 10, mostLikelyParticle[1] - 10, mostLikelyParticle[0] + 10, mostLikelyParticle[1] + 10), fill="red")
+    #draw.ellipse((mostLikelyParticle[0] - 10, mostLikelyParticle[1] - 10, mostLikelyParticle[0] + 10, mostLikelyParticle[1] + 10), fill="red")
     for particle in particles:
         x, y, theta = int(scale * particle.x), int(scale * particle.y), particle.orientation
         draw.line((x, y, x + 5 * math.cos(theta), y + 5 * math.sin(theta)), fill=(0,0,255))
@@ -218,6 +218,21 @@ def visualize( wnd, particles, map, mostLikelyParticle=[0,0] ):
         label_image.place(x=0, y=0, width=canvas.size[0], height=canvas.size[1])
         wnd.update()
 
+
+def getMostLikelyParticle(particles, weights, n):
+    indices = zip( *heapq.nlargest(n, enumerate(weights), key=operator.itemgetter(1)) ) [0]
+    x = y = 0.0
+
+    for index in indices:
+        particle = particles[index]
+        x += particle.x
+        y += particle.y
+
+    x /= n
+    y /= n
+    r = robot()
+    r.set(x, y, 0.0)
+    return r
 
 def motionUpdate(particles, odo):
     particles2 = []
@@ -243,6 +258,7 @@ def resample(particles, weights, N):
     mw          = max(weights)
     kidnapProb  = 0.01
     correctProb = 1-kidnapProb 
+
     for i in xrange( int(correctProb * N) ):
         beta += random.random() * 2.0 * mw
         while beta > weights[index]:
@@ -273,7 +289,7 @@ def getMostLikelyParticle(particles, weights, n):
 # ============================================= MAIN =====================================================
 
 def main():
-    N = 1000 # Number of particles
+    N = 500 # Number of particles
 
     # initialize gui
     wnd = Tkinter.Tk()
