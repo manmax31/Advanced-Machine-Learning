@@ -9,6 +9,8 @@ import random
 import Tkinter
 from scipy.stats import norm
 from PIL import Image, ImageDraw, ImageTk
+import heapq
+import operator
 
 # ======================================= GLOBAL DATA ==============================================
 scenario = "../data/kidnapped/"
@@ -82,7 +84,7 @@ class robot:
     def measurementProb(self, Y, measurement):
         prob = 1.0
         for m, y in zip(measurement, Y):
-            prob *= norm.pdf(m, y, self.sense_noise)
+            prob *= norm.pdf(m, y, 10)#self.sense_noise)
         return prob
         
     def __repr__(self):  
@@ -190,14 +192,18 @@ def distance_to_wall(state, dtheta):
     dist = math.sqrt((state[0] - x0) ** 2 + (state[1] - y0) ** 2)
     return dist
 
-def visualize(wnd, particles, map):
+def visualize( wnd, particles, map, mostLikelyParticle=[0,0] ):
     scale = 2
+    mostLikelyParticle[0] = mostLikelyParticle[0] * scale
+    mostLikelyParticle[1] = mostLikelyParticle[1] * scale
+    
     canvas = Image.new("RGBA", map.size)
     canvas.paste(map)
     if (scale != 1):
         canvas = canvas.resize((scale * map.size[0], scale * map.size[1]), Image.BILINEAR)
     draw = ImageDraw.Draw(canvas)
     
+    draw.ellipse((mostLikelyParticle[0] - 10, mostLikelyParticle[1] - 10, mostLikelyParticle[0] + 10, mostLikelyParticle[1] + 10), fill="red")
     for particle in particles:
         x, y, theta = int(scale * particle.x), int(scale * particle.y), particle.orientation
         draw.line((x, y, x + 5 * math.cos(theta), y + 5 * math.sin(theta)), fill=(0,0,255))
@@ -235,7 +241,7 @@ def resample(particles, weights, N):
     index       = int( random.random() * N )
     beta        = 0.0
     mw          = max(weights)
-    kidnapProb  = 0.05
+    kidnapProb  = 0.01
     correctProb = 1-kidnapProb 
     for i in xrange( int(correctProb * N) ):
         beta += random.random() * 2.0 * mw
@@ -250,11 +256,24 @@ def resample(particles, weights, N):
         particles3.append( r )
     return particles3
 
-              
+ 
+def getMostLikelyParticle(particles, weights, n):
+    indices = zip( *heapq.nlargest(n, enumerate(weights), key=operator.itemgetter(1)) ) [0]
+    x = y = 0.0
+    
+    for index in indices:
+        particle = particles[index]
+        x += particle.x
+        y += particle.y
+    
+    x /= n
+    y /= n
+    particle = [x, y]
+    return particle             
 # ============================================= MAIN =====================================================
 
 def main():
-    N = 2000 # Number of particles
+    N = 1000 # Number of particles
 
     # initialize gui
     wnd = Tkinter.Tk()
@@ -273,11 +292,13 @@ def main():
         
         # Measurement Update
         weights = particle_likelihood(particles, measurement)
+         
+        mostLikelyParticle = getMostLikelyParticle(particles, weights, 10)
         
         # Resample
         particles = resample(particles, weights, N)
         
-        visualize(wnd, particles, map)
+        visualize(wnd, particles, map, mostLikelyParticle)
         
         
         

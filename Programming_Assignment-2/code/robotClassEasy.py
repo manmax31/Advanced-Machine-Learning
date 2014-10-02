@@ -41,7 +41,7 @@ class robot:
     def set(self, new_x, new_y, new_orientation):
         self.x           = float(new_x)
         self.y           = float(new_y)
-        self.orientation = float(new_orientation)
+        self.orientation = float(new_orientation) #% (2.0 * math.pi)
     
     def set_noise(self, new_f_noise, new_t_noise, new_s_noise):
         self.forward_noise = float(new_f_noise)
@@ -59,7 +59,7 @@ class robot:
         return Y
          
     def move(self, turnAngle, forward):     
-        orientation  = self.orientation + float(turnAngle) + random.gauss(0.0, self.turn_noise)
+        orientation  = self.orientation + float(turnAngle) + random.gauss(0.0, self.turn_noise) #) % (2.0 * math.pi)
         orientation %= 2*math.pi
         distForw     = float(forward) + random.gauss(0.0, self.forward_noise)
         dist2Wall    = distance_to_wall( [self.x, self.y, self.orientation], 0 )   
@@ -192,10 +192,17 @@ def distance_to_wall(state, dtheta):
     dist = math.sqrt((state[0] - x0) ** 2 + (state[1] - y0) ** 2)
     return dist
 
-def visualize(wnd, particles, map, truth=[0,0]):
+def visualize( wnd, particles, map, truth=[0,0]):#, mostLikelyParticle=[0,0] ):
     scale = 2
-    truth[0] = truth[0]*scale
-    truth[1] = truth[1]*scale
+    truth[0] = truth[0] * scale
+    truth[1] = truth[1] * scale
+    
+    #===========================================================================
+    # mostLikelyParticle[0] = mostLikelyParticle[0] * scale
+    # mostLikelyParticle[1] = mostLikelyParticle[1] * scale
+    #===========================================================================
+    
+    
     canvas = Image.new("RGBA", map.size)
     canvas.paste(map)
     if (scale != 1):
@@ -203,6 +210,8 @@ def visualize(wnd, particles, map, truth=[0,0]):
     draw = ImageDraw.Draw(canvas)
     
     draw.ellipse((truth[0] - 4, truth[1] - 4, truth[0] + 4, truth[1] + 4), fill="red")
+    #draw.ellipse((mostLikelyParticle[0] - 10, mostLikelyParticle[1] - 10, mostLikelyParticle[0] + 10, mostLikelyParticle[1] + 10), fill="green")
+    
     for particle in particles:
         x, y, theta = int(scale * particle.x), int(scale * particle.y), particle.orientation
         draw.line((x, y, x + 5 * math.cos(theta), y + 5 * math.sin(theta)), fill=(0,0,255))
@@ -252,7 +261,7 @@ def resample(particles, weights, N):
 # ============================================= MAIN =====================================================
 
 def main():
-    N = 2000 # Number of particles
+    N = 1000 # Number of particles
 
     # initialize gui
     wnd = Tkinter.Tk()
@@ -272,10 +281,16 @@ def main():
         # Measurement Update
         weights = particle_likelihood(particles, measurement)
         
+        #=======================================================================
+        # indexOfMaxWeight   = weights.index( max(weights) )
+        # mostLikelyParticle = particles[ indexOfMaxWeight ]
+        # mostLikelyParticle = [mostLikelyParticle.x, mostLikelyParticle.y]
+        #=======================================================================
+         
         # Resample
         particles = resample(particles, weights, N)
         
-        visualize(wnd, particles, map, tru)
+        visualize(wnd, particles, map, tru)#, mostLikelyParticle)
         
         
         
