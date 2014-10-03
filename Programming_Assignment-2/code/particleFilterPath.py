@@ -17,7 +17,7 @@ from scipy.stats import norm
 from PIL import Image, ImageDraw, ImageTk
 
 # ======================================= GLOBAL DATA ==============================================
-scenario = "../data/hard/"
+scenario = "../data/easy/"
 # Map
 map = Image.open( scenario + "map.png" )
 # Measurements
@@ -78,7 +78,7 @@ class robot:
     This function moves a robot/particle based on the odometry reading and turnAngle provided to it.
     '''
     def move(self, turnAngle, forward):
-        orientation  = self.orientation + float(turnAngle) + random.gauss(0.0, self.turn_noise)
+        orientation  =  self.orientation + float(turnAngle) + random.gauss(0.0, self.turn_noise)
         orientation %= 2*math.pi
         dist_forw    = float(forward) + random.gauss(0.0, self.forward_noise)
         dist_2_Wall  = distance_to_wall( [self.x, self.y, self.orientation], 0 )
@@ -333,7 +333,7 @@ This function returns the path of the particle which has the highest joint distr
 '''
 def getMostLikelyPath():
     odoSliced = odometry[1:]
-    index  = 0
+    #index  = 0
     scores = []
     iniProb = 1/len(paths)
     for path in paths:
@@ -359,7 +359,7 @@ Execution starts from here
 '''
 def main():
     # Number of particles
-    N = 5
+    N = 200
 
 
     # initialize gui

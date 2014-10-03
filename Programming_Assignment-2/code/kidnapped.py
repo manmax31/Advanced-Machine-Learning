@@ -326,14 +326,12 @@ def resample(particles, weights, N):
         particles3.append( rParticle )
     return particles3
 
-def intialisePaths(particles):
+'''This function initalises the path'''
+def intialisePaths(N):
     global paths
-    #index = 0
-    for particle in particles:
-        #paths.append([ [ particle.x, particle.y  ] ])
+    #for particle in particles:
+    for i in xrange(N):
         paths.append([  ])
-        # index += 1
-
 
 def getMostLikelyPath():
     odoSliced = odometry[1:]
@@ -363,7 +361,7 @@ Execution starts from here
 '''
 def main():
     # Number of particles
-    N = 100
+    N = 3000
 
 
     # initialize gui
@@ -376,7 +374,7 @@ def main():
     particles = intialiseParticles(N)
     visualize(wnd, particles, map)
 
-    intialisePaths(particles)
+    intialisePaths(N)
 
     for measurement, odo in zip(measurements, odometry):
         
