@@ -82,7 +82,9 @@ class robot:
         orientation %= 2*math.pi
         dist_forw    = float(forward) + random.gauss(0.0, self.forward_noise)
         dist_2_Wall  = distance_to_wall( [self.x, self.y, self.orientation], 0 )
-        dist         = min( max(0, dist_forw), dist_2_Wall ) 
+        #maxdistForw  = max(0, dist_forw)
+        dist         = min( max(0, dist_forw), dist_2_Wall )
+        #dist         = min(dist_2_Wall, dist_forw)
         x = self.x   +  ( math.cos(orientation) * dist )
         y = self.y   +  ( math.sin(orientation) * dist )
         
@@ -124,8 +126,6 @@ This function checks if the particle/robot is in the valid state of the map
 def is_valid_state(state):
 
     W, H = map.size
-    #x = math.floor(state[0] + math.cos(state[2]))
-    #y = math.floor(state[1] + math.sin(state[2]))
     x = state[0]
     y = state[1]
     
@@ -141,7 +141,7 @@ def validPixels():
     global num_valid_pixels
     for y in xrange(H):
         for x in xrange(W):
-            if ( map.getpixel((x, y)) == 255 ):
+            if  map.getpixel((x, y)) == 255 :
                 valid_pixels.append((x, y))
         
     num_valid_pixels = len(valid_pixels)
@@ -181,10 +181,10 @@ def distance_to_wall(state, dtheta):
             y1 = 0
             x1 = (y1 - y0) * math.tan(0.5 * math.pi - theta) + x0
         elif (y1dash >= H):
-            y1 = H - 1;
+            y1 = H - 1
             x1 = (y1 - y0) * math.tan(0.5 * math.pi - theta) + x0
         else:
-            y1 = y1dash;
+            y1 = y1dash
 
     elif ((y1 < 0) or (y1 >= H)):
         if (y1 < 0):
@@ -197,9 +197,9 @@ def distance_to_wall(state, dtheta):
             y1 = (x1 - x0) * math.tan(theta) + y0
         elif (x1dash >= W):
             x1 = W - 1
-            y1 = (x1 - x0) * math.tan(theta) + y0;
+            y1 = (x1 - x0) * math.tan(theta) + y0
         else:
-            x1 = x1dash;
+            x1 = x1dash
 
     x0 = max(math.floor(x0 + math.cos(theta)), 0)
     y0 = max(math.floor(y0 + math.sin(theta)), 0)
@@ -320,7 +320,7 @@ def resample(particles, weights, N):
         particles3.append( particles[index] )
     return particles3
 
-'''This function initalises the path'''
+'''This function initialises the path'''
 def intialisePaths(N):
     global paths
     #for particle in particles:
@@ -359,7 +359,7 @@ Execution starts from here
 '''
 def main():
     # Number of particles
-    N = 200
+    N = 2000
 
 
     # initialize gui
