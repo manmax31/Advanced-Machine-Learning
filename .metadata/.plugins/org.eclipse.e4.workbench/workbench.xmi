@@ -141,7 +141,6 @@
             <children xsi:type="basic:PartStack" xmi:id="_BUZJMDUiEeSks_1_j26iEw" elementId="topLeft" containerData="2061" selectedElement="_BUZJMTUiEeSks_1_j26iEw">
               <tags>newtablook</tags>
               <tags>active</tags>
-              <tags>noFocus</tags>
               <children xsi:type="advanced:Placeholder" xmi:id="_BUZJMTUiEeSks_1_j26iEw" elementId="org.python.pydev.navigator.view" ref="_BUaXkzUiEeSks_1_j26iEw"/>
             </children>
             <children xsi:type="basic:PartSashContainer" xmi:id="_BUZJMjUiEeSks_1_j26iEw" containerData="7939" selectedElement="_BUZJMzUiEeSks_1_j26iEw">
@@ -216,7 +215,7 @@
           <tags>removeOnHide</tags>
         </children>
         <children xsi:type="basic:Part" xmi:id="__L8k0EooEeSv1Zp0dDjNDQ" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="particleFilterPath" iconURI="platform:/plugin/org.python.pydev/icons/python_file.gif" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;editor id=&quot;org.python.pydev.editor.PythonEditor&quot; name=&quot;particleFilterPath.py&quot; partName=&quot;particleFilterPath&quot; title=&quot;particleFilterPath&quot; tooltip=&quot;Programming_Assignment-2/code/particleFilterPath.py&quot;>&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/Programming_Assignment-2/code/particleFilterPath.py&quot;/>&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;10482&quot; selectionTopPixel=&quot;0&quot;/>&#xA;&lt;/editor>"/>
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;editor id=&quot;org.python.pydev.editor.PythonEditor&quot; name=&quot;particleFilterPath.py&quot; partName=&quot;particleFilterPath&quot; title=&quot;particleFilterPath&quot; tooltip=&quot;Programming_Assignment-2/code/particleFilterPath.py&quot;>&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/Programming_Assignment-2/code/particleFilterPath.py&quot;/>&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;233&quot; selectionTopPixel=&quot;2103&quot;/>&#xA;&lt;/editor>"/>
           <tags>Editor</tags>
           <tags>org.python.pydev.editor.PythonEditor</tags>
           <tags>removeOnHide</tags>
@@ -318,7 +317,7 @@
       <tags>categoryTag:Java</tags>
     </sharedElements>
     <sharedElements xsi:type="basic:Part" xmi:id="_BUaXkzUiEeSks_1_j26iEw" elementId="org.python.pydev.navigator.view" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" label="PyDev Package Explorer" iconURI="platform:/plugin/org.python.pydev/icons/pydev_package_explorer.gif" closeable="true">
-      <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;view CommonNavigator.LINKING_ENABLED=&quot;0&quot; currentWorkingSetName=&quot;Aggregate for window 1409937800341&quot; org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets=&quot;0&quot;>&#xA;&lt;expanded IMemento.internal.id=&quot;/Users/manabchetia/Documents/Eclipse/Python/Advanced-Machine-Learning/Programming_Assignment-2&quot;/>&#xA;&lt;expanded IMemento.internal.id=&quot;/Users/manabchetia/Documents/Eclipse/Python/Advanced-Machine-Learning/Programming_Assignment-2/code&quot;/>&#xA;&lt;expanded IMemento.internal.id=&quot;/Users/manabchetia/Documents/Eclipse/Python/Advanced-Machine-Learning/Programming_Assignment-2/code/particleFilterPath.py&quot;/>&#xA;&lt;expanded IMemento.internal.id=&quot;/Users/manabchetia/Documents/Eclipse/Python/Advanced-Machine-Learning/Programming_Assignment-2/data&quot;/>&#xA;&lt;expanded IMemento.internal.id=&quot;/Users/manabchetia/Documents/Eclipse/Python/Advanced-Machine-Learning/Programming_Assignment-2/data/easy&quot;/>&#xA;&lt;/view>"/>
+      <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;view CommonNavigator.LINKING_ENABLED=&quot;0&quot; currentWorkingSetName=&quot;Aggregate for window 1409937800341&quot; org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets=&quot;0&quot;/>"/>
       <tags>View</tags>
       <tags>categoryTag:PyDev</tags>
       <tags>active</tags>
@@ -340,7 +339,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_BUa-azUiEeSks_1_j26iEw" elementId="org.eclipse.ui.workbench.file">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_yo5XgE9YEeSs-8i1HCnqkw" elementId="print" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" enabled="false" command="_BUeC8TUiEeSks_1_j26iEw"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_f_96gFOrEeS5l-jG1iBd-Q" elementId="print" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" enabled="false" command="_BUeC8TUiEeSks_1_j26iEw"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_BUa-eDUiEeSks_1_j26iEw" elementId="additions" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -367,7 +366,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_BUa-nDUiEeSks_1_j26iEw" elementId="org.eclipse.ui.workbench.navigate">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_ypAFME9YEeSs-8i1HCnqkw" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_BUeCbTUiEeSks_1_j26iEw"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_gAFPQVOrEeS5l-jG1iBd-Q" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_BUeCbTUiEeSks_1_j26iEw"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_BUblWTUiEeSks_1_j26iEw" elementId="group.editor" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -809,7 +808,7 @@
     <bindings xmi:id="_BUcMaDUiEeSks_1_j26iEw" keySequence="ALT+COMMAND+X O" command="_BUeBtzUiEeSks_1_j26iEw">
       <tags>platform:cocoa</tags>
     </bindings>
-    <bindings xmi:id="_yG0lME9YEeSs-8i1HCnqkw" keySequence="COMMAND+CTRL+F" command="_BUepLDUiEeSks_1_j26iEw"/>
+    <bindings xmi:id="_fbeGUVOrEeS5l-jG1iBd-Q" keySequence="COMMAND+CTRL+F" command="_BUepLDUiEeSks_1_j26iEw"/>
   </bindingTables>
   <bindingTables xmi:id="_BUcMajUiEeSks_1_j26iEw" elementId="org.python.pydev.ui.editor.scope" bindingContext="_BUcM5jUiEeSks_1_j26iEw">
     <bindings xmi:id="_BUcMazUiEeSks_1_j26iEw" keySequence="ALT+SHIFT+ARROW_DOWN" command="_BUeoxjUiEeSks_1_j26iEw"/>
@@ -915,7 +914,7 @@
     <bindings xmi:id="_BUcMvDUiEeSks_1_j26iEw" keySequence="ALT+CR" command="_BUdbCDUiEeSks_1_j26iEw"/>
   </bindingTables>
   <bindingTables xmi:id="_BUcMvTUiEeSks_1_j26iEw" contributorURI="platform:/fragment/org.eclipse.e4.ui.workbench.renderers.swt.cocoa" bindingContext="_BUcM9TUiEeSks_1_j26iEw">
-    <bindings xmi:id="_yG1MQE9YEeSs-8i1HCnqkw" keySequence="M1+W" command="_BUepLjUiEeSks_1_j26iEw"/>
+    <bindings xmi:id="_fbfUcFOrEeS5l-jG1iBd-Q" keySequence="M1+W" command="_BUepLjUiEeSks_1_j26iEw"/>
   </bindingTables>
   <bindingTables xmi:id="_BUcMvzUiEeSks_1_j26iEw" bindingContext="_BUcM-TUiEeSks_1_j26iEw"/>
   <bindingTables xmi:id="_BUcMwDUiEeSks_1_j26iEw" bindingContext="_BUcM-jUiEeSks_1_j26iEw"/>
