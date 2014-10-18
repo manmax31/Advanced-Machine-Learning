@@ -1,23 +1,33 @@
 import numpy as np
 import os.path
-import copy
+import itertools as it
 
 basepath = os.path.dirname(__file__)
 decode_input_filepath = os.path.abspath(os.path.join(basepath, "..", "data", "decode_input.txt"))
-#train_filepath = os.path.abspath(os.path.join(basepath, "..", "data", "train.txt"))
-#train_struct_filepath = os.path.abspath(os.path.join(basepath, "..", "data", "train_struct.txt"))
-
-
 decode_input = np.loadtxt(open(decode_input_filepath,"rb"))
 
+m = 100
+m_brute_force = 3
+n_letters = 26
+vec_len = 128
 
-x_dash = np.array(decode_input[:12800]).reshape((100, 128))
-w_dash = np.array(decode_input[12800:16128]).reshape((26, 128))
-T_dash = np.array(decode_input[16128:]).reshape((26, 26))
+x_word = np.array(decode_input[:(m*vec_len)]).reshape((m, vec_len))
+w_word = np.array(decode_input[(m*vec_len):(m*vec_len+n_letters*vec_len)]).reshape((n_letters, vec_len))
+T_word = np.array(decode_input[(m*vec_len+n_letters*vec_len):]).reshape((n_letters, n_letters))
 
-# decode_ input
-# 128 for each x, 100 tota
-# Each of the 26 letters is represented by 1x128 weights
-#[128] x 100
-#[128] x 26
-# 26 x 26 transition
+configurations = np.asarray(list(it.product(range(n_letters), repeat=m_brute_force)))
+
+
+brute_force_solution = 0
+
+for y in configurations:
+	p = 0
+	p_max = 0
+	for i in range(m_brute_force-1):
+		p += T_word[y[i]][y[i+1]]
+	if p >= p_max:
+		p_max = p
+		brute_force_solution = y
+
+print brute_force_solution 
+	
