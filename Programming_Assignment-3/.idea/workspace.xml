@@ -29,8 +29,8 @@
       <file leaf-file-name="Viterbi.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/code/CRF/Viterbi.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.47802198" vertical-offset="864" max-vertical-offset="1410">
-              <caret line="75" column="14" selection-start-line="75" selection-start-column="14" selection-end-line="75" selection-end-column="14" />
+            <state vertical-scroll-proportion="-1.6648352" vertical-offset="939" max-vertical-offset="1485">
+              <caret line="2" column="40" selection-start-line="2" selection-start-column="40" selection-end-line="2" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -465,8 +465,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/code/CRF/Viterbi.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.47802198" vertical-offset="864" max-vertical-offset="1410">
-          <caret line="75" column="14" selection-start-line="75" selection-start-column="14" selection-end-line="75" selection-end-column="14" />
+        <state vertical-scroll-proportion="-1.6648352" vertical-offset="939" max-vertical-offset="1485">
+          <caret line="2" column="40" selection-start-line="2" selection-start-column="40" selection-end-line="2" selection-end-column="40" />
           <folding />
         </state>
       </provider>

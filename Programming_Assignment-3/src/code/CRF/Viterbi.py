@@ -1,3 +1,8 @@
+'''
+Q 1c. MaxSum
+This script implements maxsum algorithm to decode the file decode_input.txt
+'''
+
 import numpy as np
 
 '''
