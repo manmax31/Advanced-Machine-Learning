@@ -40,7 +40,9 @@ def get_max_states(X, W, T):
 
 
 def get_paths(max_states, W, X):
-    """ This function gets all the 26 possible paths """
+    """ This function gets all the 26 possible paths
+    :rtype : dictionary
+    """
     paths = {}
     for e, i in zip(max_states[len(max_states)], xrange(W.shape[0])):
         paths[i] = [e]
@@ -70,12 +72,12 @@ def get_most_likely_path(paths, T):
     # print("Score of max path:{}".format(max(scores)))
     max_path_index = np.argmax(scores)
     most_likely_path = paths[max_path_index]
+    most_likely_path.reverse()
     return most_likely_path
 
 
 def write_to_file(most_likely_path, file_path):
     """ This function write the states of the most likely path to the file """
-    most_likely_path.reverse()
     f = open(file_path, 'w')
     for state in most_likely_path:
         f.write(str(state + 1) + "\n")
@@ -85,10 +87,10 @@ def write_to_file(most_likely_path, file_path):
 
 def main():
     """ MAIN method : Execution starts here """
-    path = "../../data/"
-    data = np.loadtxt(path + "decode_input.txt")
+    path     = "../../data/"
+    raw_data = np.loadtxt(path + "decode_input.txt")
 
-    X, W, T          = format_data(data)
+    X, W, T          = format_data(raw_data)
     max_states       = get_max_states(X, W, T)
     paths            = get_paths(max_states, W, X)
     most_likely_path = get_most_likely_path(paths, T)
