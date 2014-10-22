@@ -70,7 +70,7 @@ def get_most_likely_path(paths, T):
         scores.append(score)
 
     # print("Score of max path:{}".format(max(scores)))
-    max_path_index = np.argmax(scores)
+    max_path_index   = np.argmax(scores)
     most_likely_path = paths[max_path_index]
     most_likely_path.reverse()
     return most_likely_path
