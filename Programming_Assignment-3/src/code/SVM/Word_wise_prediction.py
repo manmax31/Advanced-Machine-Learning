@@ -17,7 +17,7 @@ def get_int_labels(str_labels):
 def get_words(file1, file2):
     """
     This function takes in 2 files and returns the labels, file1: original file, file2: predicted file
-    :rtype : numpy array, list"""
+    :rtype : list, list"""
     data = np.loadtxt( file1, usecols=[1,2], dtype=str )
 
     str_labels = data[:,0]
@@ -61,7 +61,6 @@ def get_accuracy(orig_words, pred_words):
     return trueCount*100/len(orig_words)
 
 
-
 def main():
     c = 1000
     file_str    = "../../data/"    + "test.txt"
@@ -69,7 +68,7 @@ def main():
 
     orig_words, pred_words = get_words(file_str, file_pred)
 
-    print "C = {} Wordwise wise accuracy: {}%".format(c, get_accuracy(orig_words, pred_words) )
+    print "C = {} Word wise accuracy: {}%".format(c, get_accuracy(orig_words, pred_words) )
 
 
 
