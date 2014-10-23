@@ -30,7 +30,6 @@ def get_words(file1, file2):
 
     orig_words = []
     pred_words = []
-    index = 0
 
     sI = 0
     for i in xrange(0, len(wi) -1):
@@ -50,7 +49,7 @@ def get_words(file1, file2):
 
 def get_accuracy(orig_words, pred_words):
     """
-    This function calculates the letter wise accurary
+    This function calculates the word wise accuracy
     :rtype : accuracy %"""
 
     trueCount = 0
