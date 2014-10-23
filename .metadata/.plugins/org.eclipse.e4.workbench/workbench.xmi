@@ -11,7 +11,7 @@
     <tags>topLevel</tags>
     <tags>shellMaximized</tags>
     <children xsi:type="basic:PartSashContainer" xmi:id="_BUZJEjUiEeSks_1_j26iEw" selectedElement="_BUZJEzUiEeSks_1_j26iEw" horizontal="true">
-      <children xsi:type="advanced:PerspectiveStack" xmi:id="_BUZJEzUiEeSks_1_j26iEw" elementId="org.eclipse.ui.ide.perspectivestack" containerData="7500" selectedElement="_BUZJLjUiEeSks_1_j26iEw">
+      <children xsi:type="advanced:PerspectiveStack" xmi:id="_BUZJEzUiEeSks_1_j26iEw" elementId="org.eclipse.ui.ide.perspectivestack" containerData="7500" selectedElement="_BUZJFDUiEeSks_1_j26iEw">
         <children xsi:type="advanced:Perspective" xmi:id="_BUZJFDUiEeSks_1_j26iEw" elementId="org.eclipse.jdt.ui.JavaPerspective" selectedElement="_BUZJFTUiEeSks_1_j26iEw" label="Java" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/eview16/jperspective.gif">
           <persistedState key="persp.hiddenItems" value="persp.hideToolbarSC:org.eclipse.debug.ui.commands.RunToLine,persp.hideToolbarSC:org.eclipse.jdt.ui.actions.OpenProjectWizard,persp.hideToolbarSC:org.eclipse.ui.edit.text.toggleShowSelectedElementOnly,"/>
           <tags>persp.actionSet:org.eclipse.ui.cheatsheets.actionSet</tags>
@@ -69,6 +69,7 @@
               <children xsi:type="basic:PartStack" xmi:id="_BUZJFzUiEeSks_1_j26iEw" elementId="left" containerData="6000" selectedElement="_BUZJGDUiEeSks_1_j26iEw">
                 <tags>newtablook</tags>
                 <tags>org.eclipse.e4.primaryNavigationStack</tags>
+                <tags>active</tags>
                 <children xsi:type="advanced:Placeholder" xmi:id="_BUZJGDUiEeSks_1_j26iEw" elementId="org.eclipse.jdt.ui.PackageExplorer" ref="_BUaXNzUiEeSks_1_j26iEw"/>
                 <children xsi:type="advanced:Placeholder" xmi:id="_BUZJGTUiEeSks_1_j26iEw" elementId="org.eclipse.jdt.ui.TypeHierarchy" toBeRendered="false" ref="_BUaXdTUiEeSks_1_j26iEw"/>
                 <children xsi:type="advanced:Placeholder" xmi:id="_BUZJGjUiEeSks_1_j26iEw" elementId="org.eclipse.ui.views.ResourceNavigator" toBeRendered="false" ref="_BUaXdjUiEeSks_1_j26iEw"/>
@@ -140,7 +141,6 @@
           <children xsi:type="basic:PartSashContainer" xmi:id="_BUZJLzUiEeSks_1_j26iEw" selectedElement="_BUZJMDUiEeSks_1_j26iEw" horizontal="true">
             <children xsi:type="basic:PartStack" xmi:id="_BUZJMDUiEeSks_1_j26iEw" elementId="topLeft" containerData="2061" selectedElement="_BUZJMTUiEeSks_1_j26iEw">
               <tags>newtablook</tags>
-              <tags>active</tags>
               <children xsi:type="advanced:Placeholder" xmi:id="_BUZJMTUiEeSks_1_j26iEw" elementId="org.python.pydev.navigator.view" ref="_BUaXkzUiEeSks_1_j26iEw"/>
             </children>
             <children xsi:type="basic:PartSashContainer" xmi:id="_BUZJMjUiEeSks_1_j26iEw" containerData="7939" selectedElement="_BUZJMzUiEeSks_1_j26iEw">
@@ -215,7 +215,7 @@
           <tags>removeOnHide</tags>
         </children>
         <children xsi:type="basic:Part" xmi:id="__L8k0EooEeSv1Zp0dDjNDQ" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="particleFilterPath" iconURI="platform:/plugin/org.python.pydev/icons/python_file.gif" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;editor id=&quot;org.python.pydev.editor.PythonEditor&quot; name=&quot;particleFilterPath.py&quot; partName=&quot;particleFilterPath&quot; title=&quot;particleFilterPath&quot; tooltip=&quot;Programming_Assignment-2/code/particleFilterPath.py&quot;>&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/Programming_Assignment-2/code/particleFilterPath.py&quot;/>&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;233&quot; selectionTopPixel=&quot;2103&quot;/>&#xA;&lt;/editor>"/>
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;editor id=&quot;org.python.pydev.editor.PythonEditor&quot; name=&quot;particleFilterPath.py&quot; partName=&quot;particleFilterPath&quot; title=&quot;particleFilterPath&quot; tooltip=&quot;Programming_Assignment-2/code/particleFilterPath.py&quot;>&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/Programming_Assignment-2/code/particleFilterPath.py&quot;/>&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;233&quot; selectionTopPixel=&quot;2112&quot;/>&#xA;&lt;/editor>"/>
           <tags>Editor</tags>
           <tags>org.python.pydev.editor.PythonEditor</tags>
           <tags>removeOnHide</tags>
@@ -223,8 +223,11 @@
       </children>
     </sharedElements>
     <sharedElements xsi:type="basic:Part" xmi:id="_BUaXNzUiEeSks_1_j26iEw" elementId="org.eclipse.jdt.ui.PackageExplorer" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" label="Package Explorer" iconURI="platform:/plugin/org.eclipse.jdt.ui/icons/full/eview16/package.gif" closeable="true">
+      <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;view group_libraries=&quot;1&quot; layout=&quot;2&quot; linkWithEditor=&quot;0&quot; rootMode=&quot;1&quot; workingSetName=&quot;Aggregate for window 1409937800341&quot;>&#xA;&lt;customFilters userDefinedPatternsEnabled=&quot;false&quot;>&#xA;&lt;xmlDefinedFilters>&#xA;&lt;child filterId=&quot;org.eclipse.jdt.ui.PackageExplorer.StaticsFilter&quot; isEnabled=&quot;false&quot;/>&#xA;&lt;child filterId=&quot;org.eclipse.jdt.ui.PackageExplorer.NonJavaProjectsFilter&quot; isEnabled=&quot;false&quot;/>&#xA;&lt;child filterId=&quot;org.eclipse.jdt.ui.PackageExplorer_patternFilterId_.*&quot; isEnabled=&quot;true&quot;/>&#xA;&lt;child filterId=&quot;org.eclipse.jdt.ui.PackageExplorer.NonSharedProjectsFilter&quot; isEnabled=&quot;false&quot;/>&#xA;&lt;child filterId=&quot;org.eclipse.jdt.ui.PackageExplorer.SyntheticMembersFilter&quot; isEnabled=&quot;true&quot;/>&#xA;&lt;child filterId=&quot;org.eclipse.jdt.ui.PackageExplorer.ContainedLibraryFilter&quot; isEnabled=&quot;false&quot;/>&#xA;&lt;child filterId=&quot;org.eclipse.jdt.internal.ui.PackageExplorer.HideInnerClassFilesFilter&quot; isEnabled=&quot;true&quot;/>&#xA;&lt;child filterId=&quot;org.eclipse.jdt.internal.ui.PackageExplorer.EmptyInnerPackageFilter&quot; isEnabled=&quot;true&quot;/>&#xA;&lt;child filterId=&quot;org.eclipse.jdt.ui.PackageExplorer.ClosedProjectsFilter&quot; isEnabled=&quot;false&quot;/>&#xA;&lt;child filterId=&quot;org.eclipse.jdt.ui.PackageExplorer.EmptyLibraryContainerFilter&quot; isEnabled=&quot;true&quot;/>&#xA;&lt;child filterId=&quot;org.eclipse.jdt.ui.PackageExplorer.PackageDeclarationFilter&quot; isEnabled=&quot;true&quot;/>&#xA;&lt;child filterId=&quot;org.eclipse.jdt.ui.PackageExplorer.ImportDeclarationFilter&quot; isEnabled=&quot;true&quot;/>&#xA;&lt;child filterId=&quot;org.eclipse.jdt.ui.PackageExplorer.NonJavaElementFilter&quot; isEnabled=&quot;false&quot;/>&#xA;&lt;child filterId=&quot;org.eclipse.jdt.ui.PackageExplorer.LibraryFilter&quot; isEnabled=&quot;false&quot;/>&#xA;&lt;child filterId=&quot;org.eclipse.pde.ui.BinaryProjectFilter1&quot; isEnabled=&quot;false&quot;/>&#xA;&lt;child filterId=&quot;org.eclipse.jdt.ui.PackageExplorer.CuAndClassFileFilter&quot; isEnabled=&quot;false&quot;/>&#xA;&lt;child filterId=&quot;org.eclipse.jdt.internal.ui.PackageExplorer.EmptyPackageFilter&quot; isEnabled=&quot;false&quot;/>&#xA;&lt;child filterId=&quot;org.eclipse.jdt.ui.PackageExplorer.NonPublicFilter&quot; isEnabled=&quot;false&quot;/>&#xA;&lt;child filterId=&quot;org.eclipse.jdt.ui.PackageExplorer.LocalTypesFilter&quot; isEnabled=&quot;false&quot;/>&#xA;&lt;child filterId=&quot;org.eclipse.pde.ui.ExternalPluginLibrariesFilter1&quot; isEnabled=&quot;true&quot;/>&#xA;&lt;child filterId=&quot;org.eclipse.jdt.ui.PackageExplorer.FieldsFilter&quot; isEnabled=&quot;false&quot;/>&#xA;&lt;/xmlDefinedFilters>&#xA;&lt;/customFilters>&#xA;&lt;/view>"/>
       <tags>View</tags>
       <tags>categoryTag:Java</tags>
+      <tags>active</tags>
+      <tags>activeOnClose</tags>
       <menus xmi:id="_BUaXODUiEeSks_1_j26iEw" elementId="org.eclipse.jdt.ui.PackageExplorer">
         <tags>ViewMenu</tags>
         <tags>menuContribution:menu</tags>
@@ -248,6 +251,7 @@
       <tags>categoryTag:General</tags>
     </sharedElements>
     <sharedElements xsi:type="basic:Part" xmi:id="_BUaXeDUiEeSks_1_j26iEw" elementId="org.eclipse.ui.views.ProblemView" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" label="Problems" iconURI="platform:/plugin/org.eclipse.ui.ide/icons/full/eview16/problems_view.png" closeable="true">
+      <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;view PRIMARY_SORT_FIELD=&quot;org.eclipse.ui.ide.severityAndDescriptionField&quot; categoryGroup=&quot;org.eclipse.ui.ide.severity&quot; markerContentGenerator=&quot;org.eclipse.ui.ide.problemsGenerator&quot; partName=&quot;Problems&quot;>&#xA;&lt;columnWidths org.eclipse.ui.ide.locationField=&quot;90&quot; org.eclipse.ui.ide.markerType=&quot;90&quot; org.eclipse.ui.ide.pathField=&quot;120&quot; org.eclipse.ui.ide.resourceField=&quot;90&quot; org.eclipse.ui.ide.severityAndDescriptionField=&quot;300&quot;/>&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.severityAndDescriptionField&quot;/>&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.resourceField&quot;/>&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.pathField&quot;/>&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.locationField&quot;/>&#xA;&lt;visible IMemento.internal.id=&quot;org.eclipse.ui.ide.markerType&quot;/>&#xA;&lt;/view>"/>
       <tags>View</tags>
       <tags>categoryTag:General</tags>
       <menus xmi:id="_BUaXeTUiEeSks_1_j26iEw" elementId="org.eclipse.ui.views.ProblemView">
@@ -292,6 +296,7 @@
       <tags>categoryTag:General</tags>
     </sharedElements>
     <sharedElements xsi:type="basic:Part" xmi:id="_BUaXjDUiEeSks_1_j26iEw" elementId="org.eclipse.ui.views.ContentOutline" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" label="Outline" iconURI="platform:/plugin/org.eclipse.ui.views/icons/full/eview16/outline_co.png" closeable="true">
+      <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;view/>"/>
       <tags>View</tags>
       <tags>categoryTag:General</tags>
       <menus xmi:id="_BUaXjTUiEeSks_1_j26iEw" elementId="org.eclipse.ui.views.ContentOutline">
@@ -320,8 +325,6 @@
       <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xA;&lt;view CommonNavigator.LINKING_ENABLED=&quot;0&quot; currentWorkingSetName=&quot;Aggregate for window 1409937800341&quot; org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets=&quot;0&quot;/>"/>
       <tags>View</tags>
       <tags>categoryTag:PyDev</tags>
-      <tags>active</tags>
-      <tags>activeOnClose</tags>
       <menus xmi:id="_BUaXlDUiEeSks_1_j26iEw" elementId="org.python.pydev.navigator.view">
         <tags>ViewMenu</tags>
         <tags>menuContribution:menu</tags>
@@ -339,19 +342,19 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_BUa-azUiEeSks_1_j26iEw" elementId="org.eclipse.ui.workbench.file">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_f_96gFOrEeS5l-jG1iBd-Q" elementId="print" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" enabled="false" command="_BUeC8TUiEeSks_1_j26iEw"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_0ZUYgFpqEeSPH4zcQqR41g" elementId="print" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" enabled="false" command="_BUeC8TUiEeSks_1_j26iEw"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_BUa-eDUiEeSks_1_j26iEw" elementId="additions" toBeRendered="false">
         <tags>toolbarSeparator</tags>
         <children xsi:type="menu:ToolBarSeparator" xmi:id="_BUa-eTUiEeSks_1_j26iEw" elementId="additions" toBeRendered="false"/>
       </children>
-      <children xsi:type="menu:ToolBar" xmi:id="_BUa-ejUiEeSks_1_j26iEw" elementId="com.python.pydev.navigate.actionSet">
+      <children xsi:type="menu:ToolBar" xmi:id="_BUa-ejUiEeSks_1_j26iEw" elementId="com.python.pydev.navigate.actionSet" visible="false">
         <tags>Draggable</tags>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_BUa-fzUiEeSks_1_j26iEw" elementId="org.eclipse.debug.ui.launchActionSet">
         <tags>Draggable</tags>
       </children>
-      <children xsi:type="menu:ToolBar" xmi:id="_BUa-kTUiEeSks_1_j26iEw" elementId="org.eclipse.jdt.ui.JavaElementCreationActionSet" visible="false">
+      <children xsi:type="menu:ToolBar" xmi:id="_BUa-kTUiEeSks_1_j26iEw" elementId="org.eclipse.jdt.ui.JavaElementCreationActionSet">
         <tags>Draggable</tags>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_BUa-ljUiEeSks_1_j26iEw" elementId="org.eclipse.search.searchActionSet">
@@ -366,7 +369,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_BUa-nDUiEeSks_1_j26iEw" elementId="org.eclipse.ui.workbench.navigate">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_gAFPQVOrEeS5l-jG1iBd-Q" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_BUeCbTUiEeSks_1_j26iEw"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_0Zc7YFpqEeSPH4zcQqR41g" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_BUeCbTUiEeSks_1_j26iEw"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_BUblWTUiEeSks_1_j26iEw" elementId="group.editor" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -808,7 +811,7 @@
     <bindings xmi:id="_BUcMaDUiEeSks_1_j26iEw" keySequence="ALT+COMMAND+X O" command="_BUeBtzUiEeSks_1_j26iEw">
       <tags>platform:cocoa</tags>
     </bindings>
-    <bindings xmi:id="_fbeGUVOrEeS5l-jG1iBd-Q" keySequence="COMMAND+CTRL+F" command="_BUepLDUiEeSks_1_j26iEw"/>
+    <bindings xmi:id="_zvfYYVpqEeSPH4zcQqR41g" keySequence="COMMAND+CTRL+F" command="_BUepLDUiEeSks_1_j26iEw"/>
   </bindingTables>
   <bindingTables xmi:id="_BUcMajUiEeSks_1_j26iEw" elementId="org.python.pydev.ui.editor.scope" bindingContext="_BUcM5jUiEeSks_1_j26iEw">
     <bindings xmi:id="_BUcMazUiEeSks_1_j26iEw" keySequence="ALT+SHIFT+ARROW_DOWN" command="_BUeoxjUiEeSks_1_j26iEw"/>
@@ -914,7 +917,7 @@
     <bindings xmi:id="_BUcMvDUiEeSks_1_j26iEw" keySequence="ALT+CR" command="_BUdbCDUiEeSks_1_j26iEw"/>
   </bindingTables>
   <bindingTables xmi:id="_BUcMvTUiEeSks_1_j26iEw" contributorURI="platform:/fragment/org.eclipse.e4.ui.workbench.renderers.swt.cocoa" bindingContext="_BUcM9TUiEeSks_1_j26iEw">
-    <bindings xmi:id="_fbfUcFOrEeS5l-jG1iBd-Q" keySequence="M1+W" command="_BUepLjUiEeSks_1_j26iEw"/>
+    <bindings xmi:id="_zvgmgFpqEeSPH4zcQqR41g" keySequence="M1+W" command="_BUepLjUiEeSks_1_j26iEw"/>
   </bindingTables>
   <bindingTables xmi:id="_BUcMvzUiEeSks_1_j26iEw" bindingContext="_BUcM-TUiEeSks_1_j26iEw"/>
   <bindingTables xmi:id="_BUcMwDUiEeSks_1_j26iEw" bindingContext="_BUcM-jUiEeSks_1_j26iEw"/>
