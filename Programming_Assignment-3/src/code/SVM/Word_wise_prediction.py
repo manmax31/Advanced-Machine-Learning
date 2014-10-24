@@ -1,5 +1,5 @@
 __author__ = 'manabchetia'
-#from sklearn.svm.liblinear import fit
+
 import string
 import numpy as np
 
@@ -18,6 +18,7 @@ def get_words(file1, file2):
     """
     This function takes in 2 files and returns the labels, file1: original file, file2: predicted file
     :rtype : list, list"""
+
     data = np.loadtxt( file1, usecols=[1,2], dtype=str )
 
     str_labels = data[:,0]
