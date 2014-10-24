@@ -1,7 +1,7 @@
 __author__ = 'manabchetia'
 #from sklearn.svm.liblinear import fit
-import numpy as np
 import string
+import numpy as np
 
 
 def get_int_labels(str_labels):
@@ -62,8 +62,8 @@ def get_accuracy(orig_words, pred_words):
 
 def main():
     c = 1000
-    file_str    = "../../data/"    + "test.txt"
-    file_pred   = "../../outtags/" + "test" + str(c) + ".outtags"
+    file_str    = "../../data/" + "test.txt"
+    file_pred   = "outtags/" + "test" + str(c) + ".outtags"
 
     orig_words, pred_words = get_words(file_str, file_pred)
 
