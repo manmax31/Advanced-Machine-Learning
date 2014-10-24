@@ -1,5 +1,8 @@
 __author__ = 'manabchetia'
-
+"""
+Q 1c. Brute Force decoder
+This script implements brute force in 4 letters
+"""
 import numpy     as np
 import itertools as it
 

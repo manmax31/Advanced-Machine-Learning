@@ -1,6 +1,6 @@
 __author__ = 'manab chetia'
 """
-Q 1c. Max-Sum
+Q 1c. Max-Sum decoder
 This script implements max-sum algorithm to decode the file decode_input.txt
 """
 
