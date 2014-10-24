@@ -1,4 +1,7 @@
 __author__ = 'manabchetia'
+"""
+This script runs the binary executable svm_hmm_learn and svm_hmm_classify
+"""
 
 import subprocess as sp
 

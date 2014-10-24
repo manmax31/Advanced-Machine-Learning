@@ -1,4 +1,7 @@
 __author__ = 'manabchetia'
+"""
+This script calculates the accuracy word wise
+"""
 
 import string
 import numpy as np
