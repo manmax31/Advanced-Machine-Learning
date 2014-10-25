@@ -20,7 +20,7 @@ def svm_read_problem(data_file_name):
 		label, features = line
 		xi = {}
 		for e in features.split():
-			ind, val = e.split(":")
+			ind, val = e.split(":") # ind, val = e.split(":")
 			xi[int(ind)] = float(val)
 		prob_y += [float(label)]
 		prob_x += [xi]
