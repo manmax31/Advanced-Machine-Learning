@@ -25,17 +25,6 @@ def get_X_Y(file):
     Y          = get_int_labels( str_labels )
     return X, Y
 
-def get_accuracy(orig_letters, pred_letters):
-    """
-    This function calculates the word wise accuracy
-    :rtype : accuracy %"""
-
-    trueCount = 0
-    for o,p in zip(orig_letters, pred_letters):
-        if o==p:
-            trueCount += 1
-
-    return trueCount*100/len(orig_letters)
 
 def train(C, Y_train, X_train):
     for c in C:

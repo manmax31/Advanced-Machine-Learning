@@ -1,6 +1,7 @@
 % Rotate X by alpha degrees (angle) in a counterclockwise direction around its center point.
 % This may enlarge the image.
 % So trim the result back to the original size, around its center point.
+
 function Y = rotation(X, alpha)
 
   Y = imrotate(X, alpha); % Python counterpart: scipy.misc.imrotate

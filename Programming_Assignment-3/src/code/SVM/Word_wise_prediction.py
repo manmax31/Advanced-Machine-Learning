@@ -9,7 +9,7 @@ import numpy as np
 
 def get_int_labels(str_labels):
     """
-    This function converts a,b,c,d,... to 1,2,3,4,...
+    This function converts a,b,c,d,...,z to 1,2,3,4,...,26
     :rtype : list"""
     int_labels = []
     for str_label in str_labels:
