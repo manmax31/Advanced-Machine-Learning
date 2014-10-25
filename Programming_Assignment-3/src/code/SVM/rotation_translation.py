@@ -41,7 +41,7 @@ def get_X_Y(file):
     return X, Y
 
 def main():
-
+    pass
 if __name__ == "__main__": main()
 
 
