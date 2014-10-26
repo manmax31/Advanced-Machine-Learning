@@ -17,7 +17,6 @@ def format_data(raw_data):
 
     X = np.array(raw_data[:(m * vec_len)]).reshape((m, vec_len))
     W = np.array(raw_data[(m * vec_len):(m * vec_len + n_letters * vec_len)]).reshape((n_letters, vec_len))
-    #T = np.transpose(np.array(raw_data[(m * vec_len + n_letters * vec_len):]).reshape((n_letters, n_letters)))
     T = np.array(raw_data[(m * vec_len + n_letters * vec_len):]).reshape((n_letters, n_letters))
 
     return X, W, T
@@ -50,9 +49,9 @@ def get_paths(max_states, W, X):
 
     for path_index in paths:
         path = paths[path_index]
-        for index in xrange(X.shape[0] - 1, 0, -1):
+        for index in xrange(X.shape[0] - 1, 0, -1): # Back tracking the path from m=100 to m=1
             path.append(max_states[index][path[-1]])
-        path.reverse()
+        path.reverse() # Reversing the path as we got the path by back tracking
 
     return paths
 
@@ -63,7 +62,6 @@ def get_most_likely_path(paths, T):
     """
     Tp = np.transpose(T)
 
-
     scores = []
     for pi in paths:
         path = paths[pi]
@@ -71,7 +69,6 @@ def get_most_likely_path(paths, T):
         for i in xrange(len(path) - 1):
             score += Tp[path[i]][path[i + 1]]
         scores.append(score)
-
     print("Score of max path:{}".format(max(scores)))
     max_path_index   = np.argmax(scores)
     most_likely_path = paths[max_path_index]
@@ -82,7 +79,7 @@ def write_to_file(most_likely_path, file_path):
     """ This function write the states of the most likely path to the file """
     f = open(file_path, 'w')
     for state in most_likely_path:
-        f.write(str(state + 1) + "\n")    # state + 1 as python index starts from 0 and where we are told a=1, b=2, ...z=26
+        f.write(str(state + 1) + "\n")    # (state + 1) as python index starts from 0 and we are told a=1, b=2, ...z=26
     f.close()
     print "Successfully created decode_output.txt "
 

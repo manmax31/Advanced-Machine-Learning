@@ -1,6 +1,6 @@
 __author__ = 'manabchetia'
 """
-This script gets the word accuracy based on the models created with SVM_HMM
+This script prints out the word wise accuracy based on models created by SVM_hmm
 """
 
 import string
@@ -10,6 +10,8 @@ import numpy as np
 def get_int_labels(str_labels):
     """
     This function converts a,b,c,d,...,z to 1,2,3,4,...,26
+    :param  str_labels : the second column of the train or test files
+    :return int_labels : integer values of the letters
     :rtype : list"""
     int_labels = []
     for str_label in str_labels:
@@ -20,6 +22,10 @@ def get_int_labels(str_labels):
 def get_words(file1, file2):
     """
     This function takes in 2 files and returns the labels, file1: original file, file2: predicted file
+    :param  file1: test file
+    :param  file2: outtags file. It has the predicted labels
+    :return orig_words: a list containing the correct test labels
+    :return pred_words: a list containing the predicted labels
     :rtype : list, list"""
 
     data = np.loadtxt( file1, usecols=[1,2], dtype=str )
@@ -54,7 +60,10 @@ def get_words(file1, file2):
 def get_accuracy(orig_words, pred_words):
     """
     This function calculates the word wise accuracy
-    :rtype : accuracy %"""
+    :param orig_words: list containing correct labels
+    :param pred_words: list containing predicted labels
+    :return percentage of correct words predicted
+    :rtype : float"""
 
     trueCount = 0
     for w1,w2 in zip(orig_words, pred_words):
@@ -65,6 +74,7 @@ def get_accuracy(orig_words, pred_words):
 
 
 def main():
+    """ Execution begins here """
     c = 1000
     file_str    = "../../data/" + "test.txt"
     file_pred   = "outtags/" + "test" + str(c) + ".outtags"

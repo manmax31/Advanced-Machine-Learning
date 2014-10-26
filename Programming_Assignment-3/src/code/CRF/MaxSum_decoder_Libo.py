@@ -3,10 +3,10 @@ import numpy as np
 
 
 def load_parameters(raw):  # refers to: m, p
-    x = np.array(raw[:m * p]).reshape((m, p))
-    w = np.array(raw[m * p:m * p + 26 * p]).reshape((26, p))
-    t = np.transpose(np.array(raw[(m * p + 26 * p):]).reshape((26, 26)))
-    return x, w, t
+    X = np.array(raw[:m * p]).reshape((m, p))
+    W = np.array(raw[m * p:m * p + 26 * p]).reshape((26, p))
+    T = np.transpose(np.array(raw[(m * p + 26 * p):]).reshape((26, 26)))
+    return X, W, T
 
 
 def write_to_file(letters, filename):
@@ -55,4 +55,4 @@ x, w, t = load_parameters(np.loadtxt("../../data/decode_input.txt"))
 # print(letters)
 letters = [x + 1 for x in max_sum()]
 print(letters)
-write_to_file(letters, "../../results/decode_output.txt")
+write_to_file(letters, "../../results/decode_output_libo.txt")
