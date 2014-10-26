@@ -17,7 +17,8 @@ def format_data(raw_data):
 
     X = np.array(raw_data[:(m * vec_len)]).reshape((m, vec_len))
     W = np.array(raw_data[(m * vec_len):(m * vec_len + n_letters * vec_len)]).reshape((n_letters, vec_len))
-    T = np.transpose(np.array(raw_data[(m * vec_len + n_letters * vec_len):]).reshape((n_letters, n_letters)))
+    #T = np.transpose(np.array(raw_data[(m * vec_len + n_letters * vec_len):]).reshape((n_letters, n_letters)))
+    T = np.array(raw_data[(m * vec_len + n_letters * vec_len):]).reshape((n_letters, n_letters))
 
     return X, W, T
 
@@ -47,10 +48,11 @@ def get_paths(max_states, W, X):
     for e, i in zip(max_states[len(max_states)], xrange(W.shape[0])):
         paths[i] = [e]
 
-    for pi in paths:
-        path = paths[pi]
+    for path_index in paths:
+        path = paths[path_index]
         for index in xrange(X.shape[0] - 1, 0, -1):
             path.append(max_states[index][path[-1]])
+        path.reverse()
 
     return paths
 
@@ -59,7 +61,8 @@ def get_most_likely_path(paths, T):
     """ This function gets the most likely state based on all 26 possible states
     :rtype : list
     """
-    Tp = np.transpose(T)
+    #Tp = np.transpose(T)
+    Tp = T
 
     scores = []
     for pi in paths:
@@ -69,10 +72,9 @@ def get_most_likely_path(paths, T):
             score += Tp[path[i]][path[i + 1]]
         scores.append(score)
 
-    # print("Score of max path:{}".format(max(scores)))
+    print("Score of max path:{}".format(max(scores)))
     max_path_index   = np.argmax(scores)
     most_likely_path = paths[max_path_index]
-    most_likely_path.reverse()
     return most_likely_path
 
 
@@ -91,6 +93,7 @@ def main():
     raw_data = np.loadtxt(path + "decode_input.txt")
 
     X, W, T          = format_data(raw_data)
+    print T
     max_states       = get_max_states(X, W, T)
     paths            = get_paths(max_states, W, X)
     most_likely_path = get_most_likely_path(paths, T)

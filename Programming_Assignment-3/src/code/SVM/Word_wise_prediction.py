@@ -1,6 +1,6 @@
 __author__ = 'manabchetia'
 """
-This script calculates the accuracy word wise
+This script gets the word accuracy based on the models created with SVM_HMM
 """
 
 import string
@@ -35,14 +35,14 @@ def get_words(file1, file2):
     orig_words = []
     pred_words = []
 
-    sI = 0
+    start_index = 0
     for i in xrange(0, len(wi) -1):
-        eWi  = wi[i + 1]
+        end_index  = wi[i + 1]
 
-        o_word = orig_labels[sI:eWi + 1]
-        p_word = pred_labels[sI:eWi + 1]
+        o_word = orig_labels[start_index:end_index + 1]
+        p_word = pred_labels[start_index:end_index + 1]
 
-        sI = eWi + 1
+        start_index = end_index + 1
 
         orig_words.append(o_word)
         pred_words.append(p_word)
