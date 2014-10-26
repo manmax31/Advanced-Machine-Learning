@@ -5,7 +5,7 @@ import numpy as np
 def load_parameters(raw):  # refers to: m, p
     x = np.array(raw[:m * p]).reshape((m, p))
     w = np.array(raw[m * p:m * p + 26 * p]).reshape((26, p))
-    t = np.array(raw[(m * p + 26 * p):]).reshape((26, 26))
+    t = np.transpose(np.array(raw[(m * p + 26 * p):]).reshape((26, 26)))
     return x, w, t
 
 
@@ -36,7 +36,7 @@ def max_sum():  # refers to: x, w, t
 
 
 def brute_force():  # refers to: x, w, t
-    m = 4  # infer the first @m letters of @x
+    m = 5  # infer the first @m letters of @x
     ys = list(it.product(range(26), repeat=m))
     scores = []
     for y in ys:
@@ -46,12 +46,13 @@ def brute_force():  # refers to: x, w, t
         s += np.dot(w[y[m-1]], x[m-1])
         scores.append(s)
     y_max = max(zip(ys, scores), key=lambda x: x[1])[0]
-    print(y_max)
+    return y_max
 
 m = 100  # number of letters in a word
 p = 128  # number of pixels in a letter
 x, w, t = load_parameters(np.loadtxt("data/decode_input.txt"))
-# brute_force()
+# letters = [x + 1 for x in brute_force()]
+# print(letters)
 letters = [x + 1 for x in max_sum()]
 print(letters)
 # write_to_file(letters, "results/decode_output.txt")
