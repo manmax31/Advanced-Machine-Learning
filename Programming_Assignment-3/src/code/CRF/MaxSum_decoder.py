@@ -61,8 +61,8 @@ def get_most_likely_path(paths, T):
     """ This function gets the most likely state based on all 26 possible states
     :rtype : list
     """
-    #Tp = np.transpose(T)
-    Tp = T
+    Tp = np.transpose(T)
+
 
     scores = []
     for pi in paths:
@@ -93,7 +93,7 @@ def main():
     raw_data = np.loadtxt(path + "decode_input.txt")
 
     X, W, T          = format_data(raw_data)
-    print T
+
     max_states       = get_max_states(X, W, T)
     paths            = get_paths(max_states, W, X)
     most_likely_path = get_most_likely_path(paths, T)

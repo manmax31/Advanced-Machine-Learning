@@ -50,9 +50,9 @@ def brute_force():  # refers to: x, w, t
 
 m = 100  # number of letters in a word
 p = 128  # number of pixels in a letter
-x, w, t = load_parameters(np.loadtxt("data/decode_input.txt"))
+x, w, t = load_parameters(np.loadtxt("../../data/decode_input.txt"))
 # letters = [x + 1 for x in brute_force()]
 # print(letters)
 letters = [x + 1 for x in max_sum()]
 print(letters)
-# write_to_file(letters, "results/decode_output.txt")
+write_to_file(letters, "../../results/decode_output.txt")
