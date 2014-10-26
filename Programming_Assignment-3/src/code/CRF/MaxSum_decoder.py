@@ -80,7 +80,7 @@ def write_to_file(most_likely_path, file_path):
     """ This function write the states of the most likely path to the file """
     f = open(file_path, 'w')
     for state in most_likely_path:
-        f.write(str(state + 1) + "\n")
+        f.write(str(state + 1) + "\n")    # state + 1 as python index starts from 0 and where we are told a=1, b=2, ...z=26
     f.close()
     print "Successfully created decode_output.txt "
 
