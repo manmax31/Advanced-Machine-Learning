@@ -28,7 +28,7 @@ def rotation(X, alpha):
     """
     This function rotates the image
     :param X    : vector representing the word
-    :param alpha: angles by image is to be rotated
+    :param alpha: angles by which image is to be rotated
     :return Y   : vector representing rotated word
     :rtype : list
     """
@@ -49,7 +49,7 @@ def translation(X, offset):
     """
     This function translates the image
     :param X     : vector representing the word
-    :param offset: list representing transalation offset
+    :param offset: list representing translation offset
     :return Y    : vector representing translated word
     :rtype : list
     """

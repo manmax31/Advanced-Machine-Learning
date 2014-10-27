@@ -1,100 +1,74 @@
-__author__ = 'manab chetia'
+__author__ = "Libo Yin"
 """
 Q 1c. Max-Sum decoder
 This script implements max-sum algorithm to decode the file decode_input.txt
 """
-
+import itertools as it
 import numpy as np
 
 
-def format_data(raw_data):
-    """ This function formats the data into X, W, T from the given file 
-    :rtype : numpy arrays
-    """
-    m         = 100
-    n_letters = 26
-    vec_len   = 128
-
-    X = np.array(raw_data[:(m * vec_len)]).reshape((m, vec_len))
-    W = np.array(raw_data[(m * vec_len):(m * vec_len + n_letters * vec_len)]).reshape((n_letters, vec_len))
-    T = np.array(raw_data[(m * vec_len + n_letters * vec_len):]).reshape((n_letters, n_letters))
-
+def get_parameters(raw, m, p):
+    X = np.array(raw[:m * p]).reshape((m, p))
+    W = np.array(raw[m * p:m * p + 26 * p]).reshape((26, p))
+    T = np.transpose(np.array(raw[(m * p + 26 * p):]).reshape((26, 26)))
     return X, W, T
 
 
-def get_max_states(X, W, T):
-    """ This function gets the most likely transition state for a state from all possible states in the previous layer 
-    :rtype : dictionary
-    """
-    max_states = {}
-    for x_row, li in zip(X, xrange(1, X.shape[0])):
-        max_states[li] = []
-        for t_row in T:
-            values = []
-            for w_row, t_ij in zip(W, t_row):
-                values.append(np.dot(x_row, w_row) + t_ij)
-
-            max_index = np.argmax(values)
-            max_states[li].append(max_index)
-    return max_states
+def write_to_file(letters, filename):
+    with open(filename, mode="w") as f:
+        for l in letters:
+            f.write(str(l + 1) + "\n")  # +1 since python index starts from 0
+    print("\nSuccessfully created decode_output.txt ")
 
 
-def get_paths(max_states, W, X):
-    """ This function gets all the 26 possible paths
-    :rtype : dictionary
-    """
-    paths = {}
-    for e, i in zip(max_states[len(max_states)], xrange(W.shape[0])):
-        paths[i] = [e]
+def max_sum(m, X, W, T):                             # refers to: x, w, t
+    dp_argmax = np.zeros((m, 26), dtype=np.int)      # optimal pointers
+    dp_vmax   = np.zeros((m, 26), dtype=np.float64)  # max values corresponding to the pointers
 
-    for path_index in paths:
-        path = paths[path_index]
-        for index in xrange(X.shape[0] - 1, 0, -1): # Back tracking the path from m=100 to m=1
-            path.append(max_states[index][path[-1]])
-        path.reverse() # Reversing the path as we got the path by back tracking
+    for i in range(0, 26):                           # first row of the dp table
+        dp_vmax[0, i] = np.dot(W[i], X[0])
 
-    return paths
+    for i in range(1, m):                            # for all rows of the dp table
+        for j in range(0, 26):                       # for each current letter
+            prev = np.copy(dp_vmax[i - 1])           # the previous row of the dp table
+            for k in range(0, 26):                   # for each previous letter
+                prev[k] += T[k, j]                   # the dot product shall be added later since it is a constant wrt argmax_k
+            k_max = np.argmax(prev)
+            dp_argmax[i, j] = k_max                  # pointer to the previous link. note that the first row in @dp_argmax is empty
+            dp_vmax[i, j] = prev[k_max] + np.dot(W[j], X[i])  # add the dot product here
+
+    word = np.zeros(m, dtype=np.int)
+    word[m-1] = np.argmax(dp_vmax[m-1])               # the last choice depends on the value
+
+    for i in range(m-1, 0, -1):
+        word[i-1] = dp_argmax[i][word[i]]
+    return word.tolist()
 
 
-def get_most_likely_path(paths, T):
-    """ This function gets the most likely state based on all 26 possible states
-    :rtype : list
-    """
-    Tp = np.transpose(T)
-
+def brute_force(X, W, T):
+    m = 5                                             # infer the first @m letters of @x
+    ys = list(it.product(range(26), repeat=m))
     scores = []
-    for pi in paths:
-        path = paths[pi]
-        score = 0.0
-        for i in xrange(len(path) - 1):
-            score += Tp[path[i]][path[i + 1]]
-        scores.append(score)
-    print("Score of max path:{}".format(max(scores)))
-    max_path_index   = np.argmax(scores)
-    most_likely_path = paths[max_path_index]
-    return most_likely_path
-
-
-def write_to_file(most_likely_path, file_path):
-    """ This function write the states of the most likely path to the file """
-    f = open(file_path, 'w')
-    for state in most_likely_path:
-        f.write(str(state + 1) + "\n")    # (state + 1) as python index starts from 0 and we are told a=1, b=2, ...z=26
-    f.close()
-    print "Successfully created decode_output.txt "
-
+    for y in ys:
+        s = 0
+        for i in range(0, m - 1):
+            s += np.dot(W[y[i]], X[i]) + T[y[i]][y[i+1]]
+        s += np.dot(W[y[m-1]], X[m-1])
+        scores.append(s)
+    y_max = max(zip(ys, scores), key=lambda x: x[1])[0]
+    return y_max
 
 def main():
-    """ MAIN method : Execution starts here """
     path     = "../../data/"
     raw_data = np.loadtxt(path + "decode_input.txt")
 
-    X, W, T          = format_data(raw_data)
+    m = 100                                           # number of letters in a word
+    p = 128                                           # number of pixels in a letter
+    X, W, T = get_parameters(raw_data, m, p)
 
-    max_states       = get_max_states(X, W, T)
-    paths            = get_paths(max_states, W, X)
-    most_likely_path = get_most_likely_path(paths, T)
-    write_to_file(most_likely_path, "../../results/decode_output.txt")
-
+    decode_output = [x + 1 for x in max_sum(m, X, W, T)]
+    print("Decoded Output:")
+    print(decode_output)
+    write_to_file(decode_output, "../../results/decode_output.txt")
 
 if __name__ == "__main__": main()
