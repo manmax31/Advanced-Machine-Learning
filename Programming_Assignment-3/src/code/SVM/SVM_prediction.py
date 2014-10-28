@@ -2,7 +2,7 @@ __author__ = "Libo Yin"
 __author__ = "Manab Chetia"
 """
 Q 3.
-This script prints out the word wise accuracy based on models created by SVM_hmm
+This script prints out the letter and word wise accuracy based on models created by SVM_hmm
 """
 
 import string
@@ -84,11 +84,11 @@ def get_letter_accuracy(orig_labels, pred_labels):
     :return: percentage of correct letters predicted
     :rtype : float
     """
-    trueCount = 0.0
+    true_count = 0.0
     for l1,l2 in zip(orig_labels, pred_labels.tolist()):
         if l1==l2:
-            trueCount += 1
-    return trueCount*100/len(orig_labels)
+            true_count += 1
+    return true_count*100/len(orig_labels)
 
 
 def get_word_accuracy(orig_words, pred_words):
@@ -109,16 +109,19 @@ def get_word_accuracy(orig_words, pred_words):
 
 def main():
     """ Execution begins here """
-    c = 1000
+    C = [1, 10, 50, 100, 500, 1000, 5000]
+    #c = 1000
     file_str    = "../../data/" + "test.txt"
-    file_pred   = "outtags/" + "test" + str(c) + ".outtags"
 
-    orig_labels, pred_labels, word_index = get_labels_and_wordindex(file_str, file_pred)
+    for c in C:
+        file_pred   = "outtags/" + "test" + str(c) + ".outtags"
 
-    orig_words,  pred_words              = get_words(orig_labels, pred_labels, word_index)
+        orig_labels, pred_labels, word_index = get_labels_and_wordindex(file_str, file_pred)
 
-    print("C = {} Letter wise accuracy: {}%".format(c, get_letter_accuracy(orig_labels, pred_labels)))
-    print("C = {} Word wise accuracy  : {}%".format(c, get_word_accuracy(orig_words, pred_words)))
+        orig_words,  pred_words              = get_words(orig_labels, pred_labels, word_index)
 
+        print("C = {} Letter wise accuracy: {} %".format(c, get_letter_accuracy(orig_labels, pred_labels)))
+        print("C = {} Word wise accuracy  : {} %".format(c, get_word_accuracy(orig_words, pred_words)))
+        print
 
 if __name__ == "__main__": main()
