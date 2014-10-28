@@ -1,5 +1,7 @@
-__author__ = 'manabchetia'
+__author__ = "Libo Yin"
+__author__ = "Manab Chetia"
 """
+Q 3.
 This script runs the binary executables svm_hmm_learn to create a model and then runs svm_hmm_classify to generate a file
 which stores the predicted labels.
 """

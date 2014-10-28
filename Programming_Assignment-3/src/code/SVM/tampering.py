@@ -1,5 +1,7 @@
-__author__ = 'manabchetia'
+__author__ = "Libo Yin"
+__author__ = "Manab Chetia"
 """
+Q 4.
 This script tampers the features of a word, then trains on the tampered features and finally prints the accuracy on test data set
 """
 
@@ -210,7 +212,7 @@ def word_to_letters( words, tampered_pixels ):
 
 def main():
     """ Execution begins here """
-    path = "../../data/"
+    path         = "../../data/"
     train_file   = path + "train.txt"
     test_file    = path + "test.txt"
     command_file = path + "transform.txt"
@@ -220,8 +222,11 @@ def main():
     commands = open(command_file).readlines()
 
     words, train_words_values = get_words_and_pixvalues(train_file)
+
+    print("Tampering in progress...")
     tampered_pixels           = tamper(commands, train_words_values, x_lines)
-    print("Pixels are tampered!")
+    print("Pixels are tampered successfully!")
+
     X_train, Y_train          = word_to_letters(words, tampered_pixels)
 
     # Train

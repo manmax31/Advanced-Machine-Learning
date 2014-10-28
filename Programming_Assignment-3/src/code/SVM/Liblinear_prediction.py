@@ -1,5 +1,7 @@
-__author__ = 'manabchetia'
+__author__ = "Libo Yin"
+__author__ = "Manab Chetia"
 """
+Q 3.
 This script implements SVM MC, creates a model from the training data and finally prints out the accuracy on the test data set
 """
 

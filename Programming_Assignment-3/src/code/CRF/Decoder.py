@@ -1,8 +1,11 @@
 __author__ = "Libo Yin"
+__author__ = "Manab Chetia"
 """
-Q 1c. Max-Sum decoder
+Q 1c. Max-Sum decoder and Brute Force decoder
 This script implements max-sum algorithm to decode the file decode_input.txt
+and also implements the brute force solution.
 """
+
 import itertools as it
 import numpy as np
 
@@ -50,13 +53,13 @@ def max_sum(m, X, W, T):
     dp_argmax = np.zeros((m, 26), dtype=np.int)      # optimal pointers
     dp_vmax   = np.zeros((m, 26), dtype=np.float64)  # max values corresponding to the pointers
 
-    for i in range(0, 26):                           # first row of the dp table
+    for i in xrange(0, 26):                           # first row of the dp table
         dp_vmax[0, i] = np.dot(W[i], X[0])
 
-    for i in range(1, m):                            # for all rows of the dp table
+    for i in xrange(1, m):                            # for all rows of the dp table
         for j in range(0, 26):                       # for each current letter
             prev = np.copy(dp_vmax[i - 1])           # the previous row of the dp table
-            for k in range(0, 26):                   # for each previous letter
+            for k in xrange(0, 26):                   # for each previous letter
                 prev[k] += T[k, j]                   # the dot product shall be added later since it is a constant wrt argmax_k
             k_max           = np.argmax(prev)
             dp_argmax[i, j] = k_max                  # pointer to the previous link. note that the first row in @dp_argmax is empty
@@ -81,21 +84,21 @@ def brute_force(X, W, T):
     :rtype: list
     """
     m = 5                                             # infer the first @m letters of @x
-    ys = list(it.product(range(26), repeat=m))
+    configurations = list(it.product(range(26), repeat=m))
     scores = []
-    for y in ys:
+    for configuration in configurations:
         s = 0
-        for i in range(0, m - 1):
-            s += np.dot(W[y[i]], X[i]) + T[y[i]][y[i+1]]
-        s += np.dot(W[y[m-1]], X[m-1])
+        for i in xrange(0, m - 1):
+            s += np.dot(W[configuration[i]], X[i]) + T[configuration[i]][configuration[i+1]]
+        s += np.dot(W[configuration[m-1]], X[m-1])
         scores.append(s)
-    y_max = max(zip(ys, scores), key=lambda x: x[1])[0]
+    y_max = max(zip(configurations, scores), key=lambda x: x[1])[0]
     return y_max
 
 
 def main():
     """Execution begins here"""
-    
+
     path     = "../../data/"
     raw_data = np.loadtxt(path + "decode_input.txt")
 
@@ -107,5 +110,6 @@ def main():
     print("Decoded Output:")
     print(decode_output)
     write_to_file(decode_output, "../../results/decode_output.txt")
+
 
 if __name__ == "__main__": main()
