@@ -57,7 +57,6 @@ def get_words(orig_labels, pred_labels, wi):
     :return pred_words: a list containing the predicted labels
     :rtype : list, list, list"""
 
-
     orig_words = []
     pred_words = []
 
@@ -125,3 +124,24 @@ def main():
         print
 
 if __name__ == "__main__": main()
+
+# C = 1 Letter wise accuracy: 65.2225360715 %
+# C = 1 Word wise accuracy  : 13.4050596104 %
+#
+# C = 10 Letter wise accuracy: 75.0438964806 %
+# C = 10 Word wise accuracy  : 26.4902587962 %
+#
+# C = 50 Letter wise accuracy: 80.7504389648 %
+# C = 50 Word wise accuracy  : 37.888921198 %
+#
+# C = 100 Letter wise accuracy: 82.3459806092 %
+# C = 100 Word wise accuracy  : 41.4364640884 %
+#
+# C = 500 Letter wise accuracy: 84.1247423467 %
+# C = 500 Word wise accuracy  : 46.2925268974 %
+#
+# C = 1000 Letter wise accuracy: 84.7545614169 %
+# C = 1000 Word wise accuracy  : 47.746437918 %
+#
+# C = 5000 Letter wise accuracy: 85.1668066265 %
+# C = 5000 Word wise accuracy  : 49.3166618203 %

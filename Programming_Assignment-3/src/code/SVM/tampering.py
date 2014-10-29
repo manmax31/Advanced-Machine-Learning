@@ -2,7 +2,7 @@ __author__ = "Libo Yin"
 __author__ = "Manab Chetia"
 """
 Q 4.
-This script tampers the features of a word, then trains on the tampered features and finally prints the accuracy on test data set
+This script tampers the features of a word, then trains on the tampered features and finally prints the letter and word wise accuracy on test data set
 """
 
 from scipy.misc import imrotate
@@ -12,26 +12,27 @@ import string
 import copy
 
 
-def get_X_Y_wi(file_name):
+def get_X_Y_wi( file_name ):
     """
     This function extract the Y, X from the datasets
     :param file_name: name of the file
     :return X: features
     :return Y: labels
-    :rtype : list, list
+    :return wi: list which contains the indices which signifies where a word ends
+    :rtype : list, list, list
     """
-    labels__next_words = np.loadtxt( file_name, usecols=[1,2], dtype=str)
-    str_labels = labels__next_words[:,0]
-    next_words = labels__next_words[:,1]
+    labels__next_words = np.loadtxt(file_name, usecols=[1, 2], dtype=str)
+    str_labels = labels__next_words[:, 0]
+    next_words = labels__next_words[:, 1]
 
-    wi = np.insert(np.where(next_words=="-1"), 0, 0)
+    wi = np.insert(np.where(next_words == "-1"), 0, 0)
 
-    X          = np.loadtxt( file_name, usecols=range(5, 128+5)).tolist()
-    Y          = get_int_labels( str_labels )
+    X = np.loadtxt(file_name, usecols=range(5, 128 + 5)).tolist()
+    Y = get_int_labels(str_labels)
     return X, Y, wi
 
 
-def rotation(X, alpha):
+def rotation( X, alpha ):
     """
     This function rotates the image
     :param X    : vector representing the word
@@ -43,16 +44,16 @@ def rotation(X, alpha):
     len_x1, len_x2 = X.shape
     len_y1, len_y2 = Y.shape
 
-    from_x = np.floor((len_y1 + 1 - len_x1)/2)
-    from_y = np.floor((len_y2 + 1 - len_x2)/2)
+    from_x = np.floor((len_y1 + 1 - len_x1) / 2)
+    from_y = np.floor((len_y2 + 1 - len_x2) / 2)
 
-    idx = np.where(Y==0)
+    idx = np.where(Y == 0)
     Y[idx] = X[idx]
 
     return Y
 
 
-def translation(X, offset):
+def translation( X, offset ):
     """
     This function translates the image
     :param X     : vector representing the word
@@ -67,15 +68,18 @@ def translation(X, offset):
 
     if ox > 0 and oy > 0:
         # # Special case where ox and oy are both positive (used in this project)
-        Y[1+ox:len_x, 1+oy:len_y] = X[1:len_x-ox, 1:len_y-oy]
+        Y[1 + ox:len_x, 1 + oy:len_y] = X[1:len_x - ox, 1:len_y - oy]
     else:
         # # General case where ox and oy can be negative
-        Y[ max(1,1+ox):min(len_x, len_x+ox), max(1,1+oy):min(len_y, len_y+oy) ] = X[max(1,1-ox):min(len_x, len_x-ox), max(1,1-oy):min(len_y, len_y-oy)]
+        Y[max(1, 1 + ox):min(len_x, len_x + ox), max(1, 1 + oy):min(len_y, len_y + oy)] = X[max(1, 1 - ox):min(len_x,
+                                                                                                               len_x - ox),
+                                                                                          max(1, 1 - oy):min(len_y,
+                                                                                                             len_y - oy)]
 
     return Y
 
 
-def get_int_labels(str_labels):
+def get_int_labels( str_labels ):
     """
     This function converts a,b,c,d,...,z to 1,2,3,4,...,26
     :param  str_labels : the second column of the train or test files
@@ -84,11 +88,11 @@ def get_int_labels(str_labels):
     """
     int_labels = []
     for str_label in str_labels:
-        int_labels.append( string.ascii_lowercase.index(str_label) + 1 )
+        int_labels.append(string.ascii_lowercase.index(str_label) + 1)
     return int_labels
 
 
-def get_words_and_pixvalues(file_name):
+def get_words_and_pixvalues( file_name ):
     """
     This function takes in a file and returns the a list containing the
     [[letters of word1],[letters of word2], ...] and [[pixel values of word1],[pixel values of word2],...]
@@ -97,24 +101,24 @@ def get_words_and_pixvalues(file_name):
     :return pixvalues  : list containing features of words e.g. [[[f1] [f2] [f3]], [[f4] [f5] [f6]]]
     :rtype : list, list
     """
-    labels__next_words = np.loadtxt( file_name, usecols=[1,2], dtype=str)
-    values_all         = np.loadtxt( file_name, usecols=range(5,128+5))
+    labels__next_words = np.loadtxt(file_name, usecols=[1, 2], dtype=str)
+    values_all = np.loadtxt(file_name, usecols=range(5, 128 + 5))
 
-    str_labels = labels__next_words[:,0]
-    next_words = labels__next_words[:,1]
+    str_labels = labels__next_words[:, 0]
+    next_words = labels__next_words[:, 1]
 
-    wi = np.insert(np.where(next_words=="-1"), 0, 0)
+    wi = np.insert(np.where(next_words == "-1"), 0, 0)
 
-    int_labels = get_int_labels( str_labels )
+    int_labels = get_int_labels(str_labels)
 
-    words        = []
+    words = []
     pixel_values = []
 
     sI = 0
-    for i in xrange(0, len(wi) -1):
-        eI  = wi[i + 1]
+    for i in xrange(0, len(wi) - 1):
+        eI = wi[i + 1]
 
-        word   = int_labels[sI:eI + 1]
+        word = int_labels[sI:eI + 1]
         values = values_all[sI:eI + 1]
 
         sI = eI + 1
@@ -165,10 +169,10 @@ def tamper( commands, pixel_values, x_lines ):
                 X_word_rot.append(np.asarray(x_vec_letter_rot))
             pixel_values_tamper[word_index] = X_word_rot
 
-
     return pixel_values_tamper
 
-def train(C, Y_train, X_train, x_lines):
+
+def train( C, Y_train, X_train, x_lines ):
     """
     This function takes in the training labels and features and creates a model and saves that model
     :param C       : list containing parameter C
@@ -176,13 +180,13 @@ def train(C, Y_train, X_train, x_lines):
     :param Y_train : training labels
     :return None
     """
-    #for c in C:
+    # for c in C:
     param = '-s 2 -c ' + str(C)
     model = lu.train(Y_train, X_train, param)
-    lu.save_model("model/lmods2_tamper"+str(C)+"_"+str(x_lines)+"l.model", model)
+    lu.save_model("model/lmods2_tamper" + str(C) + "_" + str(x_lines) + "l.model", model)
 
 
-def test(C, Y_test, X_test, x_lines):
+def test( C, Y_test, X_test, x_lines ):
     """
     This function takes in the test labels and features and prints out the accuracy
     :param C      : list containing parameter C
@@ -190,8 +194,8 @@ def test(C, Y_test, X_test, x_lines):
     :param Y_test : test labels
     :return None
     """
-    #for c in C:
-    model = lu.load_model("model/lmods2_tamper"+str(C)+"_"+str(x_lines)+"l.model")
+    # for c in C:
+    model = lu.load_model("model/lmods2_tamper" + str(C) + "_" + str(x_lines) + "l.model")
     p_letters, p_acc, p_val = lu.predict(Y_test, X_test, model)
     return p_letters
 
@@ -216,18 +220,25 @@ def word_to_letters( words, tampered_pixels ):
     return X_train, Y_train
 
 
-def letters_to_words(letters, wi):
+def letters_to_words( letters, wi ):
+    """
+    This function converts letters to words
+    :param letters: a list of letters
+    :param wi: indices in the list of letters which signifies the end of the word
+    :return: a list of words [[word1], [word2], ...]
+    :rtype list of lists
+    """
     words = []
     sI = 0
-    for i in xrange(0, len(wi) -1):
-        eI   = wi[i + 1]
+    for i in xrange(0, len(wi) - 1):
+        eI = wi[i + 1]
         word = letters[sI:eI + 1]
-        sI   = eI + 1
+        sI = eI + 1
         words.append(word)
     return words
 
 
-def get_word_accuracy(orig_words, pred_words):
+def get_word_accuracy( orig_words, pred_words ):
     """
     This function calculates the word wise accuracy
     :param orig_words: list containing correct labels
@@ -236,50 +247,48 @@ def get_word_accuracy(orig_words, pred_words):
     :rtype : float"""
 
     trueCount = 0.0
-    for w1,w2 in zip(orig_words, pred_words):
-        if w1==w2:
+    for w1, w2 in zip(orig_words, pred_words):
+        if w1 == w2:
             trueCount += 1
 
-    return trueCount*100/len(orig_words)
+    return trueCount * 100 / len(orig_words)
 
 
-def main():
+def main( ):
     """ Execution begins here """
-    path         = "../../data/"
-    train_file   = path + "train.txt"
-    test_file    = path + "test.txt"
+    path = "../../data/"
+    train_file = path + "train.txt"
+    test_file = path + "test.txt"
     command_file = path + "transform.txt"
 
-    C        = 100
-    x_lines  = 2000    # [0, 500, 1000, 1500, 2000] # Number of lines to read from transform.txt
+    C = 100
+    x_lines = 2000  # [0, 500, 1000, 1500, 2000] # Number of lines to read from transform.txt
     commands = open(command_file).readlines()
 
     words, train_words_values = get_words_and_pixvalues(train_file)
 
     # Tampering
     print("Tampering in progress...")
-    tampered_pixels           = tamper(commands, train_words_values, x_lines)
+    tampered_pixels = tamper(commands, train_words_values, x_lines)
     print("Pixels are tampered successfully!")
 
     # Train
     print("Training in progress...")
-    X_train, Y_train          = word_to_letters(words, tampered_pixels)
+    X_train, Y_train = word_to_letters(words, tampered_pixels)
     train(C, Y_train, X_train, x_lines)
 
     # Test
-    X_test,  Y_test, wi_te = get_X_Y_wi(test_file)
-    pred_letters           = test(C, Y_test, X_test, x_lines)
-    orig_words             = letters_to_words(Y_test, wi_te)
-    pred_words             = letters_to_words(pred_letters, wi_te)
-    # print(orig_words)
-    # print(pred_words)
+    X_test, Y_test, wi_te = get_X_Y_wi(test_file)
+    pred_letters = test(C, Y_test, X_test, x_lines)  # This function prints out letter wise accuracy
+    orig_words = letters_to_words(Y_test, wi_te)
+    pred_words = letters_to_words(pred_letters, wi_te)
 
-    print("C = {}, lines = {}, Word wise accuracy  : {} %".format(C, x_lines, get_word_accuracy(orig_words, pred_words)))
-
+    print(
+        "C = {}, lines = {}, Word wise accuracy  : {} %".format(C, x_lines, get_word_accuracy(orig_words, pred_words)))
 
 
 if __name__ == "__main__": main()
-### C = 100
+# ## C = 100
 ## Letter wise accuracy
 # With parameter -s 2
 #0    lines tampered : Accuracy = 69.9557% (18327/26198) (classification)

@@ -2,7 +2,7 @@ __author__ = "Libo Yin"
 __author__ = "Manab Chetia"
 """
 Q 3.
-This script implements SVM MC, creates a model from the training data and finally prints out the accuracy on the test data set
+This script implements SVM MC, creates a model from the training data and finally prints out the letter wise and word wise accuracy on the test data set
 """
 
 import liblinearutil as lu
@@ -128,7 +128,7 @@ def main():
 
     # Test
     X_test,  Y_test, wi_test  = get_X_Y_wi(test_file)
-    p_letters, p_acc = test(C, Y_test, X_test)
+    p_letters, p_acc = test(C, Y_test, X_test) # This function prints out letter wise accuracy
 
     orig_words, pred_words = get_words(Y_test, p_letters, wi_test)
     print("C = {} Word wise accuracy  : {} %".format(C, get_word_accuracy(orig_words, pred_words)))
