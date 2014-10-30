@@ -46,6 +46,7 @@ def rotation( X, alpha ):
 
     from_x = np.floor((len_y1 + 1 - len_x1) / 2)
     from_y = np.floor((len_y2 + 1 - len_x2) / 2)
+    Y = Y[from_x:from_x+len_x1, from_y:from_y+len_x2]
 
     idx = np.where(Y == 0)
     Y[idx] = X[idx]
@@ -153,8 +154,8 @@ def tamper( commands, pixel_values, x_lines ):
             rot_angle = float(comm_arr[2])
             X_word_rot = []
             for x_vec_letter in X_word:
-                x_matrix_letter = x_vec_letter.reshape((8, 16))
-                x_matrix_trans = rotation(x_matrix_letter, rot_angle)
+                x_matrix_letter  = x_vec_letter.reshape((8, 16))
+                x_matrix_trans   = rotation(x_matrix_letter, rot_angle)
                 x_vec_letter_rot = x_matrix_trans.reshape((128,))
                 X_word_rot.append(np.asarray(x_vec_letter_rot))
             pixel_values_tamper[word_index] = X_word_rot
@@ -262,7 +263,7 @@ def main( ):
     command_file = path + "transform.txt"
 
     C = 100
-    x_lines = 2000  # [0, 500, 1000, 1500, 2000] # Number of lines to read from transform.txt
+    x_lines = 1500  # [0, 500, 1000, 1500, 2000] # Number of lines to read from transform.txt
     commands = open(command_file).readlines()
 
     words, train_words_values = get_words_and_pixvalues(train_file)

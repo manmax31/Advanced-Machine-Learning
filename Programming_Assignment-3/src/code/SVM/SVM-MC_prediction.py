@@ -37,7 +37,7 @@ def get_X_Y_wi(file):
 
     wi = np.insert(np.where(next_words=="-1"), 0, 0)
 
-    X          = np.loadtxt( file, usecols=range(5, 128+5)).tolist()
+    X          = np.loadtxt( file, usecols=range(5, 128+5) ).tolist()
     Y          = get_int_labels( str_labels )
     return X, Y, wi
 
@@ -117,18 +117,19 @@ def get_word_accuracy(orig_words, pred_words):
 
 def main():
     """ Execution begins here """
-    train_file = "../../data/" + "train.txt"
-    test_file  = "../../data/" + "test.txt"
+    path       = "../../data/"
+    train_file = path + "train.txt"
+    test_file  = path + "test.txt"
     #C = [1, 10, 50, 100, 500, 1000, 5000]
-    C = 5000
+    C = 1
 
     # # Train
-    # X_train, Y_train, wi_train = get_X_Y(train_file)
-    # train(C, Y_train, X_train)
+    X_train, Y_train, wi_train = get_X_Y_wi(train_file)
+    train( float(C)/len(Y_train), Y_train, X_train )
 
     # Test
     X_test,  Y_test, wi_test  = get_X_Y_wi(test_file)
-    p_letters, p_acc = test(C, Y_test, X_test) # This function prints out letter wise accuracy
+    p_letters, p_acc = test( C, Y_test, X_test ) # This function prints out letter wise accuracy
 
     orig_words, pred_words = get_words(Y_test, p_letters, wi_test)
     print("C = {} Word wise accuracy  : {} %".format(C, get_word_accuracy(orig_words, pred_words)))

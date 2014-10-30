@@ -1,13 +1,13 @@
 READ ME
 
-Project Contains 2 folders: 1) CRF 2) SVM 3) results
-1) CRF contains .py files for Q1 and Q2
-2) SVM contains .pu files for Q3 and Q4
+Project Contains 3 folders: 1) CRF 2) SVM 3) results
+1) CRF contains *.py files for Q1 and Q2
+2) SVM contains *.py files for Q3 and Q4
 3) results contains the desired results.
 
-All files are independent of each other and therefore can be run as python filename.py.
-Before you can run the scripts, some below mentioned folders already exists.
-
+All files are independent of each other and therefore can be run as "python filename.py".
+Before you can run the scripts, some below mentioned folders needs to exist beforehand.
+Please change the variable "path" in the main functions of all scripts according to where your test.txt, train.txt etc. files are located.
 
 
 Folder CRF contains:
@@ -34,7 +34,7 @@ Make sure liblinearutil.py is inside the folder SVM/  . Value of C can be change
 
 4) Tampering.py
 This script implements Q4 i.e. rotates or translates the features and gives us the letter and word wise accuracy based on SVM-MC.
-Value of C can be changed in the main() function.
+Value of C and no of lines to be tampered can be changed in the main() function.
 
 
 
