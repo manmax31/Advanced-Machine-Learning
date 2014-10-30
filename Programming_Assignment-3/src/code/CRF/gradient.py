@@ -1,16 +1,32 @@
+__author__ = "Libo Yin"
+__author__ = "Manab Chetia"
+
+"""
+Q 2a
+This script calculates the log probability and its gradient.
+"""
+
 from math import exp, log
 import numpy as np
 
 
-def load_parameters():  # refers to: p
-    raw = np.loadtxt("data/model.txt")
-    w = np.array(raw[:26 * p]).reshape((26, p))
-    t = np.transpose(np.array(raw[26 * p:]).reshape((26, 26)))
+def load_parameters(path, p):  # refers to: p
+    """
+    This function loads the required data from file model.txt
+    :param  path: path of the file model.txt
+    :param  p:    features in a letter i.e. 128
+    :return w:    weights
+    :return t:    transitions
+    :rtype
+    """
+    raw = np.loadtxt(path + "model.txt")
+    w   = np.array(raw[:26 * p]).reshape((26, p))
+    t   = np.transpose(np.array(raw[26 * p:]).reshape((26, 26)))
     return w, t
 
 
-def load_data():
-    with open("data/train.txt") as f:
+def load_data(path):
+    with open(path + "train.txt") as f:
         lines = [line.split() for line in f]
     data, x, y = [], [], []
     for l in lines:
@@ -24,7 +40,7 @@ def load_data():
 
 def forward_dp(w, t, x):
     # for all possible paths from the first letter forwards, calculate the sum of partial, unormalized probabilities
-    m = len(x)
+    m  = len(x)
     dp = np.zeros((m, 26), dtype=np.float64)
     for i in range(0, 26):  # the first line of the dp table
         dp[0, i] = exp(np.dot(w[i], x[0]))
@@ -48,7 +64,7 @@ def backward_dp(w, t, x):
     return dp
 
 
-def gradient(w, t, x, y):
+def gradient(w, t, x, y, p):
     m = len(x)
     forward = forward_dp(w, t, x)
     backward = backward_dp(w, t, x)
@@ -73,23 +89,36 @@ def gradient(w, t, x, y):
 
 
 def log_probability(w, t, x, y):
-    m = len(x)
-    prob = sum(np.dot(w[y[i]], x[i]) for i in range(0, m))
+    m     = len(x)
+    prob  = sum(np.dot(w[y[i]], x[i]) for i in range(0, m))
     prob += sum(t[y[i], y[i+1]] for i in range(0, m-1))
     z = sum(forward_dp(w, t, x)[-1])
     return log(exp(prob) / z)
 
-p = 128
-w, t = load_parameters()
-log_prob, nablas_w, nablas_t = [], [], []
-for x, y in load_data():
-    log_prob.append(log_probability(w, t, x, y))
-    nw, nt = gradient(w, t, x, y)
-    nablas_w.append(nw)  # 26 * @p
-    nablas_t.append(nt)  # 26 * 26
-print(log_prob)
-with open("result/gradient.txt", mode="w") as f:
-    for i in np.reshape(sum(nablas_w) / len(nablas_w), 26 * p):
-        f.write(str(i) + "\n")
-    for i in np.reshape(sum(nablas_t) / len(nablas_t), 26 * 26):
-        f.write(str(i) + "\n")
+
+def main():
+    path    = "../../data/"
+    results = "../../results/"
+    p       = 128
+    w, t = load_parameters(path, p)
+
+    log_prob, nablas_w, nablas_t = [], [], []
+
+    print("Calculation of log probability and its gradient in progress...")
+    for x, y in load_data(path):
+        log_prob.append(log_probability(w, t, x, y))
+        nw, nt = gradient(w, t, x, y, p)
+        nablas_w.append(nw)  # 26 * @p
+        nablas_t.append(nt)  # 26 * 26
+
+    print("Log Probability: \n{}".format(log_prob))
+
+    with open(results + "gradient.txt", mode="w") as f:
+        for i in np.reshape(sum(nablas_w) / len(nablas_w), 26 * p):
+            f.write(str(i) + "\n")
+        for i in np.reshape(sum(nablas_t) / len(nablas_t), 26 * 26):
+            f.write(str(i) + "\n")
+        print("\nSuccessfully created gradient.txt ")
+
+
+if __name__ == "__main__": main()

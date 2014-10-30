@@ -11,8 +11,8 @@ Please change the variable "path" in the main functions of all scripts according
 
 
 Folder CRF contains:
-1) Decoder.py: This script implements Max-Sum and Brute Force for Q 1c.
-2)
+1) Decoder.py : This script implements Max-Sum and Brute Force for Q 1c and outputs a file "results/decode_output.txt"
+2) Gardient.py: This script calculates the log probability and its gradient and output a file "results/gradient.txt"
 3)
 4)
 
