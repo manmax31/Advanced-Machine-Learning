@@ -39,7 +39,12 @@ Value of C and no of lines to be tampered can be changed in the main() function.
 
 
 Folder results contains:
-1)decode_output.txt
+1) decode_output.txt
 This file contains the decoded output of Q1c.
 
-2)
+2) gradient.txt
+This file contains the gradient of the the likelihood function.
+
+3) solution.txt
+
+4) prediction.txt
