@@ -43,7 +43,7 @@ Folder results contains:
 This file contains the decoded output of Q1c.
 
 2) gradient.txt
-This file contains the gradient of the the likelihood function.
+This file contains the gradient of the the likelihood function of Q 2a.
 
 3) solution.txt
 
