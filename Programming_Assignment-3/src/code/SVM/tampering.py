@@ -46,6 +46,7 @@ def rotation( X, alpha ):
 
     from_x = np.floor((len_y1 + 1 - len_x1) / 2)
     from_y = np.floor((len_y2 + 1 - len_x2) / 2)
+
     Y = Y[from_x:from_x+len_x1, from_y:from_y+len_x2]
 
     idx = np.where(Y == 0)
@@ -262,8 +263,8 @@ def main( ):
     test_file = path + "test.txt"
     command_file = path + "transform.txt"
 
-    C = 100
-    x_lines = 1500  # [0, 500, 1000, 1500, 2000] # Number of lines to read from transform.txt
+    C       = 100
+    x_lines = 2000  # [0, 500, 1000, 1500, 2000] # Number of lines to read from transform.txt
     commands = open(command_file).readlines()
 
     words, train_words_values = get_words_and_pixvalues(train_file)
@@ -276,7 +277,7 @@ def main( ):
     # Train
     print("Training in progress...")
     X_train, Y_train = word_to_letters(words, tampered_pixels)
-    train(C, Y_train, X_train, x_lines)
+    train(float(C)/len(Y_train), Y_train, X_train, x_lines)
 
     # Test
     X_test, Y_test, wi_te = get_X_Y_wi(test_file)
