@@ -1,5 +1,9 @@
 __author__ = "Libo Yin"
 __author__ = "Manab Chetia"
+"""
+This script contains functions used by other scripts.
+"""
+
 
 from math import exp, log
 import itertools as it
