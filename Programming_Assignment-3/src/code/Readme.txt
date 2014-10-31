@@ -13,8 +13,10 @@ Please change the variable "path" in the main functions of all scripts according
 Folder CRF contains:
 1) Decoder.py : This script implements Max-Sum and Brute Force for Q 1c and outputs a file "results/decode_output.txt"
 2) Gardient.py: This script calculates the log probability and its gradient and output a file "results/gradient.txt"
-3)
-4)
+3) Folder TrainCRF contains scripts for Q 2:
+   a) lib.py   : This script contains functions used by other scripts.
+   b) learn.py : This script learns w matrix and T matrix from the training data, and writes them to learnt_w.txt, learnt_t.txt, and solution.txt.
+   c) test.py  : This script uses learnt w and T matrix to predict the letters on the test data, and writes the result to prediction.txt.
 
 
 
@@ -46,5 +48,7 @@ This file contains the decoded output of Q1c.
 This file contains the gradient of the the likelihood function of Q 2a.
 
 3) solution.txt
+This function contains the learnt W and T matrix.
 
 4) prediction.txt
+This file contains the predicted letters.
