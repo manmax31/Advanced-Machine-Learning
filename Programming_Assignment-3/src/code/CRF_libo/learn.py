@@ -29,17 +29,19 @@ def obj_prime(theta):
 
 p = 128
 c = 1000
-data = load_data("data/train.txt")
-start_time = time.time()
-theta, min_obj, _ = fmin_l_bfgs_b(func=objective, x0=np.zeros(26 * p + 26 ** 2), fprime=obj_prime)
-print("learning time={}".format(time.time() - start_time))
-print("value={}".format(min_obj))
-w = np.reshape(theta[:26 * p], (26, p))
-t = np.reshape(theta[26 * p:], (26, 26))
-np.savetxt("result/learnt_w.txt", w)
-np.savetxt("result/learnt_t.txt", t)
-with open("result/solution.txt", mode="w") as f:
-    for i in np.reshape(w, 26 * p):
-        f.write(str(i) + "\n")
-    for i in np.reshape(np.transpose(t), 26 * 26):
-        f.write(str(i) + "\n")
+if __name__ == "__main__":
+    data = load_data("data/train.txt")
+    start_time = time.time()
+    theta, min_obj, _ = fmin_l_bfgs_b(func=objective, x0=np.zeros(26 * p + 26 ** 2), fprime=obj_prime)
+    print("learning time={}".format(time.time() - start_time))
+    print("c={}".format(c))
+    print("value={}".format(min_obj))
+    w = np.reshape(theta[:26 * p], (26, p))
+    t = np.reshape(theta[26 * p:], (26, 26))
+    np.savetxt("result/learnt_w.txt", w)
+    np.savetxt("result/learnt_t.txt", t)
+    with open("result/solution.txt", mode="w") as f:
+        for i in np.reshape(w, 26 * p):
+            f.write(str(i) + "\n")
+        for i in np.reshape(np.transpose(t), 26 * 26):
+            f.write(str(i) + "\n")

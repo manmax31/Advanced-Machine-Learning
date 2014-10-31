@@ -12,10 +12,12 @@ def load_parameters():  # refers to: m, p
 
 m = 100  # number of letters in the word
 p = 128  # number of pixels in a letter
-x, w, t = load_parameters()
-letters = [i + 1 for i in max_sum(x, w, t)]  # +1 since python index starts from 0
-print(letters)
-with open("result/decode_output.txt", mode="w") as f:
-    for l in letters:
-        f.write(str(l) + "\n")
+if __name__ == "__main__":
+    x, w, t = load_parameters()
+    letters = [i + 1 for i in max_sum(x, w, t)]  # +1 since python index starts from 0
+    print(letters)
+    with open("result/decode_output.txt", mode="w") as f:
+        for l in letters:
+            f.write(str(l) + "\n")
+
 # print([i + 1 for i in brute_force(x, w, t, 5)])
