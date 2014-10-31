@@ -95,9 +95,12 @@ def load_data(path):
         lines = [line.split() for line in f]
     data, x, y = [], [], []
     for l in lines:
-        x.append(list(map(int, l[5:])))
+        pixels = np.array(list(map(int, l[5:])), dtype=np.float64)
+        if any(p > 1 for p in pixels):
+            pixels /= 255
+        x.append(pixels)
         y.append(ord(l[1]) - 97)
         if l[2] == "-1":
-            data.append((np.array(x, dtype=np.bool), np.array(y, dtype=np.int)))
+            data.append((np.array(x, dtype=np.float64), np.array(y, dtype=np.int)))
             x, y = [], []
     return data
