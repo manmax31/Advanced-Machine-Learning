@@ -1,4 +1,10 @@
+__author__ = "Libo Yin"
+__author__ = "Manab Chetia"
+
+"""
 # Q2.b
+This script learns w matrix and T matrix from the training data, and writes them to learnt_w.txt, learnt_t.txt, and solution.txt.
+"""
 from lib import *
 from scipy.optimize import fmin_l_bfgs_b
 import numpy as np

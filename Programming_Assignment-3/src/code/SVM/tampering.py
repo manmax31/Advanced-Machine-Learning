@@ -185,7 +185,7 @@ def train( C, Y_train, X_train, x_lines ):
     # for c in C:
     param = '-s 2 -c ' + str(C)
     model = lu.train(Y_train, X_train, param)
-    lu.save_model("model/lmods2_tamper" + str(C) + "_" + str(x_lines) + "l.model", model)
+    lu.save_model("model/lmods2_tamper" + str(round(C,2)) + "_" + str(x_lines) + "l.model", model)
 
 
 def test( C, Y_test, X_test, x_lines ):
@@ -197,7 +197,7 @@ def test( C, Y_test, X_test, x_lines ):
     :return None
     """
     # for c in C:
-    model = lu.load_model("model/lmods2_tamper" + str(C) + "_" + str(x_lines) + "l.model")
+    model = lu.load_model("model/lmods2_tamper" + str(round(C,2)) + "_" + str(x_lines) + "l.model")
     p_letters, p_acc, p_val = lu.predict(Y_test, X_test, model)
     return p_letters
 
@@ -264,7 +264,7 @@ def main( ):
     command_file = path + "transform.txt"
 
     C       = 100
-    x_lines = 2000  # [0, 500, 1000, 1500, 2000] # Number of lines to read from transform.txt
+    x_lines = 0  # [0, 500, 1000, 1500, 2000] # Number of lines to read from transform.txt
     commands = open(command_file).readlines()
 
     words, train_words_values = get_words_and_pixvalues(train_file)
@@ -277,32 +277,35 @@ def main( ):
     # Train
     print("Training in progress...")
     X_train, Y_train = word_to_letters(words, tampered_pixels)
-    train(float(C)/len(Y_train), Y_train, X_train, x_lines)
+
+    train( float(C)/len(Y_train), Y_train, X_train, x_lines )
+
 
     # Test
     X_test, Y_test, wi_te = get_X_Y_wi(test_file)
-    pred_letters = test(C, Y_test, X_test, x_lines)  # This function prints out letter wise accuracy
-    orig_words = letters_to_words(Y_test, wi_te)
-    pred_words = letters_to_words(pred_letters, wi_te)
+    pred_letters          = test(float(C)/len(Y_train), Y_test, X_test, x_lines)  # This function prints out letter wise accuracy
+    orig_words            = letters_to_words(Y_test, wi_te)
+    pred_words            = letters_to_words(pred_letters, wi_te)
 
     print(
         "C = {}, lines = {}, Word wise accuracy  : {} %".format(C, x_lines, get_word_accuracy(orig_words, pred_words)))
 
 
 if __name__ == "__main__": main()
-# ## C = 100
-## Letter wise accuracy
-# With parameter -s 2
-#0    lines tampered : Accuracy = 69.9557% (18327/26198) (classification)
-#500  lines tampered : Accuracy = 36.4188% (9540/26198) (classification)
-#1000 lines tampered : Accuracy = 29.7771% (7801/26198) (classification)
-#1500 lines tampered : Accuracy = 25.1737% (6595/26198) (classification)
-#2000 lines tampered : Accuracy = 24.9027% (6524/26198) (classification)
+##C=100
 
-## Word wise accuracy
-# With parameter -s 2
-# 0    lines tampered   : Word wise accuracy  : 17.2143064844 %
-# 500  lines tampered   : Word wise accuracy  : 1.19220703693 %
-# 1000 lines tampered   : Word wise accuracy  : 0.465251526607 %
-# 1500 lines tampered   : Word wise accuracy  : 0.261703983716 %
-# 2000 lines tampered   : Word wise accuracy  : 0.348938644955 %
+# Accuracy = 68.0854% (17837/26198) (classification)
+# C = 100, lines = 0, Word wise accuracy  : 15.0625181739 %
+
+# Accuracy = 35.6134% (9330/26198) (classification)
+# C = 100, lines = 500, Word wise accuracy  : 0.988659494039 %
+
+# Accuracy = 29.7618% (7797/26198) (classification)
+# C = 100, lines = 1000, Word wise accuracy  : 0.465251526607 %
+
+# Accuracy = 25.0286% (6557/26198) (classification)
+# C = 100, lines = 1500, Word wise accuracy  : 0.261703983716 %
+
+# Accuracy = 24.2843% (6362/26198) (classification)
+# C = 100, lines = 2000, Word wise accuracy  : 0.290782204129 %
+

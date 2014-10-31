@@ -82,7 +82,7 @@ def train(c, Y_train, X_train):
     #for c in C:
     param = '-s 2 -c ' + str(c)
     model = lu.train(Y_train, X_train, param)
-    lu.save_model("model/lmods2_"+str(c)+".model", model)
+    lu.save_model("model/lmods2_"+str(round(c,2))+".model", model)
 
 def test(c, Y_test, X_test):
     """
@@ -93,7 +93,7 @@ def test(c, Y_test, X_test):
     :return None
     """
     #for c in C:
-    model = lu.load_model("model/lmods2_"+str(c)+".model")
+    model = lu.load_model("model/lmods2_"+str(round(c,2))+".model")
     p_letters, p_acc, p_val = lu.predict(Y_test, X_test, model)
 
     return p_letters, p_acc
@@ -121,7 +121,7 @@ def main():
     train_file = path + "train.txt"
     test_file  = path + "test.txt"
     #C = [1, 10, 50, 100, 500, 1000, 5000]
-    C = 1
+    C = 5000
 
     # # Train
     X_train, Y_train, wi_train = get_X_Y_wi(train_file)
@@ -129,7 +129,7 @@ def main():
 
     # Test
     X_test,  Y_test, wi_test  = get_X_Y_wi(test_file)
-    p_letters, p_acc = test( C, Y_test, X_test ) # This function prints out letter wise accuracy
+    p_letters, p_acc = test( float(C)/len(Y_test), Y_test, X_test ) # This function prints out letter wise accuracy
 
     orig_words, pred_words = get_words(Y_test, p_letters, wi_test)
     print("C = {} Word wise accuracy  : {} %".format(C, get_word_accuracy(orig_words, pred_words)))
@@ -138,32 +138,28 @@ def main():
 
 
 if __name__ == "__main__": main()
-## Letter wise Accuracy
-# Without parameter -s 2
-# Accuracy = 70.013% (18342/26198) (classification)
-# Accuracy = 69.6847% (18256/26198) (classification)
-# Accuracy = 61.4742% (16105/26198) (classification)
-# Accuracy = 53.5423% (14027/26198) (classification)
-# Accuracy = 49.8588% (13062/26198) (classification)
-# Accuracy = 53.8362% (14104/26198) (classification)
-# Accuracy = 48.435% (12689/26198) (classification)
 
-# With parameter -s 2
-# Accuracy = 69.9557% (18327/26198) (classification)
-# Accuracy = 69.9061% (18314/26198) (classification)
-# Accuracy = 69.9137% (18316/26198) (classification)
-# Accuracy = 69.9328% (18320/26198) (classification)
-# Accuracy = 69.9061% (18314/26198) (classification)
-# Accuracy = 69.9328% (18320/26198) (classification)
-# Accuracy = 69.9366% (18322/26198) (classification)
+# Accuracy = 48.3358% (12663/26198) (classification)
+# C = 1 Word wise accuracy  : 2.00639720849 %
 
-## Word wise Accuracy
-# With parameter -s 2
-#C = 1 Word wise accuracy  : 17.4178540273 %
-#C = 10 Word wise accuracy  : 17.2433847049 %
-#C = 50 Word wise accuracy  : 17.2433847049 %
-#C = 100 Word wise accuracy  : 17.2143064844 %
-#C = 500 Word wise accuracy  : 17.185228264 %
-#C = 1000 Word wise accuracy  : 17.3015411457 %
-#C = 5000 Word wise accuracy  : 17.3015411457 %
+# Accuracy = 61.207% (16035/26198) (classification)
+# C = 10 Word wise accuracy  : 7.6475719686 %
+
+# Accuracy = 66.9135% (17529/26198) (classification)
+# C = 50 Word wise accuracy  : 13.8412329165 %
+
+# Accuracy = 68.0854% (17837/26198) (classification)
+# C = 100 Word wise accuracy  : 15.0625181739 %
+
+# Accuracy = 68.0854% (17837/26198) (classification)
+# C = 100 Word wise accuracy  : 15.0625181739 %
+
+# Accuracy = 69.4099% (18184/26198) (classification)
+# C = 500 Word wise accuracy  : 16.3419598721 %
+
+# Accuracy = 69.742% (18271/26198) (classification)
+# C = 1000 Word wise accuracy  : 16.9526025007 %
+
+# Accuracy = 69.9328% (18320/26198) (classification)
+# C = 5000 Word wise accuracy  : 17.1561500436 %
 

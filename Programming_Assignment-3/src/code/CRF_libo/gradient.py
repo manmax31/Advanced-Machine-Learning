@@ -1,4 +1,8 @@
 # Q2.a
+"""
+This script contains functions used by other scripts.
+"""
+
 from lib import *
 import numpy as np
 

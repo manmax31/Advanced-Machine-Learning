@@ -1,4 +1,10 @@
+__author__ = "Libo Yin"
+__author__ = "Manab Chetia"
 # Q2.b
+
+"""
+This script uses learnt w and T matrix to predict the letters on the test data, and writes the result to prediction.txt.
+"""
 from lib import *
 import numpy as np
 import time

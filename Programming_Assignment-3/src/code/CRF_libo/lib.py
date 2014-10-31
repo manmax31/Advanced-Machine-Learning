@@ -1,3 +1,6 @@
+__author__ = "Libo Yin"
+__author__ = "Manab Chetia"
+
 from math import exp, log
 import itertools as it
 import numpy as np

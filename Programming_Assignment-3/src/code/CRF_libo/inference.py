@@ -1,3 +1,6 @@
+__author__ = "Libo Yin"
+__author__ = "Manab Chetia"
+
 # Q1.c
 from lib import *
 import numpy as np

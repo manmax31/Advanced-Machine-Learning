@@ -1,22 +1,24 @@
 READ ME
 
 Project Contains 3 folders: 1) CRF 2) SVM 3) results
-1) CRF contains *.py files for Q1 and Q2
+1) CRF contains *.py files for Q1a and Q2a and a folder TrainCRF which contains all files *.py needed for Q2
 2) SVM contains *.py files for Q3 and Q4
 3) results contains the desired results.
 
 All files are independent of each other and therefore can be run as "python filename.py".
 Before you can run the scripts, some below mentioned folders needs to exist beforehand.
-Please change the variable "path" in the main functions of all scripts according to where your test.txt, train.txt etc. files are located.
+Please change the variable "path" or directory location in the main functions of all scripts according to where your test.txt, train.txt etc. files are located.
 
 
 Folder CRF contains:
 1) Decoder.py : This script implements Max-Sum and Brute Force for Q 1c and outputs a file "results/decode_output.txt"
 2) Gardient.py: This script calculates the log probability and its gradient and output a file "results/gradient.txt"
 3) Folder TrainCRF contains scripts for Q 2:
-   a) lib.py   : This script contains functions used by other scripts.
-   b) learn.py : This script learns w matrix and T matrix from the training data, and writes them to learnt_w.txt, learnt_t.txt, and solution.txt.
-   c) test.py  : This script uses learnt w and T matrix to predict the letters on the test data, and writes the result to prediction.txt.
+   a) lib.py      : This script contains functions used by other scripts.
+   b) learn.py    : This script learns w matrix and T matrix from the training data, and writes them to learnt_w.txt, learnt_t.txt, and solution.txt.
+   c) test.py     : This script uses learnt w and T matrix to predict the letters on the test data, and writes the result to prediction.txt.
+   d) gradient.py : This script calculates the log probability and its gradient and output a file "results/gradient.txt"
+   e) inference.py: This script implements Max-Sum and Brute Force to decode and outputs a file "results/decode_output.txt"
 
 
 
