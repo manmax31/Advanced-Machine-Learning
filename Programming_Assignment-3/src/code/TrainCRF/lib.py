@@ -13,9 +13,11 @@ import numpy as np
 def max_sum(x, w, t):
     m = len(x)
     dp_argmax = np.zeros((m, 26), dtype=np.int)  # backward pointers
-    dp_vmax = np.zeros((m, 26), dtype=np.float64)  # max values corresponding to the pointers
+
+    dp_vmax   = np.zeros((m, 26), dtype=np.float64)  # max values corresponding to the pointers
     for i in range(0, 26):  # first row of the dp table
         dp_vmax[0, i] = np.dot(w[i], x[0])
+
     for i in range(1, m):  # for all rows of the dp table
         for j in range(0, 26):  # for each current letter
             prev = np.copy(dp_vmax[i - 1])  # the previous row of the dp table
@@ -24,18 +26,23 @@ def max_sum(x, w, t):
             k_max = np.argmax(prev)
             dp_argmax[i, j] = k_max  # point to the previous link. note that @dp_argmax[0] is empty
             dp_vmax[i, j] = prev[k_max] + np.dot(w[j], x[i])  # the dot product is for the current letter
-    word = np.zeros(m, dtype=np.int)  # backtrack the dp tables
+
+    word      = np.zeros(m, dtype=np.int)  # backtrack the dp tables
     word[m-1] = np.argmax(dp_vmax[m-1])  # the last choice depends on the min_obj
+
     for i in range(m-1, 0, -1):  # all previous choices have been calculated
         word[i-1] = dp_argmax[i][word[i]]
+
     return word
 
 
 def brute_force(x, w, t, m):  # infer the first @m letters of @x
     letters = list(it.product(range(26), repeat=m))
     scores = []
+
     for l in letters:
         scores.append(sum(np.dot(w[l[i]], x[i]) + t[l[i]][l[i+1]] for i in range(0, m - 1)) + np.dot(w[l[m-1]], x[m-1]))
+
     return max(zip(letters, scores), key=lambda x: x[1])[0]
 
 
@@ -43,8 +50,10 @@ def forward_dp(w, t, x):
     # for all possible paths from the first letter forwards, calculate the sum of partial, unormalized probabilities
     m = len(x)
     dp = np.zeros((m, 26), dtype=np.float64)
+
     for i in range(0, 26):  # the first line of the dp table
         dp[0, i] = exp(np.dot(w[i], x[0]))
+
     for i in range(1, m):  # for all following lines of the dp table
         for j in range(0, 26):  # for each possible previous letter
             dp[i, j] = sum(dp[i-1, k] * exp(t[k, j]) for k in range(0, 26)) * exp(np.dot(w[j], x[i]))
@@ -56,12 +65,15 @@ def backward_dp(w, t, x):
     # for all possible paths from the last letter backwards, calculate the sum of partial, unormalized probabilities
     m = len(x)
     dp = np.zeros((m, 26), dtype=np.float64)
+
     for i in range(0, 26):  # the last line of the dp table
         dp[-1, i] = exp(np.dot(w[i], x[-1]))
+
     for i in range(m-2, -1, -1):  # for all previous lines of the dp table
         for j in range(0, 26):  # for each possible next letter
             dp[i, j] = sum(dp[i+1, k] * exp(t[j, k]) for k in range(0, 26)) * exp(np.dot(w[j], x[i]))
             # here we rewrite the exp(sum) as prod(exp)
+
     return dp
 
 
